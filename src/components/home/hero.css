@@ -1,0 +1,17 @@
+/* Blue wash over the hero that the page loader fades out (desktop). */
+@media screen and (min-width: 991px) {
+  .section_home-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(180deg, var(--_color---colors-secondary--blue, #244c8a) 50%, #d3e7ff00);
+    /* 0 by default so the hero is visible on client-side navigation, when the loader doesn't run. */
+    opacity: var(--bg-overlay-opacity, 0);
+    z-index: 0;
+    pointer-events: none;
+  }
+}
+
+.home-header_reactor {
+  height: auto;
+}

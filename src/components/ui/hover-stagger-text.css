@@ -1,0 +1,29 @@
+[data-hover-stagger] {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+[data-hover-stagger] > span > span {
+  display: inline-block;
+  position: relative;
+  top: 0;
+  transition: top 0.3s ease;
+}
+
+@media (min-width: 992px) {
+  /* Show exactly one line; the clone sits below and rolls up on hover. */
+  [data-hover-stagger] {
+    height: 1lh;
+  }
+
+  [data-hover-stagger]:hover > span > span {
+    top: -100%;
+  }
+}
+
+@media (max-width: 991px) {
+  [data-hover-stagger] .clone-text {
+    display: none;
+  }
+}

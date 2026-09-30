@@ -1,0 +1,74 @@
+/* Menu + hamburger states. In the reference these ran through Webflow interactions. */
+
+.navbar_hamburguer {
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* An <li> here (a <div> in the reference), so undo the theme's list-item margin. */
+li.navbar_menu-button {
+  margin: 0;
+  list-style: none;
+}
+
+@media screen and (max-width: 991px) {
+  /* Closed: list fades out, then the panel fades, then it collapses. */
+  .navbar_link-wrapper {
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.2s ease 0.18s,
+      visibility 0s linear 0.38s,
+      height 0s linear 0.38s;
+  }
+
+  .navbar_link-wrapper .navbar_list {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Open: the panel fills the screen and fades in, then the list follows. */
+  .navbar_link-wrapper.is-menu-opened {
+    height: 100dvh;
+    opacity: 1;
+    visibility: visible;
+    transition:
+      opacity 0.2s ease,
+      visibility 0s,
+      height 0s;
+  }
+
+  .navbar_link-wrapper.is-menu-opened .navbar_list {
+    opacity: 1;
+    transition: opacity 0.3s ease 0.18s;
+  }
+
+  .navbar_hamburguer-line {
+    transition:
+      transform 0.25s cubic-bezier(0.215, 0.61, 0.355, 1),
+      background-color 0.2s;
+  }
+
+  .navbar_hamburguer.is-menu-opened .navbar_hamburguer-line.is-first {
+    transform: translateY(430%) rotate(45deg);
+  }
+
+  .navbar_hamburguer.is-menu-opened .navbar_hamburguer-line.is-second {
+    opacity: 0;
+  }
+
+  .navbar_hamburguer.is-menu-opened .navbar_hamburguer-line.is-third {
+    transform: translateY(-430%) rotate(-45deg);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .navbar_hamburguer.is-menu-opened .navbar_hamburguer-line.is-first {
+    transform: translateY(500%) rotate(45deg);
+  }
+
+  .navbar_hamburguer.is-menu-opened .navbar_hamburguer-line.is-third {
+    transform: translateY(-500%) rotate(-45deg);
+  }
+}
