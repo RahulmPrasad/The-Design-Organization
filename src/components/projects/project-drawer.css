@@ -1,0 +1,183 @@
+/* Project panel: slides in from the left over a blurred, dimmed page. */
+
+.project-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 10000; /* above the navbar (9999), below the page loader */
+  pointer-events: none;
+  visibility: hidden;
+  transition: visibility 0s linear 0.6s; /* stay visible until the close animation ends */
+}
+
+.project-drawer[data-open="true"] {
+  pointer-events: auto;
+  visibility: visible;
+  transition: none;
+}
+
+.project-drawer_backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgb(0 0 0 / 0.25);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.project-drawer[data-open="true"] .project-drawer_backdrop {
+  opacity: 1;
+}
+
+.project-drawer_panel {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: max(44vw, 28rem);
+  max-width: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  /* Scrollable, but without a visible scrollbar. */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  background-color: var(--_color---colors-primary--white, #fff);
+  color: var(--_color---colors-primary--black, #000);
+  box-shadow: 0 0 3rem rgb(0 0 0 / 0.15);
+  transform: translateX(-100%);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-drawer_panel::-webkit-scrollbar {
+  display: none;
+}
+
+.project-drawer[data-open="true"] .project-drawer_panel {
+  transform: translateX(0);
+}
+
+/* Title bar stays in view while the panel scrolls. */
+.project-drawer_header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.5rem 2rem;
+  background-color: var(--_color---colors-primary--white, #fff);
+  border-bottom: 1px solid var(--_color---greyscale--grey-100, #e8e8e8);
+}
+
+.project-drawer_title {
+  margin-top: 0.375rem;
+  margin-bottom: 0;
+}
+
+.project-drawer_close {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0.25rem;
+  background-color: var(--_color---colors-primary--light-blue, #d3e7ff);
+  color: var(--_color---colors-primary--black, #000);
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+.project-drawer_close:hover {
+  background-color: var(--_color---colors-secondary--blue, #628ad1);
+  color: var(--_color---colors-primary--white, #fff);
+}
+
+.project-drawer_close:focus-visible {
+  outline: 0.125rem solid #4d65ff;
+  outline-offset: 0.125rem;
+}
+
+.project-drawer_body {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem 2rem 4rem;
+  /* Content settles in just after the panel. */
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition:
+    opacity 0.5s ease,
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-drawer[data-open="true"] .project-drawer_body {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.2s;
+}
+
+.project-drawer_image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--_sizes---border-radius--small, 0.25rem);
+}
+
+.project-drawer_meta {
+  display: flex;
+  gap: 3rem;
+  margin: 0;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--_color---greyscale--grey-100, #e8e8e8);
+}
+
+.project-drawer_meta dd {
+  margin: 0.25rem 0 0;
+}
+
+.project-drawer_text {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.project-drawer_text p {
+  margin: 0;
+}
+
+.project-drawer_gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media screen and (max-width: 991px) {
+  .project-drawer_panel {
+    width: 75vw;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .project-drawer_panel {
+    width: 100%;
+  }
+
+  .project-drawer_header,
+  .project-drawer_body {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-drawer_panel,
+  .project-drawer_body,
+  .project-drawer_backdrop {
+    transition-duration: 0s;
+    transition-delay: 0s;
+  }
+}

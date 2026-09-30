@@ -6,13 +6,34 @@ import { useEffect, useRef } from "react";
 import { Lottie } from "@/components/ui/Lottie";
 import { gsap } from "@/lib/gsap";
 
-// Webflow button variants: the class that styles each one, and whether the
-// animated (hover) layer carries the variant class too.
+type VariantConfig = {
+  /** Webflow class that styles the variant. */
+  className: string;
+  /** The animated (hover) text layer also carries the variant class. */
+  animatedLayer: boolean;
+  /** The variant class also goes on the hover wrapper, resting content and top line. */
+  everywhere?: boolean;
+  /** Arrow sits inline before the label instead of in a separate square. */
+  inlineIcon?: boolean;
+  /** Value of the data-wf--button--variant attribute, when it differs from the key. */
+  dataName?: string;
+};
+
 const VARIANTS = {
   nav: { className: "w-variant-ee785f6d-1702-684b-b42d-dcfc9770e3a6", animatedLayer: true },
   "light-blue": { className: "w-variant-1274ae82-b5f7-9672-ae5c-64448103f021", animatedLayer: false },
   light: { className: "", animatedLayer: false },
-} as const;
+  /** Small outlined button on project cards. */
+  "team-card": { className: "w-variant-a34e5f5e-b186-5de3-c9f1-93a11190005c", animatedLayer: false },
+  /** Full-width text link with an inline arrow and a top rule that sweeps in on hover (for dark cards). */
+  "tertiary-dark": {
+    className: "w-variant-ff30d952-2892-9a95-9aeb-d29186579211",
+    animatedLayer: true,
+    everywhere: true,
+    inlineIcon: true,
+    dataName: "tertiary---dark",
+  },
+} satisfies Record<string, VariantConfig>;
 
 export type ButtonVariant = keyof typeof VARIANTS;
 
@@ -21,6 +42,8 @@ type ButtonProps = {
   variant: ButtonVariant;
   href?: string;
   onClick?: () => void;
+  /** Accessible name when the visible label isn't specific enough (e.g. "View project: Riverside"). */
+  ariaLabel?: string;
   /** Square arrow icon before the label; animates on hover. */
   icon?: boolean;
   desktopFullWidth?: boolean;
@@ -43,8 +66,10 @@ function ArrowIcon() {
   );
 }
 
-export function Button({ label, variant, href, onClick, icon, desktopFullWidth, mobileFullWidth }: ButtonProps) {
-  const { className: variantClass, animatedLayer } = VARIANTS[variant];
+export function Button({ label, variant, href, onClick, ariaLabel, icon, desktopFullWidth, mobileFullWidth }: ButtonProps) {
+  const config: VariantConfig = VARIANTS[variant];
+  const { className: variantClass, animatedLayer, everywhere = false, inlineIcon = false } = config;
+  const squareIcon = icon && !inlineIcon;
   const wrapperRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
   const animatedTextRef = useRef<HTMLSpanElement>(null);
@@ -102,7 +127,7 @@ export function Button({ label, variant, href, onClick, icon, desktopFullWidth, 
   // The fill sweeps in from the left, then anchors right so it sweeps out to the right.
   const handleEnter = () => {
     const wrapper = wrapperRef.current;
-    if (icon) playArrow(true);
+    if (squareIcon) playArrow(true);
     if (!wrapper || hover.current.animating) return;
     hover.current.shouldReverse = false;
     hover.current.animating = true;
@@ -117,7 +142,7 @@ export function Button({ label, variant, href, onClick, icon, desktopFullWidth, 
 
   const handleLeave = () => {
     const wrapper = wrapperRef.current;
-    if (icon) playArrow(false);
+    if (squareIcon) playArrow(false);
     hover.current.shouldReverse = true;
     if (!wrapper || hover.current.animating) return;
     if (wrapper.classList.contains("is-hover-state")) collapse(wrapper);
@@ -128,15 +153,16 @@ export function Button({ label, variant, href, onClick, icon, desktopFullWidth, 
 
   return (
     <div
-      data-wf--button--variant={variant}
+      data-wf--button--variant={config.dataName ?? variant}
       desktop-full-width={desktopFullWidth ? "true" : ""}
       mobile-full-width={mobileFullWidth ? "true" : ""}
       className={withVariant("button_main_icon")}
+      style={inlineIcon ? { textAlign: "left" } : undefined}
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
     >
-      <div ref={wrapperRef} className="button-animated-wrapper">
-        {icon && (
+      <div ref={wrapperRef} className={withVariant("button-animated-wrapper", everywhere)}>
+        {squareIcon && (
           <div className="button_icon-wrapper is-animated">
             <Lottie
               src="/lottie/button-arrow.json"
@@ -154,25 +180,36 @@ export function Button({ label, variant, href, onClick, icon, desktopFullWidth, 
           </span>
         </div>
       </div>
-      {icon && (
+      {squareIcon && (
         <div className="button_icon-wrapper">
           <ArrowIcon />
         </div>
       )}
-      <div className="button_content">
+      <div className={withVariant("button_content", everywhere)}>
+        {icon && inlineIcon && (
+          <div style={{ order: 0 }} className="button_icon-inner">
+            <ArrowIcon />
+          </div>
+        )}
         <div className="clickable_wrap">
           {href ? (
             isInternal ? (
-              <Link href={href} className="clickable_link w-inline-block">
+              <Link href={href} className="clickable_link w-inline-block" aria-label={ariaLabel}>
                 <span className="clickable_text">{label}</span>
               </Link>
             ) : (
-              <a href={href} className="clickable_link w-inline-block">
+              <a href={href} className="clickable_link w-inline-block" aria-label={ariaLabel}>
                 <span className="clickable_text">{label}</span>
               </a>
             )
           ) : (
-            <button type="button" className="clickable_btn" style={{ display: "block" }} onClick={onClick}>
+            <button
+              type="button"
+              className="clickable_btn"
+              style={{ display: "block" }}
+              onClick={onClick}
+              aria-label={ariaLabel}
+            >
               <span className="clickable_text">{label}</span>
             </button>
           )}
@@ -181,7 +218,7 @@ export function Button({ label, variant, href, onClick, icon, desktopFullWidth, 
           {label}
         </span>
       </div>
-      <div className="button-top-line-animation" />
+      <div className={withVariant("button-top-line-animation", everywhere)} />
     </div>
   );
 }

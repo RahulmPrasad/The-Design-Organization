@@ -17,6 +17,7 @@ const playOnEnter = (trigger: Element) => ({ trigger, start: "top bottom", toggl
  * - data-label-fade: characters flicker in
  * - data-heading-fade / data-paragraph-fade: lines rise and fade in
  * - data-animate-self: element rises and fades in
+ * - data-animate-list="stagger": the element's children rise and fade in one after another
  * Each attribute's value is a delay in milliseconds. Elements start hidden via webflow-embeds.css.
  */
 export function useScrollReveal(scope: RefObject<HTMLElement | null>) {
@@ -64,6 +65,15 @@ export function useScrollReveal(scope: RefObject<HTMLElement | null>) {
             });
           });
         }
+
+        root.querySelectorAll('[data-animate-list="stagger"]').forEach((list) => {
+          const items = [...list.children].filter((child) => child.getAttribute("data-animate-list") !== "static");
+          if (items.length === 0) return;
+          gsap
+            .timeline({ scrollTrigger: { trigger: list, start: "top 99%", toggleActions: "play none none none" } })
+            .fromTo(items, { y: "2rem" }, { y: "0rem", duration: 1.3, ease: "power3.out", stagger: 0.1 }, 0)
+            .fromTo(items, { opacity: 0 }, { opacity: 1, duration: 1.3, ease: "power2.out", stagger: 0.1 }, "<");
+        });
 
         const selfAnimated = root.querySelectorAll("[data-animate-self]");
         gsap.set(selfAnimated, { autoAlpha: 0, y: "1rem" });
