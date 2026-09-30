@@ -1,3 +1,5 @@
+export const siteName = "The Design Organization";
+
 export type SiteLink = {
   label: string;
   href: string;
@@ -5,13 +7,12 @@ export type SiteLink = {
 };
 
 export const mainNav: SiteLink[] = [
-  { label: "Company", href: "/about-us" },
-  { label: "Technology", href: "/technology" },
-  { label: "Solutions", href: "/solutions" },
-  { label: "Our Edge", href: "/our-edge" },
-  { label: "Our Team", href: "/team" },
-  { label: "Investors", href: "/investors-private" },
-  { label: "News", href: "/news" },
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about-us" },
+  { label: "Services", href: "/services" },
+  { label: "Projects", href: "/projects" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export const contactLink: SiteLink = { label: "Get in Touch", href: "/contact" };

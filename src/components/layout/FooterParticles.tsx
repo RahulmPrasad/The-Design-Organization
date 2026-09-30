@@ -1,145 +1,200 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { prefersReducedMotion } from "@/lib/media";
 
-/** Three rows of dots drifting across the footer; they speed up while the page scrolls. */
+const CONFIG = {
+  /** Screen area (px²) per dot; lower = denser. */
+  areaPerDot: 3600,
+  maxDots: 480,
+  radius: [0.8, 2.2],
+  drift: 0.12,
+  /** How far (px) the cursor pushes dots away. */
+  pushRadius: 180,
+  pushStrength: 4,
+  /** Pull back toward each dot's drifting home position. */
+  spring: 0.02,
+  damping: 0.88,
+  color: [82, 79, 75], // #524F4B
+  highlight: [211, 231, 255], // #D3E7FF, brand light blue
+};
+
+type Dot = {
+  homeX: number;
+  homeY: number;
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  driftX: number;
+  driftY: number;
+  radius: number;
+  alpha: number;
+  glow: number;
+};
+
+function random(min: number, max: number) {
+  return min + Math.random() * (max - min);
+}
+
+/** Scattered dots that drift slowly and part around the cursor, then settle back. */
 export function FooterParticles() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [failed, setFailed] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) return;
-    let disposed = false;
-    let cleanup = () => {};
+    const canvas = canvasRef.current;
+    const ctx = canvas?.getContext("2d");
+    if (!container || !canvas || !ctx) return;
 
-    import("three")
-      .then((THREE) => {
-        if (disposed) return;
-        const isMobile = window.innerWidth < 768;
-        const config = {
-          lineCount: 3,
-          dotsPerLine: isMobile ? 18 : 35,
-          rowSpacing: 0.75,
-          depthRange: 6,
-          dotColor: "#524F4B",
-          dotSize: isMobile ? 0.15 : 0.25,
-          dotSpeed: 0.15,
+    const reducedMotion = prefersReducedMotion();
+    let width = 0;
+    let height = 0;
+    let dots: Dot[] = [];
+    let frameId = 0;
+    let visible = false;
+    // Last pointer position in viewport coordinates; null when the pointer is away.
+    let pointer: { x: number; y: number } | null = null;
+
+    const seed = () => {
+      const count = Math.min(CONFIG.maxDots, Math.round((width * height) / CONFIG.areaPerDot));
+      dots = Array.from({ length: count }, () => {
+        const x = random(0, width);
+        const y = random(0, height);
+        const angle = random(0, Math.PI * 2);
+        return {
+          homeX: x,
+          homeY: y,
+          x,
+          y,
+          vx: 0,
+          vy: 0,
+          driftX: Math.cos(angle) * CONFIG.drift * random(0.3, 1),
+          driftY: Math.sin(angle) * CONFIG.drift * random(0.3, 1),
+          radius: random(CONFIG.radius[0], CONFIG.radius[1]),
+          alpha: random(0.35, 0.9),
+          glow: 0,
         };
+      });
+    };
 
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
-        camera.position.z = 20;
+    const draw = () => {
+      ctx.clearRect(0, 0, width, height);
+      const [r, g, b] = CONFIG.color;
+      const [hr, hg, hb] = CONFIG.highlight;
+      for (const dot of dots) {
+        const t = dot.glow;
+        ctx.fillStyle = `rgba(${r + (hr - r) * t}, ${g + (hg - g) * t}, ${b + (hb - b) * t}, ${
+          dot.alpha + (1 - dot.alpha) * t
+        })`;
+        ctx.beginPath();
+        ctx.arc(dot.x, dot.y, dot.radius * (1 + t * 1.2), 0, Math.PI * 2);
+        ctx.fill();
+      }
+    };
 
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        renderer.setClearColor("#000000", 0);
-        Object.assign(renderer.domElement.style, { width: "100%", height: "100%", display: "block" });
-        container.appendChild(renderer.domElement);
+    const step = () => {
+      const rect = canvas.getBoundingClientRect();
+      const px = pointer ? pointer.x - rect.left : -1e4;
+      const py = pointer ? pointer.y - rect.top : -1e4;
+      const { pushRadius, pushStrength, spring, damping } = CONFIG;
 
-        const dots: { y: number; z: number; progress: number; speed: number; offset: number }[] = [];
-        for (let line = 0; line < config.lineCount; line++) {
-          const y = (line - (config.lineCount - 1) / 2) * config.rowSpacing;
-          const z = (Math.random() - 0.5) * config.depthRange;
-          for (let dot = 0; dot < config.dotsPerLine; dot++) {
-            dots.push({ y, z, progress: dot / config.dotsPerLine, speed: 0.5 + Math.random(), offset: Math.random() });
-          }
+      for (const dot of dots) {
+        // Home drifts and wraps around the edges.
+        dot.homeX += dot.driftX;
+        dot.homeY += dot.driftY;
+        if (dot.homeX < -10) { dot.homeX += width + 20; dot.x += width + 20; }
+        if (dot.homeX > width + 10) { dot.homeX -= width + 20; dot.x -= width + 20; }
+        if (dot.homeY < -10) { dot.homeY += height + 20; dot.y += height + 20; }
+        if (dot.homeY > height + 10) { dot.homeY -= height + 20; dot.y -= height + 20; }
+
+        // Push away from the pointer, strongest up close.
+        const dx = dot.x - px;
+        const dy = dot.y - py;
+        const distance = Math.hypot(dx, dy);
+        let influence = 0;
+        if (distance < pushRadius && distance > 0.01) {
+          influence = 1 - distance / pushRadius;
+          const force = influence * influence * pushStrength;
+          dot.vx += (dx / distance) * force;
+          dot.vy += (dy / distance) * force;
         }
 
-        const geometry = new THREE.BufferGeometry();
-        const positions = new Float32Array(dots.length * 3);
-        dots.forEach((dot, i) => {
-          positions[i * 3 + 1] = dot.y;
-          positions[i * 3 + 2] = dot.z;
-        });
-        geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+        // Spring back home, with damping.
+        dot.vx = (dot.vx + (dot.homeX - dot.x) * spring) * damping;
+        dot.vy = (dot.vy + (dot.homeY - dot.y) * spring) * damping;
+        dot.x += dot.vx;
+        dot.y += dot.vy;
+        dot.glow += (influence - dot.glow) * 0.12;
+      }
+      draw();
+    };
 
-        // Round dot sprite.
-        const sprite = document.createElement("canvas");
-        sprite.width = sprite.height = 64;
-        const ctx = sprite.getContext("2d");
-        if (!ctx) throw new Error("2D canvas unavailable");
-        ctx.beginPath();
-        ctx.arc(32, 32, 30, 0, Math.PI * 2);
-        ctx.fillStyle = "white";
-        ctx.fill();
-        const texture = new THREE.CanvasTexture(sprite);
+    const loop = () => {
+      step();
+      frameId = requestAnimationFrame(loop);
+    };
 
-        const material = new THREE.PointsMaterial({
-          color: config.dotColor,
-          size: config.dotSize,
-          transparent: true,
-          map: texture,
-          alphaMap: texture,
-          depthWrite: false,
-        });
-        scene.add(new THREE.Points(geometry, material));
+    const start = () => {
+      if (reducedMotion || frameId || !visible) return;
+      frameId = requestAnimationFrame(loop);
+    };
 
-        let visibleWidth = 100;
-        const updateVisibleWidth = () => {
-          const visibleHeight = 2 * Math.tan((camera.fov * Math.PI) / 360) * Math.abs(camera.position.z);
-          visibleWidth = visibleHeight * camera.aspect;
-        };
+    const stop = () => {
+      cancelAnimationFrame(frameId);
+      frameId = 0;
+    };
 
-        const reducedMotion = prefersReducedMotion();
-        let lastScrollY = window.scrollY;
-        let smoothVelocity = 0;
-        let time = 0;
-        let frameId = 0;
+    const resize = () => {
+      const rect = container.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
+      width = rect.width;
+      height = rect.height;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      seed();
+      draw();
+    };
 
-        const render = () => {
-          const scrollY = window.scrollY;
-          smoothVelocity += (Math.abs(scrollY - lastScrollY) - smoothVelocity) * 0.1;
-          lastScrollY = scrollY;
-          time += (0.016 * config.dotSpeed) / (visibleWidth / 35) + smoothVelocity * 0.0015;
+    // The footer content sits above the canvas, so track the pointer on the window.
+    const onPointerMove = (e: PointerEvent) => {
+      pointer = { x: e.clientX, y: e.clientY };
+    };
+    const onPointerLeave = () => {
+      pointer = null;
+    };
+    // A lifted finger leaves no hover position; a released mouse button still does.
+    const onPointerUp = (e: PointerEvent) => {
+      if (e.pointerType !== "mouse") pointer = null;
+    };
 
-          const position = geometry.attributes.position;
-          dots.forEach((dot, i) => {
-            const progress = (((dot.progress + dot.offset - time * 0.1 * dot.speed) % 1) + 1) % 1;
-            position.setXYZ(i, (progress - 0.5) * visibleWidth, dot.y, dot.z);
-          });
-          position.needsUpdate = true;
-          renderer.render(scene, camera);
-        };
+    const resizeObserver = new ResizeObserver(resize);
+    resizeObserver.observe(container);
 
-        const loop = () => {
-          render();
-          frameId = requestAnimationFrame(loop);
-        };
+    // Only animate while the footer is on screen.
+    const visibilityObserver = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      if (visible) start();
+      else stop();
+    });
+    visibilityObserver.observe(container);
 
-        const resizeObserver = new ResizeObserver(([entry]) => {
-          const { width, height } = entry.contentRect;
-          if (width === 0 || height === 0) return;
-          renderer.setSize(width, height);
-          camera.aspect = width / height;
-          camera.updateProjectionMatrix();
-          updateVisibleWidth();
-          if (reducedMotion) render();
-        });
-        resizeObserver.observe(container);
-        updateVisibleWidth();
-        if (reducedMotion) render();
-        else loop();
-
-        cleanup = () => {
-          cancelAnimationFrame(frameId);
-          resizeObserver.disconnect();
-          geometry.dispose();
-          material.dispose();
-          texture.dispose();
-          renderer.dispose();
-          renderer.domElement.remove();
-        };
-      })
-      .catch((error) => {
-        console.warn("Footer particles unavailable, showing fallback image.", error);
-        if (!disposed) setFailed(true);
-      });
+    if (!reducedMotion) {
+      window.addEventListener("pointermove", onPointerMove, { passive: true });
+      window.addEventListener("pointerup", onPointerUp);
+      document.documentElement.addEventListener("pointerleave", onPointerLeave);
+    }
 
     return () => {
-      disposed = true;
-      cleanup();
+      stop();
+      resizeObserver.disconnect();
+      visibilityObserver.disconnect();
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pointerup", onPointerUp);
+      document.documentElement.removeEventListener("pointerleave", onPointerLeave);
     };
   }, []);
 
@@ -149,23 +204,10 @@ export function FooterParticles() {
         ref={containerRef}
         id="particles-footer-canvas"
         className="footer_bg-wrapper"
-        style={{
-          position: "absolute",
-          width: "100%",
-          height: "100%",
-          zIndex: 0,
-          overflow: "hidden",
-          display: failed ? "none" : undefined,
-        }}
-      />
-      {/* eslint-disable-next-line @next/next/no-img-element -- decorative fallback, shown only if WebGL fails */}
-      <img
-        src="/images/footer-lines.svg"
-        loading="lazy"
-        alt=""
-        className="footer_bg-wrapper is-fallback"
-        style={failed ? { display: "block" } : undefined}
-      />
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", zIndex: 0, overflow: "hidden" }}
+      >
+        <canvas ref={canvasRef} aria-hidden="true" style={{ display: "block", width: "100%", height: "100%" }} />
+      </div>
     </div>
   );
 }

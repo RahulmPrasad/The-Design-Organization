@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { Lottie } from "@/components/ui/Lottie";
+import { SiteLogo } from "@/components/ui/SiteLogo";
 import { gsap } from "@/lib/gsap";
 import { isDesktop, prefersReducedMotion } from "@/lib/media";
 import { takePageIntro } from "@/lib/page-intro";
 import { startScroll, stopScroll } from "@/lib/smooth-scroll";
+import "./page-loader.css";
 
 const ROWS = 4;
 const BLOCKS_PER_ROW = 16;
@@ -150,7 +151,7 @@ export function PageLoader() {
         ))}
       </div>
       <div className="page-loader_content">
-        <Lottie src="/lottie/logo-black-motion.json" autoplay className="page-loader_icon" />
+        <SiteLogo sizes="120px" eager className="page-loader_icon page-loader_logo" />
       </div>
     </div>
   );

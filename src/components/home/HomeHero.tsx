@@ -95,22 +95,22 @@ export function HomeHero() {
               <Spacer d={240} t={220} m={100} />
             </div>
             <h2 className="heading-display-1 z-index-2">
-              <span className="z-index-3 display-block">Powering </span>
+              <span className="z-index-3 display-block">Building </span>
               <div className="home-header_span-wrapper">
-                <span>the</span>
+                <span>your</span>
                 {/* Non-breaking space: a regular one collapses inside the flex row on mobile. */}
-                <span>{" "}World</span>
+                <span>{" "}Dreams</span>
               </div>
               <div className="show-mobile-landscape">
                 <Spacer d={16} m={132} />
               </div>
               <Image
                 className="home-header_reactor"
-                src="/images/hero-reactor.webp"
+                src="/images/hero-img.png"
                 alt="Cutaway view of a compact nuclear reactor showing fuel rods and internal components inside a metallic cylindrical vessel."
-                width={1748}
-                height={3108}
-                sizes="(max-width: 479px) 145vw, (max-width: 767px) 120vw, (max-width: 991px) 58vw, 874px"
+                width={1920}
+                height={1080}
+                sizes="(max-width: 767px) 100vw, (max-width: 991px) 95vw, 1300px"
                 loading="eager"
                 fetchPriority="high"
                 data-image-parallax="1.12"
@@ -120,8 +120,8 @@ export function HomeHero() {
             <div className="home-header_bottom-content">
               <Spacer d={64} t={104} m={28} />
               <div className="home-header_content">
-                <h1 className="heading-style-h6 text-style-wrap-pretty">
-                  Clean Heat and Electricity to Power a World of Industrial Applications
+                <h1 className="heading-style-h6 text-style-wrap-pretty text-end" style={{ textAlign: "right" }}>
+                   Design Meets Interaction Creating Spaces That Adapt to Your World
                 </h1>
                 <div className="home-header_content-line" />
               </div>

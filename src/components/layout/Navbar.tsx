@@ -1,12 +1,10 @@
 "use client";
 
-import type { AnimationItem } from "lottie-web";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { LogoWordmark } from "@/components/icons/logos";
 import { Button } from "@/components/ui/Button";
 import { HoverStaggerText } from "@/components/ui/HoverStaggerText";
-import { Lottie } from "@/components/ui/Lottie";
+import { SiteLogo } from "@/components/ui/SiteLogo";
 import { Spacer } from "@/components/ui/Spacer";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { contactLink, mainNav } from "@/lib/site";
@@ -21,8 +19,6 @@ function cx(...classes: (string | false)[]) {
 
 export function Navbar() {
   const navRef = useRef<HTMLDivElement>(null);
-  const logoAnimation = useRef<AnimationItem | null>(null);
-  const logoFrame = useRef({ frame: 0 });
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuOpenRef = useRef(menuOpen);
@@ -77,19 +73,6 @@ export function Navbar() {
     }
   }, [menuOpen]);
 
-  // Logo animation scrubs forward over 2s on hover and back over 1s on leave.
-  const playLogo = (toEnd: boolean) => {
-    const animation = logoAnimation.current;
-    if (!animation) return;
-    gsap.to(logoFrame.current, {
-      frame: toEnd ? animation.totalFrames - 1 : 0,
-      duration: toEnd ? 2 : 1,
-      ease: "none",
-      overwrite: true,
-      onUpdate: () => animation.goToAndStop(logoFrame.current.frame, true),
-    });
-  };
-
   const closeMenu = () => setMenuOpen(false);
   const scrolledClass = scrolled && "is-navbar-scrolled";
   const menuClass = menuOpen && "is-menu-opened";
@@ -107,20 +90,8 @@ export function Navbar() {
               aria-label="Click here to navigate to the homepage"
               className={cx("navbar_brand-wrapper w-nav-brand", scrolledClass, menuClass)}
               onClick={closeMenu}
-              onMouseEnter={() => playLogo(true)}
-              onMouseLeave={() => playLogo(false)}
             >
-              <Lottie
-                src="/lottie/logo-white.json"
-                className="navbar_brand hide-tablet"
-                onReady={(animation) => {
-                  logoAnimation.current = animation;
-                  animation.goToAndStop(0, true);
-                }}
-              />
-              <div className="navbar_brand show-tablet w-embed icon-current-color icon-full">
-                <LogoWordmark />
-              </div>
+              <SiteLogo sizes="100px" eager className="navbar_brand navbar_brand-image" />
             </Link>
 
             <div className={cx("navbar_link-wrapper", scrolledClass, menuClass)}>

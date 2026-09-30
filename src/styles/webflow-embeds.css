@@ -39,6 +39,17 @@ html.lenis {
     background-color: transparent !important;
 }
 
+/* Hidden until useScrollReveal (or a section's own script) reveals them. */
+@media (min-width: 992px) and (prefers-reduced-motion: no-preference) {
+    [data-animate-detail-text],
+    [data-heading-fade],
+    [data-label-fade],
+    [data-paragraph-fade],
+    [data-animate-self] {
+        visibility: hidden;
+    }
+}
+
 .line-mask {
     overflow: hidden;
     display: block;

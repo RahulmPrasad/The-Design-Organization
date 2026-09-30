@@ -1,0 +1,8 @@
+# Static export (see next.config.ts): Netlify builds the site and serves the `out` folder.
+[build]
+  command = "npm run build"
+  publish = "out"
+
+[build.environment]
+  # Next.js 16 requires Node.js 20.9 or newer.
+  NODE_VERSION = "22"

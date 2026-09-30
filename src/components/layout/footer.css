@@ -1,0 +1,11 @@
+.footer_logo-image {
+  width: 100%;
+  max-width: 16rem;
+  height: auto;
+}
+
+@media screen and (max-width: 479px) {
+  .footer_logo-image {
+    max-width: 12rem;
+  }
+}

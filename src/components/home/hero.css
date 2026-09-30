@@ -12,6 +12,43 @@
   }
 }
 
+/* Hero image size (overrides webflow-theme.css: 63.5174% / max 54.625rem). */
 .home-header_reactor {
   height: auto;
+  width: 95%;
+  max-width: 85rem;
+}
+
+/* Desktop: nudge the image left and up. Uses `translate` (not `transform`),
+   which the scroll/intro animations own. Negative x = left, negative y = up. */
+@media screen and (min-width: 992px) {
+  .home-header_reactor {
+    translate: -8rem -1rem !important;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .home-header_reactor {
+    width: 80%;
+  }
+}
+
+/* Tagline ("Clean Heat and Electricity…"): right-aligned on desktop and tablet.
+   Mobile keeps it on the left, above the image. */
+@media screen and (min-width: 768px) {
+  .home-header_content {
+    margin-left: auto;
+    /* Above the hero image (z-index 2), which can reach it on tablet widths. */
+    z-index: 3;
+  }
+}
+
+/* Mobile: the theme pulls the section up under the (tall) reactor render with a
+   large negative margin and offset; undo that for the wide photo. */
+@media screen and (max-width: 767px) {
+  .home-header_reactor {
+    width: 100%;
+    margin-bottom: 0;
+    transform: none;
+  }
 }

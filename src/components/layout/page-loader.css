@@ -1,0 +1,5 @@
+/* The logo is light; show it dark on the light-blue loader. */
+.page-loader_icon.page-loader_logo {
+  width: auto;
+  filter: brightness(0);
+}

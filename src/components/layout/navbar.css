@@ -1,5 +1,26 @@
 /* Menu + hamburger states. In the reference these ran through Webflow interactions. */
 
+/* PNG logo: sized by height (matches the 3rem button) instead of the wordmark's fixed box. */
+.navbar_brand.navbar_brand-image {
+  width: auto;
+  height: 3rem;
+  margin-left: 0;
+  transition: filter 0.2s;
+}
+
+@media screen and (max-width: 767px) {
+  .navbar_brand.navbar_brand-image {
+    width: auto;
+    height: 2.5rem;
+  }
+}
+
+/* The logo is light; darken it on the white scrolled bar and open menu. */
+.navbar_brand-wrapper.is-navbar-scrolled .navbar_brand-image,
+.navbar_brand-wrapper.is-menu-opened .navbar_brand-image {
+  filter: brightness(0);
+}
+
 .navbar_hamburguer {
   border: 0;
   padding: 0;

@@ -8,6 +8,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { PageLoader } from "@/components/layout/PageLoader";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
+import { siteName } from "@/lib/site";
 
 // Geist for headings, Inter for body text (wired into the theme via --font-geist / --font-inter).
 const geist = Geist({
@@ -26,10 +27,10 @@ const description =
   "Advanced small modular reactors built on proven HTGR technology, delivering up to 950°C clean heat and electricity for industrial applications.";
 
 export const metadata: Metadata = {
-  title: "ZettaJoule | Proven Advanced Nuclear Technology",
+  title: siteName,
   description,
-  openGraph: { title: "ZettaJoule | Proven Advanced Nuclear Technology", description, type: "website" },
-  twitter: { card: "summary_large_image", title: "ZettaJoule | Proven Advanced Nuclear Technology", description },
+  openGraph: { title: siteName, description, type: "website" },
+  twitter: { card: "summary_large_image", title: siteName, description },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
