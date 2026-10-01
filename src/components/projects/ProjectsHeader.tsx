@@ -13,7 +13,7 @@ const content = {
   intro:
     "Explore a selection of our residential, hospitality and workplace interiors, each one shaped around the people who use it.",
   background: {
-    desktop: { src: "/images/projects/project-img-3.png", width: 1920, height: 1080 },
+    desktop: { src: "/images/projects/project-img-3.jpg", width: 1920, height: 1080 },
     mobile: { src: "/images/projects/header-mobile.webp", width: 960, height: 2010 },
   },
 };

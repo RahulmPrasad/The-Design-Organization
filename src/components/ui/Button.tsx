@@ -15,6 +15,8 @@ type VariantConfig = {
   everywhere?: boolean;
   /** Arrow sits inline before the label instead of in a separate square. */
   inlineIcon?: boolean;
+  /** The variant class also goes on the square icon wrappers. */
+  iconWrappers?: boolean;
   /** Value of the data-wf--button--variant attribute, when it differs from the key. */
   dataName?: string;
 };
@@ -25,6 +27,8 @@ const VARIANTS = {
   light: { className: "", animatedLayer: false },
   /** Small outlined button on project cards. */
   "team-card": { className: "w-variant-a34e5f5e-b186-5de3-c9f1-93a11190005c", animatedLayer: false },
+  /** Outlined light button with a light-blue arrow square (for dark sections). */
+  cta: { className: "w-variant-d9e79d8e-4125-5274-6302-d8ac911798b8", animatedLayer: false, iconWrappers: true },
   /** Full-width text link with an inline arrow and a top rule that sweeps in on hover (for dark cards). */
   "tertiary-dark": {
     className: "w-variant-ff30d952-2892-9a95-9aeb-d29186579211",
@@ -68,7 +72,7 @@ function ArrowIcon() {
 
 export function Button({ label, variant, href, onClick, ariaLabel, icon, desktopFullWidth, mobileFullWidth }: ButtonProps) {
   const config: VariantConfig = VARIANTS[variant];
-  const { className: variantClass, animatedLayer, everywhere = false, inlineIcon = false } = config;
+  const { className: variantClass, animatedLayer, everywhere = false, inlineIcon = false, iconWrappers = false } = config;
   const squareIcon = icon && !inlineIcon;
   const wrapperRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
@@ -163,7 +167,7 @@ export function Button({ label, variant, href, onClick, ariaLabel, icon, desktop
     >
       <div ref={wrapperRef} className={withVariant("button-animated-wrapper", everywhere)}>
         {squareIcon && (
-          <div className="button_icon-wrapper is-animated">
+          <div className={withVariant("button_icon-wrapper is-animated", iconWrappers)}>
             <Lottie
               src="/lottie/button-arrow.json"
               className="button_lottie"
@@ -181,7 +185,7 @@ export function Button({ label, variant, href, onClick, ariaLabel, icon, desktop
         </div>
       </div>
       {squareIcon && (
-        <div className="button_icon-wrapper">
+        <div className={withVariant("button_icon-wrapper", iconWrappers)}>
           <ArrowIcon />
         </div>
       )}

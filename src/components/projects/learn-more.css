@@ -1,0 +1,41 @@
+/* "Learn More" cards with a photo behind a black overlay. */
+
+.about-cta_card.has-image {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate; /* keeps the image and overlay behind the text but inside the card */
+  background-color: var(--_color---colors-primary--black, #000);
+}
+
+.about-cta_card-image {
+  z-index: -2;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-cta_card-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: rgb(0 0 0 / 0.6);
+  transition: background-color 0.4s ease;
+}
+
+/* Hover: the photo eases in slightly and the overlay lightens. */
+.about-cta_card.has-image:hover .about-cta_card-image {
+  transform: scale(1.05);
+}
+
+.about-cta_card.has-image:hover .about-cta_card-overlay {
+  background-color: rgb(0 0 0 / 0.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-cta_card-image {
+    transition: none;
+  }
+
+  .about-cta_card.has-image:hover .about-cta_card-image {
+    transform: none;
+  }
+}

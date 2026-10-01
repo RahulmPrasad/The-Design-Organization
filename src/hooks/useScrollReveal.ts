@@ -18,6 +18,7 @@ const playOnEnter = (trigger: Element) => ({ trigger, start: "top bottom", toggl
  * - data-heading-fade / data-paragraph-fade: lines rise and fade in
  * - data-animate-self: element rises and fades in
  * - data-animate-list="stagger": the element's children rise and fade in one after another
+ * - data-animate-fill="<color>": text fills with that color as it scrolls through view (value is any CSS color)
  * Each attribute's value is a delay in milliseconds. Elements start hidden via webflow-embeds.css.
  */
 export function useScrollReveal(scope: RefObject<HTMLElement | null>) {
@@ -73,6 +74,30 @@ export function useScrollReveal(scope: RefObject<HTMLElement | null>) {
             .timeline({ scrollTrigger: { trigger: list, start: "top 99%", toggleActions: "play none none none" } })
             .fromTo(items, { y: "2rem" }, { y: "0rem", duration: 1.3, ease: "power3.out", stagger: 0.1 }, 0)
             .fromTo(items, { opacity: 0 }, { opacity: 1, duration: 1.3, ease: "power2.out", stagger: 0.1 }, "<");
+        });
+
+        // Text fills left to right with the attribute's color as it scrolls through view.
+        root.querySelectorAll<HTMLElement>("[data-animate-fill]").forEach((el) => {
+          const probe = document.createElement("span");
+          probe.style.color = (el.dataset.animateFill ?? "").replace(/;/g, "").trim();
+          el.appendChild(probe);
+          const target = getComputedStyle(probe).color;
+          probe.remove();
+          const base = getComputedStyle(el).color;
+          gsap.set(el, {
+            backgroundImage: `linear-gradient(90deg, ${target} 50%, ${base} 50%)`,
+            backgroundSize: "200% 100%",
+            backgroundPosition: "100% 0%",
+            webkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+            display: "inline-block",
+          });
+          gsap.to(el, {
+            backgroundPosition: "0% 0%",
+            ease: "none",
+            scrollTrigger: { trigger: el, start: "top 90%", end: "bottom 70%", scrub: 0.8 },
+          });
         });
 
         const selfAnimated = root.querySelectorAll("[data-animate-self]");

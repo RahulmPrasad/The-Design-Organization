@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HomeCta } from "@/components/home/HomeCta";
 import { SiteLogo } from "@/components/ui/SiteLogo";
 import { Spacer } from "@/components/ui/Spacer";
 import { footerColumns, legalLinks, siteName, type SiteLink } from "@/lib/site";
@@ -25,6 +26,8 @@ export function Footer() {
 
   return (
     <div className="footer_wrap">
+      {/* "Connect With Us" section on the home page; the footer slides up from behind it. */}
+      <HomeCta />
       <footer className="section_footer">
         <Spacer d={80} m={48} />
         <div className="padding-global z-index-2">

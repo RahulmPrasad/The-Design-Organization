@@ -1,22 +1,42 @@
 "use client";
 
+import Image from "next/image";
 import { useRef } from "react";
 import { Button } from "@/components/ui/Button";
 import { Spacer } from "@/components/ui/Spacer";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import "./learn-more.css";
 
 const content = {
   label: "Learn More About Us",
   heading: "Discover how we work, the services we offer, and how we can bring your next space to life.",
-  // Each id places its card on the Webflow grid (see webflow-pages.css).
+  // Each id places its card on the Webflow grid (see webflow-theme.css).
   cards: [
-    { id: "w-node-b463cb2b-518e-c44a-9ec0-cd7f6ee64868-b37d542f", title: "About Us", cta: "Learn More", href: "/about-us" },
-    { id: "w-node-a97a15e4-fa78-a4c5-8972-0878e8d62ce5-b37d542f", title: "Services", cta: "Explore our services", href: "/services" },
-    { id: "w-node-_26911f43-3c7c-1ae8-8bdd-806d91f40c34-b37d542f", title: "Contact", cta: "Start a project", href: "/contact" },
+    {
+      id: "w-node-b463cb2b-518e-c44a-9ec0-cd7f6ee64868-b37d542f",
+      title: "About Us",
+      cta: "Learn More",
+      href: "/about-us",
+      image: "/images/projects/interior-wide-8.webp",
+    },
+    {
+      id: "w-node-a97a15e4-fa78-a4c5-8972-0878e8d62ce5-b37d542f",
+      title: "Services",
+      cta: "Explore our services",
+      href: "/services",
+      image: "/images/projects/interior-wide-6.webp",
+    },
+    {
+      id: "w-node-_26911f43-3c7c-1ae8-8bdd-806d91f40c34-b37d542f",
+      title: "Contact",
+      cta: "Start a project",
+      href: "/contact",
+      image: "/images/projects/interior-wide-3.webp",
+    },
   ],
 };
 
-/** Black section with an intro and three blue link cards. */
+/** Black section with an intro and three photo link cards. */
 export function LearnMore() {
   const sectionRef = useRef<HTMLElement>(null);
   useScrollReveal(sectionRef);
@@ -46,7 +66,16 @@ export function LearnMore() {
           <div data-animate-list="stagger" className="u-grid">
             {content.cards.map((card) => (
               <div key={card.id} id={card.id}>
-                <div className="about-cta_card">
+                <div className="about-cta_card has-image">
+                  {/* Decorative: the card's title and link carry the meaning. */}
+                  <Image
+                    src={card.image}
+                    alt=""
+                    fill
+                    sizes="(max-width: 767px) 100vw, 33vw"
+                    className="about-cta_card-image"
+                  />
+                  <div className="about-cta_card-overlay" aria-hidden="true" />
                   <div className="heading-style-h5">{card.title}</div>
                   <Button variant="tertiary-dark" icon label={card.cta} href={card.href} desktopFullWidth mobileFullWidth />
                 </div>

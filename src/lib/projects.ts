@@ -20,7 +20,7 @@ export type Project = {
 };
 
 // ---- Placeholder content: replace with real projects. ----
-// Photos are free-to-use Unsplash images (sources in public/images/projects/CREDITS.md).
+// Photos are free-to-use Unsplash images (unsplash.com/license).
 
 const dir = "/images/projects";
 const portrait = (file: string, alt: string): ProjectImage => ({ src: `${dir}/${file}`, alt, width: 664, height: 928 });

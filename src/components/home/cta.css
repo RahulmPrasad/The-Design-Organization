@@ -1,0 +1,25 @@
+.cta_logo-mark {
+  display: block;
+  width: auto;
+  height: 1.5rem;
+}
+
+/* Natural proportions from tablet up; on phones the theme makes both photos fill the row (height: 100%). */
+@media (min-width: 768px) {
+  .cta_image {
+    height: auto;
+  }
+}
+
+/* The scroll fill only runs on desktop with motion allowed; otherwise show the lead text white. */
+@media (max-width: 991px) {
+  .section_cta [data-animate-fill] {
+    color: var(--_color---colors-primary--white) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section_cta [data-animate-fill] {
+    color: var(--_color---colors-primary--white) !important;
+  }
+}
