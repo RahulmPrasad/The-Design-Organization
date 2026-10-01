@@ -49,7 +49,7 @@ function CtaSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="cta" className="section_cta">
+    <section ref={sectionRef} id="cta" className="section_cta" style={{ backgroundColor: "#e6912d" }}>
       <div className="padding-global">
         <Spacer d={160} t={120} m={80} />
         <div className="container-large position-relative">
@@ -65,7 +65,7 @@ function CtaSection() {
                   <span data-animate-fill="var(--_color---colors-primary--white)" className="heading-style-h5">
                     {content.lead}
                   </span>
-                  <span className="heading-style-h5 text-color-grey-350 text-style-wrap-pretty"> {content.text}</span>
+                  <span className="heading-style-h5 text-color-white text-style-wrap-pretty"> {content.text}</span>
                 </div>
               </div>
               <Spacer d={40} t={40} m={32} />

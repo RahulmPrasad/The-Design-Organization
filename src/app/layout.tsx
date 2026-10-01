@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "@/styles/webflow-base.css";
 import "@/styles/webflow-theme.css";
 import "@/styles/webflow-embeds.css";
@@ -11,16 +11,20 @@ import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { siteName } from "@/lib/site";
 
 // Geist for headings, Inter for body text (wired into the theme via --font-geist / --font-inter).
-const geist = Geist({
+// Self-hosted variable fonts (Latin subset, all weights 100–900) from Google Fonts, so builds
+// never depend on fetching from Google: its font CSS sometimes returns URLs the dev bundler can't load.
+const geist = localFont({
+  src: "../fonts/geist-latin.woff2",
   variable: "--font-geist",
-  subsets: ["latin"],
-  weight: ["200", "300", "400"],
+  weight: "100 900",
+  display: "swap",
 });
 
-const inter = Inter({
+const inter = localFont({
+  src: "../fonts/inter-latin.woff2",
   variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
+  weight: "100 900",
+  display: "swap",
 });
 
 const description =

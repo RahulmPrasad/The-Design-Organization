@@ -8,17 +8,18 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Flip, gsap, ScrollTrigger, SplitText } from "@/lib/gsap";
 import { DESKTOP_QUERY } from "@/lib/media";
 import { siteName } from "@/lib/site";
+import "./about.css";
 
 const content = {
   label: "The Name Reflects our Mission",
   intro:
     "Great interiors do more than look beautiful. We design spaces that reflect how you live and work, balancing form, function, and craft in every detail.",
   cta: { label: "Discover Our Story", href: "/about-us" },
-  subtitle: `Our name, ${siteName}, reflects how we work: thoughtful, organized, and led by design, turning every room into a place people love to be.`,
-  video: { src: "/videos/about.mp4", poster: "/images/about-video-poster.webp" },
+  subtitle: `Elevated living requires organized thinking. The Design Organization delivers design-led spatial solutions that turn every room into a sanctuary.`,
+  video: { src: "/videos/home-video.mp4", poster: "/images/about-video-poster.webp" },
   detail: {
     title: siteName,
-    pronunciation: "\\ ðə dɪˈzaɪn ˌɔːrɡənəˈzeɪʃən \\",
+    pronunciation: "We Build your dreams to reality.",
     text: "Interior design for homes and workplaces, crafted with purpose and character.",
   },
 };
@@ -216,7 +217,7 @@ export function HomeAbout() {
                   aria-hidden="true"
                 />
               </div>
-              <div className="home-about_video-detail-wrapper">
+              <div className="home-about_video-detail-wrapper is-centered">
                 <div className="home-about_video-detail-line" />
                 <div className="u-grid">
                   <div

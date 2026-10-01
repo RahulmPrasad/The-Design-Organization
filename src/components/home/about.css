@@ -1,0 +1,20 @@
+/* Video caption: centered over the video, company name with the details stacked below it
+   (the reference puts the name on the left and the details in the right corner). */
+.home-about_video-detail-wrapper.is-centered {
+  left: 0;
+  right: 0;
+  align-items: center; /* the rule draws outward from the middle as it widens */
+  text-align: center;
+}
+
+.home-about_video-detail-wrapper.is-centered > .u-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  max-width: 40rem;
+}
+
+.home-about_video-detail-wrapper.is-centered .home-about_video-detail-block {
+  align-items: center;
+}

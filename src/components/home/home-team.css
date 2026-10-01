@@ -1,0 +1,4 @@
+/* Let the photo strip run past the page margins to the screen edges (as in the reference). */
+.is-home-zroc .splide__track {
+  overflow: unset;
+}

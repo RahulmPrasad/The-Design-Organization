@@ -1143,8 +1143,8 @@ figcaption {
 
 .info-card {
     border-radius: var(--_sizes---border-radius--small);
-    background-color: var(--_color---colors-primary--black);
-    color: var(--_color---greyscale--grey-250);
+    background-color: var(--_color---colors-primary--white);
+    color: var(--_color---colors-primary--dark-grey);
     padding: 1.5rem
 }
 

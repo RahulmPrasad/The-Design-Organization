@@ -13,7 +13,7 @@ const content = {
   body: "We're the only Western advanced small modular reactor (SMR) company modernizing the established, publicly available technology of Japan's High Temperature Engineering Test Reactor, which is capable of producing industrial process heat up to 950 °C.",
   cta: { label: "Explore Our Technology", href: "/technology" },
   image: {
-    src: "/images/tech-building.webp",
+    src: "/images/info-img.jpg",
     alt: "Modern building complex with surrounding smaller buildings near a winding river in a green rural landscape.",
   },
   card: {
@@ -68,7 +68,7 @@ export function HomeTechnology() {
                 sizes="(max-width: 479px) 260vw, (max-width: 767px) 200vw, 1376px"
                 loading="eager"
                 className="home-tech_image"
-                style={{ height: "auto" }}
+                style={{ }}
                 data-image-parallax="1.12"
                 data-image-scale="false"
               />
