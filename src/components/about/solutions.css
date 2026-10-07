@@ -1,0 +1,124 @@
+/* "Find the Right Solutions for You" list, from the reference technology page. */
+
+.tech-solutions_item {
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+  border-top: 1px solid var(--_color---alpha--white-alpha-10);
+  grid-template-rows: auto;
+  grid-template-columns: 3.4fr 3.1fr 4fr;
+  align-items: center;
+  height: 6.5rem;
+  padding: 1.5rem 2rem;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+  display: grid;
+}
+
+.tech-solutions_item:hover,
+.tech-solutions_item:focus-visible {
+  background-color: var(--_color---greyscale--grey-950);
+  color: var(--_color---colors-primary--light-blue);
+}
+
+.tech-solutions_item p {
+  margin: 0;
+}
+
+.tech-solutions_item-img {
+  border-radius: var(--_sizes---border-radius--small);
+  pointer-events: none;
+  object-fit: cover;
+  display: none; /* desktop uses the floating preview; shown as a thumbnail on phones */
+}
+
+.tech-solutions_item-icon {
+  width: 2rem;
+  display: flex;
+  justify-self: end;
+}
+
+/* Descriptions appear only on the hovered row (devices with a mouse). */
+@media (hover: hover) {
+  .tech-solutions_item p {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .tech-solutions_item:hover p,
+  .tech-solutions_item:focus-visible p {
+    opacity: 1;
+  }
+}
+
+.tech-solutions_floating-images {
+  border-radius: var(--_sizes---border-radius--small);
+  pointer-events: none;
+  width: 20rem;
+  height: 12.5rem;
+  margin-top: -6.25rem;
+  margin-left: -10rem;
+  transition: opacity 0.2s;
+  position: fixed;
+  inset: 0 auto auto 0;
+  z-index: 5;
+  overflow: hidden;
+}
+
+.tech-solutions_floating-image-wrap {
+  width: 100%;
+  height: 100%;
+  transition: height 0.5s cubic-bezier(0.801, -0.018, 0.25, 1);
+  position: absolute;
+  inset: auto 0 0;
+  overflow: hidden;
+}
+
+.tech-solutions_floating-image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+#w-node-c65111da-54c9-7265-559c-09496b19fc38-c65a4cfd {
+  grid-area: span 1 / span 4 / span 1 / span 4;
+}
+
+#w-node-c65111da-54c9-7265-559c-09496b19fc3c-c65a4cfd {
+  grid-area: span 1 / span 7 / span 1 / span 7;
+}
+
+@media screen and (max-width: 991px) {
+  .tech-solutions_item {
+    grid-template-columns: 1.75fr 2.75fr 1fr;
+  }
+
+  .tech-solutions_floating-images {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .tech-solutions_item {
+    grid-template-columns: 4.875rem 15.4fr 1.5rem;
+    height: auto;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .tech-solutions_item-img {
+    display: block;
+    aspect-ratio: 7.8 / 4.8;
+    width: 100%;
+    height: auto;
+  }
+
+  .tech-solutions_item-icon {
+    width: 1.5rem;
+  }
+
+  #w-node-c65111da-54c9-7265-559c-09496b19fc38-c65a4cfd,
+  #w-node-c65111da-54c9-7265-559c-09496b19fc3c-c65a4cfd {
+    grid-column: span 12 / span 12;
+  }
+}

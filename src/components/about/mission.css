@@ -1,0 +1,15 @@
+/* Photos fill their frame (the frame crops to 427:480); slightly taller so the parallax drift never shows an edge. */
+.mission_image {
+  width: 100%;
+  height: 108%;
+  object-fit: cover;
+}
+
+/* Dividers in translucent white so they read on the orange background (the reference uses grey on white). */
+.section_mission .features-3_v-divider {
+  background-color: rgb(255 255 255 / 0.4);
+}
+
+.section_mission .features-3_h-divider {
+  background-image: linear-gradient(90deg, #fff0, rgb(255 255 255 / 0.4) 15%, rgb(255 255 255 / 0.4) 85%, #fff0);
+}

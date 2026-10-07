@@ -58,6 +58,7 @@
     --_sizes---global-padding--regular: 2.5rem;
     --_sizes---border-radius--small: .25rem;
     --_color---colors-primary--dark-grey: #1b1b1b;
+    --_color---colors-primary--orange: #e6912d; /* brand accent */
     --container--medium: 64rem;
     --container--small: 48rem;
     --font-weight--medium: 500;
@@ -2511,6 +2512,219 @@ figcaption {
 
 #w-node-_063d0d45-eb3f-2d77-e8b5-523b280b0816-280b0812 {
     grid-area: span 1/span 7/span 1/span 7
+}
+
+/* ---- About page FAQ (from the reference about page) ---- */
+
+.subtitle-3 {
+    font-family: var(--_typography---subtitle-3--font-family);
+    font-size: var(--_typography---subtitle-3--font-size);
+    line-height: var(--_typography---subtitle-3--line-height);
+    font-weight: var(--_typography---subtitle-3--font-weight);
+    letter-spacing: var(--_typography---subtitle-3--letter-spacing)
+}
+
+.accordion_component {
+    border-top: 1px solid var(--_color---greyscale--grey-100)
+}
+
+.accordion_component:where(.w-variant-23b25ddd-1ec4-ade0-4292-30280b06dd4d),
+.accordion_component:where(.w-variant-c4de97d6-029c-03bb-110c-cc7864d8b21a) {
+    border-top-color: var(--_color---greyscale--grey-750)
+}
+
+.accordion_toggle_button {
+    grid-column-gap: clamp(.875*1rem, ((.875 - ((1 - .875)/(90 - 20)*20))*1rem + ((1 - .875)/(90 - 20))*100vw), 1*1rem);
+    grid-row-gap: clamp(.875*1rem, ((.875 - ((1 - .875)/(90 - 20)*20))*1rem + ((1 - .875)/(90 - 20))*100vw), 1*1rem);
+    outline-offset: calc(.125rem*-1);
+    background-color: #0000;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    padding: 1.5rem 0 0;
+    transition-property: all;
+    transition-duration: .3s;
+    transition-timing-function: ease;
+    display: flex
+}
+
+.accordion_toggle_button:where(.w-variant-23b25ddd-1ec4-ade0-4292-30280b06dd4d) {
+    padding-top: 1.5rem
+}
+
+.accordion_toggle_button:where(.w-variant-c4de97d6-029c-03bb-110c-cc7864d8b21a) {
+    padding-top: 1rem
+}
+
+.accordion_toggle_button:hover {
+    opacity: .6
+}
+
+.accordion_toggle_text {
+    text-align: left;
+    max-width: 42.5rem
+}
+
+.accordion_content_wrap {
+    width: 100%;
+    display: none;
+    position: relative;
+    overflow: hidden
+}
+
+.accordion_content_text {
+    max-width: 42.5rem;
+    color: var(--_color---greyscale--grey-750)
+}
+
+.accordion_content_text:where(.w-variant-23b25ddd-1ec4-ade0-4292-30280b06dd4d) {
+    color: var(--_color---greyscale--grey-350)
+}
+
+.accordion_content_text:where(.w-variant-c4de97d6-029c-03bb-110c-cc7864d8b21a) {
+    max-width: none;
+    color: var(--_color---greyscale--grey-350)
+}
+
+.accordion_content_text p {
+    color: inherit;
+    margin-bottom: 1.25em
+}
+
+.accordion_content_padding {
+    padding-top: 0
+}
+
+.accordion_content_padding.is-solutions-tabs {
+    padding-right: 1.5rem
+}
+
+.accordion_toggle_heading {
+    margin-top: 0;
+    margin-bottom: 0
+}
+
+.accordion_item {
+    width: 100%;
+    color: var(--_color---colors-primary--black)
+}
+
+.accordion_item:where(.w-variant-23b25ddd-1ec4-ade0-4292-30280b06dd4d),
+.accordion_item:where(.w-variant-c4de97d6-029c-03bb-110c-cc7864d8b21a) {
+    color: var(--_color---colors-primary--white)
+}
+
+.accordion_wrap {
+    width: 100%
+}
+
+.accordion_list {
+    grid-column-gap: 2rem;
+    grid-row-gap: 2rem;
+    flex-flow: column;
+    display: flex
+}
+
+.section_faq {
+    color: var(--_color---colors-primary--black)
+}
+
+.section_faq:where(.w-variant-84e9aba6-c9cd-993b-805d-193ac1a02336) {
+    background-color: var(--_color---colors-primary--black);
+    color: var(--_color---colors-primary--white)
+}
+
+.section_faq:where(.w-variant-644e92cc-ab32-a564-6abf-ceded51f8b7f) {
+    background-color: var(--_color---colors-primary--dark-grey);
+    color: var(--_color---colors-primary--white)
+}
+
+.faq_icon {
+    color: var(--_color---colors-primary--black);
+    display: inline-flex
+}
+
+.faq_icon:where(.w-variant-84e9aba6-c9cd-993b-805d-193ac1a02336),
+.faq_icon:where(.w-variant-644e92cc-ab32-a564-6abf-ceded51f8b7f) {
+    color: var(--_color---colors-primary--light-blue)
+}
+
+.accordion_toggle_lottie {
+    aspect-ratio: 1;
+    flex: none;
+    justify-content: center;
+    align-items: center;
+    width: 1.5rem;
+    display: flex
+}
+
+#w-node-b463cb2b-518e-c44a-9ec0-cd7f6ee64868-b37d542f,
+#w-node-a97a15e4-fa78-a4c5-8972-0878e8d62ce5-b37d542f,
+#w-node-_26911f43-3c7c-1ae8-8bdd-806d91f40c34-b37d542f,
+#w-node-b91d1224-fb4b-ffa8-795f-bc2d54d6e357-54d6e352 {
+    grid-area: span 1/span 4/span 1/span 4
+}
+
+#w-node-_55097afd-582a-754b-5b8f-72d7d56bfc5a-54d6e352 {
+    grid-area: span 1/span 6/span 1/span 6
+}
+
+#w-node-b91d1224-fb4b-ffa8-795f-bc2d54d6e35b-54d6e352 {
+    grid-area: span 1/span 7/span 1/span 7
+}
+
+#w-node-b91d1224-fb4b-ffa8-795f-bc2d54d6e35f-54d6e352 {
+    grid-area: span 1/span 4/span 1/span 4
+}
+
+#w-node-b91d1224-fb4b-ffa8-795f-bc2d54d6e362-54d6e352 {
+    grid-area: span 1/span 8/span 1/span 8
+}
+
+/* ---- About page mission (from the reference about page) ---- */
+
+.background-color-orange {
+    background-color: var(--_color---colors-primary--orange)
+}
+
+.features-3_component {
+    grid-column-gap: 1.5rem;
+    grid-row-gap: 1.5rem;
+    grid-template-rows: auto;
+    grid-template-columns: 1fr 1px 1fr 1px 1fr;
+    grid-auto-columns: 1fr;
+    display: grid
+}
+
+.features-3_v-divider {
+    background-color: var(--_color---greyscale--grey-250);
+    width: 100%
+}
+
+.features-3_item {
+    padding-bottom: 3rem
+}
+
+.features-3_h-divider {
+    background-image: linear-gradient(90deg, #0000, var(--_color---greyscale--grey-250)15%, var(--_color---greyscale--grey-250)85%, #fff0);
+    height: 1px
+}
+
+.features-3_image-wrapper {
+    aspect-ratio: 427/480;
+    border-radius: var(--_sizes---border-radius--small);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    overflow: hidden
+}
+
+#w-node-a6b790ca-c448-203a-8dc3-a35154a0d754-f60ad0a4 {
+    grid-area: span 1/span 3/span 1/span 3
+}
+
+#w-node-a6b790ca-c448-203a-8dc3-a35154a0d758-f60ad0a4 {
+    grid-area: span 1/span 6/span 1/span 6
 }
 
 /* ---- end Projects page ---- */
@@ -5130,5 +5344,60 @@ figcaption {
 @media screen and (max-width:479px) {
     #w-node-_063d0d45-eb3f-2d77-e8b5-523b280b0816-280b0812 {
         grid-column: span 12/span 12
+    }
+}
+
+/* ---- About page FAQ: responsive ---- */
+
+@media screen and (max-width:767px) {
+    #w-node-b463cb2b-518e-c44a-9ec0-cd7f6ee64868-b37d542f,
+    #w-node-a97a15e4-fa78-a4c5-8972-0878e8d62ce5-b37d542f,
+    #w-node-_26911f43-3c7c-1ae8-8bdd-806d91f40c34-b37d542f,
+    #w-node-b91d1224-fb4b-ffa8-795f-bc2d54d6e357-54d6e352,
+    #w-node-_55097afd-582a-754b-5b8f-72d7d56bfc5a-54d6e352,
+    #w-node-b91d1224-fb4b-ffa8-795f-bc2d54d6e35b-54d6e352,
+    #w-node-b91d1224-fb4b-ffa8-795f-bc2d54d6e35f-54d6e352,
+    #w-node-b91d1224-fb4b-ffa8-795f-bc2d54d6e362-54d6e352 {
+        grid-column: span 12/span 12
+    }
+}
+
+@media screen and (max-width:479px) {
+    #w-node-b91d1224-fb4b-ffa8-795f-bc2d54d6e35f-54d6e352 {
+        grid-column: span 4/span 4
+    }
+}
+
+/* ---- About page mission: responsive ---- */
+
+@media screen and (max-width:767px) {
+    #w-node-a419b7ce-3901-5e91-7080-eff1b7b94ba1-f60ad0a4,
+    #w-node-a6b790ca-c448-203a-8dc3-a35154a0d754-f60ad0a4,
+    #w-node-a6b790ca-c448-203a-8dc3-a35154a0d758-f60ad0a4,
+    #w-node-ed92b030-e539-7003-8d38-30c00713b6d8-f60ad0a4,
+    #w-node-ed92b030-e539-7003-8d38-30c00713b6dc-f60ad0a4 {
+        grid-column: span 12/span 12
+    }
+}
+
+@media screen and (max-width:767px) {
+    .features-3_component {
+        grid-row-gap: 3rem;
+        grid-template-columns: 1fr 1fr
+    }
+
+    .features-3_v-divider,
+    .features-3_h-divider {
+        display: none
+    }
+
+    .features-3_item {
+        padding-bottom: 0
+    }
+}
+
+@media screen and (max-width:479px) {
+    .features-3_component {
+        grid-template-columns: 1fr
     }
 }

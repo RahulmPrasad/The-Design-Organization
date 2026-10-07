@@ -10,35 +10,26 @@ import "./learn-more.css";
 const content = {
   label: "Learn More About Us",
   heading: "Discover how we work, the services we offer, and how we can bring your next space to life.",
-  // Each id places its card on the Webflow grid (see webflow-theme.css).
+  // Three cards are shown, skipping `currentPage`.
   cards: [
-    {
-      id: "w-node-b463cb2b-518e-c44a-9ec0-cd7f6ee64868-b37d542f",
-      title: "About Us",
-      cta: "Learn More",
-      href: "/about-us",
-      image: "/images/projects/interior-wide-8.webp",
-    },
-    {
-      id: "w-node-a97a15e4-fa78-a4c5-8972-0878e8d62ce5-b37d542f",
-      title: "Services",
-      cta: "Explore our services",
-      href: "/services",
-      image: "/images/projects/interior-wide-6.webp",
-    },
-    {
-      id: "w-node-_26911f43-3c7c-1ae8-8bdd-806d91f40c34-b37d542f",
-      title: "Contact",
-      cta: "Start a project",
-      href: "/contact",
-      image: "/images/projects/interior-wide-3.webp",
-    },
+    { title: "About Us", cta: "Learn More", href: "/about-us", image: "/images/projects/interior-wide-8.webp" },
+    { title: "Services", cta: "Explore our services", href: "/services", image: "/images/projects/interior-wide-6.webp" },
+    { title: "Projects", cta: "View our work", href: "/projects", image: "/images/projects/interior-wide-1.webp" },
+    { title: "Contact", cta: "Start a project", href: "/contact", image: "/images/projects/interior-wide-3.webp" },
   ],
 };
 
-/** Black section with an intro and three photo link cards. */
-export function LearnMore() {
+// Each id places one card slot on the Webflow grid (see webflow-theme.css).
+const CARD_SLOT_IDS = [
+  "w-node-b463cb2b-518e-c44a-9ec0-cd7f6ee64868-b37d542f",
+  "w-node-a97a15e4-fa78-a4c5-8972-0878e8d62ce5-b37d542f",
+  "w-node-_26911f43-3c7c-1ae8-8bdd-806d91f40c34-b37d542f",
+];
+
+/** Black section with an intro and three photo link cards to other pages. */
+export function LearnMore({ currentPage }: { currentPage?: string }) {
   const sectionRef = useRef<HTMLElement>(null);
+  const cards = content.cards.filter((card) => card.href !== currentPage).slice(0, CARD_SLOT_IDS.length);
   useScrollReveal(sectionRef);
 
   return (
@@ -64,8 +55,8 @@ export function LearnMore() {
           </div>
           <Spacer d={80} />
           <div data-animate-list="stagger" className="u-grid">
-            {content.cards.map((card) => (
-              <div key={card.id} id={card.id}>
+            {cards.map((card, i) => (
+              <div key={card.href} id={CARD_SLOT_IDS[i]}>
                 <div className="about-cta_card has-image">
                   {/* Decorative: the card's title and link carry the meaning. */}
                   <Image

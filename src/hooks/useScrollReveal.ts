@@ -101,6 +101,7 @@ export function useScrollReveal(scope: RefObject<HTMLElement | null>) {
         });
 
         const selfAnimated = root.querySelectorAll("[data-animate-self]");
+        if (selfAnimated.length === 0) return;
         gsap.set(selfAnimated, { autoAlpha: 0, y: "1rem" });
         ScrollTrigger.batch(selfAnimated, {
           start: "top bottom",

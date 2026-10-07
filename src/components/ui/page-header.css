@@ -1,0 +1,4 @@
+/* Centered variant: title stays left-aligned but sits in the vertical middle of the header. */
+.section_team-header.is-centered {
+  justify-content: center;
+}

@@ -1,0 +1,32 @@
+.faq_logo-mark {
+  display: block;
+  width: auto;
+  height: 1.5rem;
+  filter: brightness(0); /* the logo file is light gray; show it black on white */
+}
+
+/* Question row: text on the left, plus/minus icon on the right (the reference sets this via Webflow). */
+.accordion_toggle_button {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.accordion_toggle_icon-wrap {
+  display: flex;
+  flex: none;
+}
+
+.lottie-current-color path {
+  stroke: currentColor;
+}

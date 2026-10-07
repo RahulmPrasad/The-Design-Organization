@@ -26,7 +26,7 @@ export function Footer() {
 
   return (
     <div className="footer_wrap">
-      {/* "Connect With Us" section on the home page; the footer slides up from behind it. */}
+      {/* "Connect With Us" section on every page; the footer slides up from behind it. */}
       <HomeCta />
       <footer className="section_footer">
         <Spacer d={80} m={48} />

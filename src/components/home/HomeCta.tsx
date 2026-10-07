@@ -21,11 +21,11 @@ const content = {
   },
 };
 
-/** Dark "Connect With Us" section that sits on top of the footer (home page only). */
+/** Dark "Connect With Us" section that sits on top of the footer on every page. */
 export function HomeCta() {
+  // Remount per page so its scroll animations are measured against the new page.
   const pathname = usePathname();
-  if (pathname !== "/") return null;
-  return <CtaSection />;
+  return <CtaSection key={pathname} />;
 }
 
 function CtaSection() {
@@ -49,7 +49,7 @@ function CtaSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="cta" className="section_cta" style={{ backgroundColor: "#e6912d" }}>
+    <section ref={sectionRef} id="cta" className="section_cta" style={{ backgroundColor: "var(--_color---colors-primary--orange)" }}>
       <div className="padding-global">
         <Spacer d={160} t={120} m={80} />
         <div className="container-large position-relative">

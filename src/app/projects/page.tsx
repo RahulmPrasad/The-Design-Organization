@@ -14,7 +14,7 @@ export default function ProjectsPage() {
     <>
       <ProjectsHeader />
       <ProjectsList />
-      <LearnMore />
+      <LearnMore currentPage="/projects" />
     </>
   );
 }
