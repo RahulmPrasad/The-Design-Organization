@@ -1,0 +1,27 @@
+/* The photo fills its rounded box (cropped like a cover image). CSS sets both width and height,
+   so Next.js doesn't warn about a changed aspect ratio. */
+@media (min-width: 768px) {
+  .home-tech_image-wrapper {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  /* Taller than the box and centered on it, so the scroll drift (±6%) never reveals an edge. */
+  .home-tech_image {
+    position: absolute;
+    top: -8%;
+    left: 0;
+    width: 100%;
+    height: 116%;
+    max-width: none;
+    object-fit: cover;
+  }
+}
+
+/* Phones: the theme widens the photo (200–260%) inside a portrait box; fill its height too. */
+@media (max-width: 767px) {
+  .home-tech_image {
+    height: 100%;
+  }
+}

@@ -9,7 +9,7 @@ export type SiteLink = {
 export const mainNav: SiteLink[] = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about-us" },
-  { label: "Services", href: "/services" },
+  // { label: "Services", href: "/services" },
   { label: "Projects", href: "/projects" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },

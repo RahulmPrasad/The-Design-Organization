@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Spacer } from "@/components/ui/Spacer";
 import { useImageParallax } from "@/hooks/useImageParallax";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import "./technology.css";
 
 const content = {
   heading: "Modernizing",
@@ -63,12 +64,11 @@ export function HomeTechnology() {
               <Image
                 src={content.image.src}
                 alt={content.image.alt}
-                width={2064}
-                height={1620}
+                width={1200}
+                height={800}
                 sizes="(max-width: 479px) 260vw, (max-width: 767px) 200vw, 1376px"
                 loading="eager"
                 className="home-tech_image"
-                style={{ }}
                 data-image-parallax="1.12"
                 data-image-scale="false"
               />

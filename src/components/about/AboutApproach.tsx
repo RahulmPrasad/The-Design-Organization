@@ -12,7 +12,7 @@ const content = {
   heading: "How we bring interiors to life",
   body: "From the first conversation to the final styling, we turn ideas into spaces that feel personal and work beautifully. Our team guides every step: planning layouts, selecting materials and finishes, and coordinating the craftspeople who make it real.",
   cta: { label: "View Our Projects", href: "/projects" },
-  image: { src: "/images/projects/interior-wide-5.webp", alt: "White and timber kitchen", width: 1600, height: 1000 },
+  image: { src: "/images/projects/about3.jpeg", alt: "White and timber kitchen", width: 1600, height: 1000 },
 };
 
 /** White section: large image on the left, heading, text and a button on the right. */
