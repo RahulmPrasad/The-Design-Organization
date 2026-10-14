@@ -7,42 +7,14 @@ import { Spacer } from "@/components/ui/Spacer";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { DESKTOP_QUERY } from "@/lib/media";
+import { faqs } from "@/lib/faq";
 import { siteName } from "@/lib/site";
 import "./faq.css";
 
 const content = {
   label: "Common Questions",
-  heading: "Learn More About Us",
-  questions: [
-    {
-      q: "What kinds of spaces do you design?",
-      a: [
-        "We design homes and workplaces: full residential interiors, single rooms such as kitchens and living spaces, and offices and hospitality spaces. Every project starts from how the space will be used day to day.",
-      ],
-    },
-    {
-      q: "How does a project with you usually work?",
-      a: [
-        "We begin with a consultation to understand your needs, style and budget. From there we develop concepts and layouts, refine materials and finishes with you, and then manage the work through to final styling.",
-      ],
-    },
-    {
-      q: "Can you work within my budget?",
-      a: [
-        "Yes. We agree on a budget at the start and plan the design around it, showing you where to invest and where to save so the result feels considered without surprises.",
-      ],
-    },
-    {
-      q: "Do you manage contractors and installation?",
-      a: [
-        "We can. We work with a trusted network of builders and craftspeople and coordinate them on your behalf, or we can collaborate with contractors you already work with.",
-      ],
-    },
-    {
-      q: "How long does a typical project take?",
-      a: ["It depends on scope. A single room can take a few weeks, while a full home renovation may take several months. We share a clear timeline before work begins."],
-    },
-  ],
+  heading: "Interior Design in Vadodara: Your Questions Answered",
+  questions: faqs,
 };
 
 /** One question: the answer slides open and the plus icon turns into a minus. */
@@ -159,21 +131,21 @@ export function AboutFaq() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="section_faq">
+    <section ref={sectionRef} id="faq" className="section_faq">
       <div className="padding-global">
         <Spacer d={160} t={120} m={80} />
         <div className="container-large position-relative">
           <div className="u-grid">
             <div id="w-node-b91d1224-fb4b-ffa8-795f-bc2d54d6e357-54d6e352">
               <Spacer d={4} m={0} />
-              <h2 data-label-fade="0" className="label-style-2 text-weight-medium">
+              <p data-label-fade="0" className="label-style-2 text-weight-medium">
                 {content.label}
-              </h2>
+              </p>
             </div>
             <div id="w-node-_55097afd-582a-754b-5b8f-72d7d56bfc5a-54d6e352">
-              <div data-heading-fade="300" id="w-node-b91d1224-fb4b-ffa8-795f-bc2d54d6e35b-54d6e352" className="heading-style-h3 text-style-wrap-pretty">
+              <h2 data-heading-fade="300" id="w-node-b91d1224-fb4b-ffa8-795f-bc2d54d6e35b-54d6e352" className="heading-style-h3 text-style-wrap-pretty">
                 {content.heading}
-              </div>
+              </h2>
             </div>
           </div>
           <Spacer d={64} />

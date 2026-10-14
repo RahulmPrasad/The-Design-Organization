@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { HomeCta } from "@/components/home/HomeCta";
+import { Particles } from "@/components/ui/Particles";
 import { SiteLogo } from "@/components/ui/SiteLogo";
 import { Spacer } from "@/components/ui/Spacer";
-import { footerColumns, legalLinks, siteName, type SiteLink } from "@/lib/site";
-import { FooterParticles } from "./FooterParticles";
+import { business, city, footerColumns, legalLinks, siteName, type SiteLink } from "@/lib/site";
 import "./footer.css";
 
 function FooterLink({ link }: { link: SiteLink }) {
@@ -22,7 +22,15 @@ function FooterLink({ link }: { link: SiteLink }) {
 }
 
 export function Footer() {
-  const copyright = `© ${new Date().getFullYear()} ${siteName}. All rights reserved.`;
+  const copyright = `© ${new Date().getFullYear()} ${siteName}, Interior Designers in ${city}, Gujarat. All rights reserved.`;
+  // Name, address and phone, matching the Google Business Profile (shown once filled in lib/site.ts).
+  const { address } = business;
+  const street = address.street && `${address.street}, ${address.locality} ${address.postalCode}`.trim();
+  const nap = [
+    street && { label: street, href: business.mapUrl || undefined },
+    business.phone && { label: business.phone, href: `tel:${business.phone.replace(/\s/g, "")}` },
+    business.email && { label: business.email, href: `mailto:${business.email}` },
+  ].filter((item): item is { label: string; href: string | undefined } => Boolean(item));
 
   return (
     <div className="footer_wrap">
@@ -34,13 +42,13 @@ export function Footer() {
           <div className="container-large">
             <div className="u-grid is-footer-custom">
               <h2 id="w-node-_78e76d15-8bbc-8e48-95ae-2dee7a4d3959-7a4d3953" className="heading-style-h4">
-                Proven Advanced <br />
-                Nuclear Technology
+                Designing Spaces <br />
+                With Purpose
               </h2>
               {footerColumns.map((column) => (
                 <div key={column.id} id={column.id} className="footer_links-col">
                   {column.links.map((link) => (
-                    <FooterLink key={link.href} link={link} />
+                    <FooterLink key={link.label} link={link} />
                   ))}
                 </div>
               ))}
@@ -67,6 +75,21 @@ export function Footer() {
                     {link.label}
                   </Link>
                 ))}
+                {nap.length > 0 && (
+                  <address style={{ fontStyle: "normal", display: "contents" }}>
+                    {nap.map((item) =>
+                      item.href ? (
+                        <a key={item.label} href={item.href} className="footer_link-small is-grey">
+                          {item.label}
+                        </a>
+                      ) : (
+                        <span key={item.label} className="footer_link-small is-grey no-hover">
+                          {item.label}
+                        </span>
+                      ),
+                    )}
+                  </address>
+                )}
               </div>
               <div id="w-node-ff52d41c-acec-858e-7a62-3c1e81021db9-7a4d3953" className="show-mobile-landscape">
                 <div className="footer_link-small is-grey no-hover">{copyright}</div>
@@ -74,7 +97,9 @@ export function Footer() {
             </div>
           </div>
         </div>
-        <FooterParticles />
+        <div className="footer_bg">
+          <Particles className="footer_bg-wrapper" style={{ zIndex: 0 }} />
+        </div>
         <Spacer d={64} m={48} />
       </footer>
     </div>

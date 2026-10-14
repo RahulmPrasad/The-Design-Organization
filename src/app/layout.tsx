@@ -8,7 +8,10 @@ import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { PageLoader } from "@/components/layout/PageLoader";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
-import { siteName } from "@/lib/site";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { defaultOgImage } from "@/lib/metadata";
+import { city, siteDescription, siteName, siteUrl } from "@/lib/site";
+import { businessSchema, websiteSchema } from "@/lib/structured-data";
 
 // Geist for headings, Inter for body text (wired into the theme via --font-geist / --font-inter).
 // Self-hosted variable fonts (Latin subset, all weights 100–900) from Google Fonts, so builds
@@ -27,20 +30,48 @@ const inter = localFont({
   display: "swap",
 });
 
-const description =
-  "Advanced small modular reactors built on proven HTGR technology, delivering up to 950°C clean heat and electricity for industrial applications.";
+const defaultTitle = `${siteName} | Interior Designers in ${city}`;
+const ogImage = defaultOgImage;
 
 export const metadata: Metadata = {
-  title: siteName,
-  description,
-  openGraph: { title: siteName, description, type: "website" },
-  twitter: { card: "summary_large_image", title: siteName, description },
+  metadataBase: new URL(siteUrl),
+  title: { default: defaultTitle, template: `%s | ${siteName}` },
+  description: siteDescription,
+  applicationName: siteName,
+  keywords: [
+    "interior designer in Vadodara",
+    "interior designers in Vadodara",
+    "best interior designer in Vadodara",
+    "interior design firm Vadodara",
+    "home interior designer Vadodara",
+    "interior designer Baroda",
+    "modular kitchen Vadodara",
+    "office interior designer Vadodara",
+    "turnkey interiors Vadodara",
+    "3BHK interior design Vadodara",
+  ],
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    siteName,
+    url: "/",
+    title: defaultTitle,
+    description: siteDescription,
+    images: [ogImage],
+  },
+  twitter: { card: "summary_large_image", title: defaultTitle, description: siteDescription, images: [ogImage.url] },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
+  other: { "geo.region": "IN-GJ", "geo.placename": city },
+  // TODO: paste the verification code from Google Search Console (HTML tag method) once the domain is live.
+  // verification: { google: "…" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${geist.variable} ${inter.variable}`}>
+    <html lang="en-IN" className={`${geist.variable} ${inter.variable}`}>
       <body>
+        <JsonLd data={[businessSchema(), websiteSchema()]} />
         <SmoothScroll />
         <div className="page-wrapper">
           <PageLoader />

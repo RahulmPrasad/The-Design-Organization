@@ -22,7 +22,7 @@ export function AboutApproach() {
   useImageParallax(sectionRef);
 
   return (
-    <section ref={sectionRef} data-page-load="next-section" className="section_approach text-color-black">
+    <section ref={sectionRef} id="approach" data-page-load="next-section" className="section_approach text-color-black">
       <Spacer d={160} t={120} m={80} />
       <div className="padding-global">
         <div className="container-large">

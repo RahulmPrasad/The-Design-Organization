@@ -14,7 +14,7 @@ const landscape = { width: 1600, height: 1000 };
 
 const content = {
   heading: "Crafted by a Team That Cares",
-  body: "From first sketch to final styling, our designers, project managers and trusted craftspeople work side by side on every detail. We collaborate closely with you at each stage, so the finished space feels exactly right.",
+  body: "From first sketch to final styling, our designers, project managers and trusted Vadodara craftspeople work side by side on every detail. We collaborate closely with you at each stage, so the finished space feels exactly right.",
   cta: { label: "Contact Us to Learn More", href: "/contact" },
   // Alternating portrait and landscape, like the reference.
   images: [

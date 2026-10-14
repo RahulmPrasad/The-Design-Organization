@@ -9,17 +9,17 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import "./technology.css";
 
 const content = {
-  heading: "Modernizing",
-  headingEnd: "Proven Technology",
-  body: "We're the only Western advanced small modular reactor (SMR) company modernizing the established, publicly available technology of Japan's High Temperature Engineering Test Reactor, which is capable of producing industrial process heat up to 950 °C.",
-  cta: { label: "Explore Our Technology", href: "/technology" },
+  heading: "Complete Interiors,",
+  headingEnd: "Designed in Vadodara",
+  body: "From 2BHK and 3BHK apartments to villas, bungalows, modular kitchens, offices and showrooms, we design and deliver interiors across Vadodara, including Alkapuri, Akota, Gotri, Bhayli, Old Padra Road, Sama and Manjalpur. Every project gets space planning, 3D design and material selection before any work begins.",
+  cta: { label: "Explore Our Services", href: "/about-us#solutions" },
   image: {
     src: "/images/info-img.jpg",
-    alt: "Modern building complex with surrounding smaller buildings near a winding river in a green rural landscape.",
+    alt: "Contemporary villa with timber cladding, a stone feature wall and a landscaped front garden",
   },
   card: {
-    label: "Design Meets Resilience",
-    text: "Our SMR facility will be a next-generation energy campus, defined by contemporary architectural elements - softened structural lines and sculpted façades that integrate thoughtfully with surrounding environments.",
+    label: "Turnkey, From Concept to Keys",
+    text: "One team handles design, civil and electrical work, carpentry, lighting and final styling, coordinating every contractor so your home or office is delivered on time, on budget and exactly as designed.",
   },
 };
 

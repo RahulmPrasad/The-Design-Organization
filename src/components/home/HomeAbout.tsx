@@ -11,16 +11,16 @@ import { siteName } from "@/lib/site";
 import "./about.css";
 
 const content = {
-  label: "The Name Reflects our Mission",
+  label: "Interior Design Studio in Vadodara",
   intro:
-    "Great interiors do more than look beautiful. We design spaces that reflect how you live and work, balancing form, function, and craft in every detail.",
+    "Great interiors do more than look beautiful. From apartments and villas to offices and cafés across Vadodara, we design spaces that reflect how you live and work, balancing form, function and craft in every detail.",
   cta: { label: "Discover Our Story", href: "/about-us" },
-  subtitle: `Elevated living requires organized thinking. The Design Organization delivers design-led spatial solutions that turn every room into a sanctuary.`,
+  subtitle: `Elevated living requires organized thinking. ${siteName} delivers design-led interiors for homes and businesses in Vadodara, turning every room into a sanctuary.`,
   video: { src: "/videos/home-video.mp4", poster: "/images/about-video-poster.webp" },
   detail: {
     title: siteName,
     pronunciation: "We Build your dreams to reality.",
-    text: "Interior design for homes and workplaces, crafted with purpose and character.",
+    text: "Interior design for homes and workplaces in Vadodara, crafted with purpose and character.",
   },
 };
 

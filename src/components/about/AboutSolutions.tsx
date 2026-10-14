@@ -72,7 +72,7 @@ export function AboutSolutions() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="background-color-dark-grey text-color-white">
+    <section ref={sectionRef} id="solutions" className="background-color-dark-grey text-color-white">
       <div className="padding-global">
         <Spacer d={200} t={140} m={80} />
         <div className="container-large position-relative">

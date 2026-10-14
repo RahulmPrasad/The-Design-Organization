@@ -12,6 +12,12 @@
   }
 }
 
+/* Footer-style particles: above the blue background and its ::before wash (z-index 0),
+   below the headline, image and tagline (z-index 2+). */
+.home-header_particles {
+  z-index: 1;
+}
+
 /* Hero image size (overrides webflow-theme.css: 63.5174% / max 54.625rem). */
 .home-header_reactor {
   height: auto;

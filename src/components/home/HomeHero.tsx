@@ -2,13 +2,14 @@
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import { Particles } from "@/components/ui/Particles";
 import { Spacer } from "@/components/ui/Spacer";
 import { gsap } from "@/lib/gsap";
 import { DESKTOP_QUERY } from "@/lib/media";
 import { registerPageIntro } from "@/lib/page-intro";
 import "./hero.css";
 
-// The reactor drifts ±6% vertically as the hero scrolls past (scale 1.12 → (1.12 - 1) * 100 / 2).
+// The hero image drifts ±6% vertically as the hero scrolls past (scale 1.12 → (1.12 - 1) * 100 / 2).
 const REACTOR_PARALLAX = 6;
 
 export function HomeHero() {
@@ -88,13 +89,16 @@ export function HomeHero() {
 
   return (
     <header ref={heroRef} className="section_home-header">
+      {/* Same particles as the footer, in white so they read on the blue. */}
+      <Particles className="home-header_particles" color={[255, 255, 255]} />
       <div className="padding-global">
         <div className="container-large">
           <div className="home-header_component">
             <div className="home-header_top-spacing">
               <Spacer d={240} t={220} m={100} />
             </div>
-            <h2 className="heading-display-1 z-index-2">
+            {/* Display tagline, not a heading: the page's single H1 carries the keywords below. */}
+            <div className="heading-display-1 z-index-2">
               <span className="z-index-3 display-block">Building </span>
               <div className="home-header_span-wrapper">
                 <span>your</span>
@@ -107,7 +111,7 @@ export function HomeHero() {
               <Image
                 className="home-header_reactor"
                 src="/images/hero-img.png"
-                alt="Cutaway view of a compact nuclear reactor showing fuel rods and internal components inside a metallic cylindrical vessel."
+                alt="Row of modern homes with grey board-and-batten exteriors"
                 width={1920}
                 height={1080}
                 sizes="(max-width: 767px) 100vw, (max-width: 991px) 95vw, 1300px"
@@ -116,12 +120,12 @@ export function HomeHero() {
                 data-image-parallax="1.12"
                 data-image-scale="false"
               />
-            </h2>
+            </div>
             <div className="home-header_bottom-content">
               <Spacer d={64} t={104} m={28} />
               <div className="home-header_content">
                 <h1 className="heading-style-h6 text-style-wrap-pretty text-end" style={{ textAlign: "right" }}>
-                   Design Meets Interaction Creating Spaces That Adapt to Your World
+                  Interior Designers in Vadodara Creating Homes, Offices and Spaces That Adapt to Your World
                 </h1>
                 <div className="home-header_content-line" />
               </div>

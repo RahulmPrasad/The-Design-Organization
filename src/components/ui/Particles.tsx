@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type CSSProperties } from "react";
 import { prefersReducedMotion } from "@/lib/media";
 
 const CONFIG = {
@@ -15,8 +15,17 @@ const CONFIG = {
   /** Pull back toward each dot's drifting home position. */
   spring: 0.02,
   damping: 0.88,
-  color: [82, 79, 75], // #524F4B
-  highlight: [211, 231, 255], // #D3E7FF, brand light blue
+};
+
+type RGB = [number, number, number];
+
+type ParticlesProps = {
+  className?: string;
+  style?: CSSProperties;
+  /** Dot color at rest. */
+  color?: RGB;
+  /** Color dots glow toward near the cursor. */
+  highlight?: RGB;
 };
 
 type Dot = {
@@ -38,7 +47,12 @@ function random(min: number, max: number) {
 }
 
 /** Scattered dots that drift slowly and part around the cursor, then settle back. */
-export function FooterParticles() {
+export function Particles({
+  className,
+  style,
+  color = [82, 79, 75], // #524F4B
+  highlight = [211, 231, 255], // #D3E7FF, brand light blue
+}: ParticlesProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -81,8 +95,8 @@ export function FooterParticles() {
 
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
-      const [r, g, b] = CONFIG.color;
-      const [hr, hg, hb] = CONFIG.highlight;
+      const [r, g, b] = color;
+      const [hr, hg, hb] = highlight;
       for (const dot of dots) {
         const t = dot.glow;
         ctx.fillStyle = `rgba(${r + (hr - r) * t}, ${g + (hg - g) * t}, ${b + (hb - b) * t}, ${
@@ -159,7 +173,7 @@ export function FooterParticles() {
       draw();
     };
 
-    // The footer content sits above the canvas, so track the pointer on the window.
+    // Content sits above the canvas, so track the pointer on the window.
     const onPointerMove = (e: PointerEvent) => {
       pointer = { x: e.clientX, y: e.clientY };
     };
@@ -174,7 +188,7 @@ export function FooterParticles() {
     const resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(container);
 
-    // Only animate while the footer is on screen.
+    // Only animate while on screen.
     const visibilityObserver = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
       if (visible) start();
@@ -196,18 +210,17 @@ export function FooterParticles() {
       window.removeEventListener("pointerup", onPointerUp);
       document.documentElement.removeEventListener("pointerleave", onPointerLeave);
     };
-  }, []);
+    // Colors arrive as array literals, so compare by value.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [color.join(), highlight.join()]);
 
   return (
-    <div className="footer_bg">
-      <div
-        ref={containerRef}
-        id="particles-footer-canvas"
-        className="footer_bg-wrapper"
-        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", zIndex: 0, overflow: "hidden" }}
-      >
-        <canvas ref={canvasRef} aria-hidden="true" style={{ display: "block", width: "100%", height: "100%" }} />
-      </div>
+    <div
+      ref={containerRef}
+      className={className}
+      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", overflow: "hidden", pointerEvents: "none", ...style }}
+    >
+      <canvas ref={canvasRef} aria-hidden="true" style={{ display: "block", width: "100%", height: "100%" }} />
     </div>
   );
 }

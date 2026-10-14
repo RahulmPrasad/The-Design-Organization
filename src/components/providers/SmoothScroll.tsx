@@ -8,7 +8,8 @@ import { setLenis } from "@/lib/smooth-scroll";
 /** Site-wide smooth scrolling, driven by GSAP's ticker so ScrollTrigger stays in sync. */
 export function SmoothScroll() {
   useEffect(() => {
-    const lenis = new Lenis({ lerp: 0.12, wheelMultiplier: 0.6, gestureOrientation: "vertical" });
+    // `anchors` smooth-scrolls in-page links like the footer's "#cta" and "/about-us#faq".
+    const lenis = new Lenis({ lerp: 0.12, wheelMultiplier: 0.6, gestureOrientation: "vertical", anchors: true });
     setLenis(lenis);
     lenis.on("scroll", ScrollTrigger.update);
 
