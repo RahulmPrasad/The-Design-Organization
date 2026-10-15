@@ -22,15 +22,16 @@ function FooterLink({ link }: { link: SiteLink }) {
 }
 
 export function Footer() {
-  const copyright = `© ${new Date().getFullYear()} ${siteName}, Interior Designers in ${city}, Gujarat. All rights reserved.`;
+  const copyright = `© ${new Date().getFullYear()} ${siteName}. All rights reserved.`;
   // Name, address and phone, matching the Google Business Profile (shown once filled in lib/site.ts).
   const { address } = business;
-  const street = address.street && `${address.street}, ${address.locality} ${address.postalCode}`.trim();
+  // Until a street address is set, the city alone keeps the location visible.
+  const street = address.street ? `${address.street}, ${address.locality} ${address.postalCode}`.trim() : `${city}, ${address.region}`;
   const nap = [
-    street && { label: street, href: business.mapUrl || undefined },
+    { label: street, href: business.mapUrl || undefined },
     business.phone && { label: business.phone, href: `tel:${business.phone.replace(/\s/g, "")}` },
     business.email && { label: business.email, href: `mailto:${business.email}` },
-  ].filter((item): item is { label: string; href: string | undefined } => Boolean(item));
+  ].filter((item) => item !== "") as { label: string; href: string | undefined }[];
 
   return (
     <div className="footer_wrap">
@@ -66,30 +67,29 @@ export function Footer() {
                 <SiteLogo sizes="256px" className="footer_logo-image" />
               </Link>
               <div id="w-node-_3fb759fd-0912-61c6-b1ac-14f87d1cb0d9-7a4d3953" className="hide-mobile-landscape" />
-              <div id="w-node-ebb05fb1-5dc3-f2af-49f6-3289e45af446-7a4d3953" className="footer-legal_wrapper">
-                <div className="hide-mobile-landscape">
-                  <div className="footer_link-small is-grey no-hover">{copyright}</div>
+              <div id="w-node-ebb05fb1-5dc3-f2af-49f6-3289e45af446-7a4d3953" className="footer-legal_wrapper is-stacked">
+                {/* Contact first (name, address, phone, matching the Google Business Profile), then the legal line. */}
+                <address className="footer-legal_row">
+                  {nap.map((item) =>
+                    item.href ? (
+                      <a key={item.label} href={item.href} className="footer_link-small">
+                        {item.label}
+                      </a>
+                    ) : (
+                      <span key={item.label} className="footer_link-small no-hover">
+                        {item.label}
+                      </span>
+                    ),
+                  )}
+                </address>
+                <div className="footer-legal_row is-legal">
+                  <div className="footer_link-small is-grey no-hover hide-mobile-landscape">{copyright}</div>
+                  {legalLinks.map((link) => (
+                    <Link key={link.href} href={link.href} className="footer_link-small is-grey">
+                      {link.label}
+                    </Link>
+                  ))}
                 </div>
-                {legalLinks.map((link) => (
-                  <Link key={link.href} href={link.href} className="footer_link-small is-grey">
-                    {link.label}
-                  </Link>
-                ))}
-                {nap.length > 0 && (
-                  <address style={{ fontStyle: "normal", display: "contents" }}>
-                    {nap.map((item) =>
-                      item.href ? (
-                        <a key={item.label} href={item.href} className="footer_link-small is-grey">
-                          {item.label}
-                        </a>
-                      ) : (
-                        <span key={item.label} className="footer_link-small is-grey no-hover">
-                          {item.label}
-                        </span>
-                      ),
-                    )}
-                  </address>
-                )}
               </div>
               <div id="w-node-ff52d41c-acec-858e-7a62-3c1e81021db9-7a4d3953" className="show-mobile-landscape">
                 <div className="footer_link-small is-grey no-hover">{copyright}</div>

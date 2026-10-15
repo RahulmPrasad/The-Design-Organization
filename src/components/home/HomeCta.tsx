@@ -8,7 +8,6 @@ import { Spacer } from "@/components/ui/Spacer";
 import { useImageParallax } from "@/hooks/useImageParallax";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { gsap } from "@/lib/gsap";
-import { siteName } from "@/lib/site";
 import "./cta.css";
 
 const content = {
@@ -57,7 +56,7 @@ function CtaSection() {
             <div id="w-node-f911818e-159d-c05e-c48d-892c263b1949-263b1944" className="cta_content">
               <div data-animate-self="0" className="embed-icon">
                 {/* eslint-disable-next-line @next/next/no-img-element -- tiny decorative brand mark */}
-                <img src="/images/logo-mark.png" alt={siteName} width={64} height={24} className="cta_logo-mark" />
+                <img src="/images/logo-mark.png" alt="" width={64} height={24} loading="lazy" className="cta_logo-mark" />
               </div>
               <Spacer d={40} t={40} m={40} />
               <div className="tech-connect_heading-wrap">

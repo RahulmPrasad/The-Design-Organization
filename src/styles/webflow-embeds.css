@@ -50,22 +50,10 @@ html.lenis {
     }
 }
 
-.line-mask {
-    overflow: hidden;
-    display: block;
-    position: relative;
-}
-
 .line-child {
     display: block;
     position: relative;
     will-change: transform, opacity;
-}
-
-.line-mask-detail {
-    overflow: hidden;
-    display: block;
-    position: relative;
 }
 
 .line-child-detail {
@@ -117,41 +105,6 @@ html.lenis {
         transform-origin: center;
         will-change: transform;
     }
-    .shutter-grid-container {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: flex;
-        flex-direction: column;
-        z-index: -1;
-    }
-    .shutter-row {
-        width: 100%;
-        height: 50%;
-        display: flex;
-        position: relative;
-    }
-    .shutter-block {
-        flex: 1;
-        height: 100%;
-        transform-origin: left center;
-    }
-    .shutter-row.is-right .shutter-block {
-        transform-origin: right center;
-    }
-    .sr-only {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        white-space: nowrap;
-        border-width: 0;
-    }
 }
 
 /* ---------- Global utilities ---------- */
@@ -166,36 +119,29 @@ html.lenis {
                       overscroll-behavior: none;
                   }
 
-                  .sr-only {
-                      position: absolute;
-                      width: 1px;
-                      height: 1px;
-                      padding: 0;
-                      margin: -1px;
-                      overflow: hidden;
-                      clip: rect(0, 0, 0, 0);
-                      white-space: nowrap;
-                      border-width: 0;
-                  }
-
                   @media screen and (min-width: 991px) {
                       .page-loader {
                           pointer-events: auto;
                       }
-                      .wf-design-mode .page-loader {
-                          pointer-events: none !important;
+                  }
+
+                  /* Root size is scaled to 90% on tablet and desktop (the layout is rem-based, so everything scales
+                     like 90% browser zoom). Originals: 16px above 1440px, 1.1111vw and 1.4111vw below. Phones are unchanged. */
+                  @media only screen and (min-width: 1441px) {
+                      html {
+                          font-size: 90%;
                       }
                   }
 
                   @media only screen and (max-width: 1440px) and (min-width: 992px) {
                       html {
-                          font-size: 1.1111vw;
+                          font-size: 1vw;
                       }
                   }
 
                   @media only screen and (max-width: 991px) and (min-width: 767px) {
                       html {
-                          font-size: 1.4111vw;
+                          font-size: 1.27vw;
                       }
                   }
 
@@ -215,29 +161,12 @@ html.lenis {
 
                   /* Set color style to inherit */
 
-                  .inherit-color * {
-                      color: inherit;
-                  }
-
                   /* Get rid of top margin on first element in any rich text element */
-
-                  .w-richtext> :not(div):first-child,
-                  .w-richtext>div:first-child> :first-child {
-                      margin-top: 0 !important;
-                  }
 
                   /* Get rid of bottom margin on last element in any rich text element */
 
-                  .w-richtext> :last-child,
-                  .w-richtext ol li:last-child,
-                  .w-richtext ul li:last-child {
-                      margin-bottom: 0 !important;
-                  }
-
                   /* Make sure containers never lose their center alignment */
 
-                  .container-medium,
-                  .container-small,
                   .container-large {
                       margin-right: auto !important;
                       margin-left: auto !important;
@@ -266,36 +195,11 @@ font-size: inherit;
 
                   /* Apply "..." after 4 lines of text */
 
-                  .text-style-4lines {
-                      display: -webkit-box;
-                      overflow: hidden;
-                      -webkit-line-clamp: 4;
-                      -webkit-box-orient: vertical;
-                  }
-
                   /* Apply "..." after 3 lines of text */
-
-                  .text-style-3lines {
-                      display: -webkit-box;
-                      overflow: hidden;
-                      -webkit-line-clamp: 3;
-                      -webkit-box-orient: vertical;
-                  }
 
                   /* Apply "..." after 2 lines of text */
 
-                  .text-style-2lines {
-                      display: -webkit-box;
-                      overflow: hidden;
-                      -webkit-line-clamp: 2;
-                      -webkit-box-orient: vertical;
-                  }
-
                   /* Adds inline flex display */
-
-                  .display-inlineflex {
-                      display: inline-flex;
-                  }
 
                   /* These classes are never overwritten */
 
@@ -314,17 +218,6 @@ font-size: inherit;
                       .hide-mobile-landscape {
                           display: none !important;
                       }
-                  }
-
-                  @media screen and (max-width: 479px) {
-                      .hide-mobile {
-                          display: none !important;
-                      }
-                  }
-
-                  .spacing-clean {
-                      padding: 0rem !important;
-                      margin: 0rem !important;
                   }
 
                   textarea {
@@ -360,17 +253,7 @@ font-size: inherit;
                       stroke: currentcolor;
                   }
 
-                  .hide-if-empty:empty,
-                  .hide-if-empty:not(:has(> :not(.w-condition-invisible))),
-                  .hide-if-empty-cms:not(:has(.w-dyn-item)) {
-                      display: none !important;
-                  }
-
                   /* Global / Clickable Component */
-
-                  .wf-design-mode .clickable_wrap {
-                      z-index: 0;
-                  }
 
                   .clickable_wrap a[href='#'] {
                       display: none;
@@ -380,47 +263,8 @@ font-size: inherit;
                       display: block;
                   }
 
-                  .form_main_checkbox_label:has(input:checked) .form_main_checkbox_box {
-                      background-color: currentColor;
-                      border-color: currentColor;
-                  }
-
-                  .form_main_checkbox_label:has(input:checked) .form_main_checkbox_icon {
-                      opacity: 1;
-                  }
-
-                  .form_main_select_icon.open {
-                      transform: rotate(180deg);
-                  }
-
-                  .wf-design-mode *[href='#'],
-                  .wf-design-mode *[href=''] {
-                      outline: 2px dashed yellow;
-                      outline-offset: 5px;
-                  }
-
-                  .swiper-button-disabled {
-                      pointer-events: none;
-                      opacity: 0.5;
-                      cursor: default;
-                  }
-
-                  @media (min-width: 992px) {
-                      .swiper-button-disabled {
-                          pointer-events: none;
-                          opacity: 0;
-                          cursor: default;
-                      }
-                  }
-
                   [white-space='nowrap'] {
                       white-space: nowrap;
-                  }
-
-                  @media screen and (min-width: 767px) and (max-width: 991px) {
-                      .newsletter_input-wrap input {
-                          height: 100%;
-                      }
                   }
 
                   [data-image-parallax] {
@@ -447,71 +291,9 @@ font-size: inherit;
                       }
                   }
 
-                  .background-gradient_blue-fill {
-                      background: var(--Blue-FIll-Gradient, linear-gradient(180deg, rgba(211, 231, 255, 0) 0%, rgba(98, 138, 209, 0.4) 100%), #d3e7ff);
-                  }
-
-                  .team-detail_content h1 strong,
-                  .team-detail_content h2 strong,
-                  .team-detail_content h3 strong,
-                  .team-detail_content h4 strong,
-                  .team-detail_content h5 strong,
-                  .team-detail_content h6 strong,
-                  .team-detail_content h1 b,
-                  .team-detail_content h2 b,
-                  .team-detail_content h3 b,
-                  .team-detail_content h4 b,
-                  .team-detail_content h5 b,
-                  .team-detail_content h6 b {
-                      font-weight: 400 !important;
-                  }
-
-                  .team-detail_content h1,
-                  .team-detail_content h2,
-                  .team-detail_content h3,
-                  .team-detail_content h4,
-                  .team-detail_content h5,
-                  .team-detail_content h6 {
-                      font-weight: 400 !important;
-                  }
-
 /* ---------- CMS empty-state helpers ---------- */
 
 /* Empty Image */
-
-.u-check-for-image:has(.u-cms-image[src*="placeholder"]).u-hide-if-empty-image,
-.u-check-for-image:has(.u-cms-image[src*="placeholder"]) .u-hide-if-empty-image,
-.u-check-for-image:not(:has(.u-cms-image[src*="placeholder"])).u-show-if-empty-image,
-.u-check-for-image:not(:has(.u-cms-image[src*="placeholder"])) .u-show-if-empty-image,
-/* Empty Text */
-
-.u-check-for-text:has(.u-cms-text:empty).u-hide-if-empty-text,
-.u-check-for-text:has(.u-cms-text:empty) .u-hide-if-empty-text,
-.u-check-for-text:has(.u-cms-text:not(:empty)).u-show-if-empty-text,
-.u-check-for-text:has(.u-cms-text:not(:empty)) .u-show-if-empty-text,
-/* Empty Link */
-
-.u-check-for-link:has(.u-cms-link a[href="#"]).u-hide-if-empty-link,
-.u-check-for-link:has(.u-cms-link a[href="#"]) .u-hide-if-empty-link,
-.u-check-for-link:has(.u-cms-link a:not([href="#"])).u-show-if-empty-link,
-.u-check-for-link:has(.u-cms-link a:not([href="#"])) .u-show-if-empty-link,
-/* Toggle */
-
-.u-check-for-toggle:has(.u-cms-toggle:not(.w-condition-invisible)).u-hide-if-toggled,
-.u-check-for-toggle:has(.u-cms-toggle:not(.w-condition-invisible)) .u-hide-if-toggled,
-.u-check-for-toggle:has(.u-cms-toggle.w-condition-invisible).u-show-if-toggled,
-.u-check-for-toggle:has(.u-cms-toggle.w-condition-invisible) .u-show-if-toggled {
-    display: none;
-}
-
-.team-member_social-wrapper .u-check-for-link:has(.clickable_link[href="#"]),
-.team-member_social-wrapper .u-check-for-link:has(.clickable_link[href=""]) {
-    display: none !important;
-}
-
-.team-member_social-wrapper .u-check-for-link:not(:has(.clickable_link[href])) {
-    display: none !important;
-}
 
 /* ---------- Buttons ---------- */
 
@@ -1447,14 +1229,6 @@ font-size: inherit;
         opacity: 0;
         transform: translateY(12px);
     }
-}
-
-.scroll-icon {
-    animation: scrollRevealLoop 3.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
-}
-
-.scroll-icon svg {
-    display: block;
 }
 
 /* ---------- Navbar states ---------- */

@@ -23,3 +23,8 @@
     color: var(--_color---colors-primary--white) !important;
   }
 }
+
+/* White button outline on the CTA's orange background (overriding the variable keeps it white on hover too). */
+.section_cta .button_content {
+  --_button-style---border: var(--_color---colors-primary--white);
+}

@@ -47,14 +47,79 @@
     /* Above the hero image (z-index 2), which can reach it on tablet widths. */
     z-index: 3;
   }
+
+  .home-header_content h1 {
+    text-align: right;
+  }
 }
 
-/* Mobile: the theme pulls the section up under the (tall) reactor render with a
-   large negative margin and offset; undo that for the wide photo. */
+/* Mobile: one full-screen column (heading, tagline, then the photo filling the bottom
+   edge to edge). Replaces the theme's absolute tagline and negative-margin image.
+   `.section_home-header` prefixes outrank the theme's 767px and 479px rules. */
 @media screen and (max-width: 767px) {
-  .home-header_reactor {
-    width: 100%;
-    margin-bottom: 0;
+  .section_home-header .home-header_component {
+    height: 100vh;
+    height: 100svh;
+    min-height: 38rem;
+    max-height: none;
+    justify-content: flex-start;
+  }
+
+  /* Extra room below the navbar, on top of the 100px spacer. */
+  .section_home-header .home-header_top-spacing {
+    padding-top: 6rem;
+  }
+
+  /* Lets the heading's lines and the photo be laid out (and ordered) as column items. */
+  .section_home-header .heading-display-1 {
+    display: contents;
+  }
+
+  /* The theme's 132px gap above the old overlapping image. */
+  .section_home-header .heading-display-1 > .show-mobile-landscape,
+  .section_home-header .home-header_bottom-content > .spacer:last-child {
+    display: none;
+  }
+
+  .section_home-header .home-header_bottom-content {
+    order: 1;
+    position: static;
+  }
+
+  .section_home-header .home-header_content {
+    max-width: 19rem;
+  }
+
+  .section_home-header .home-header_content h1 {
+    text-align: left;
+  }
+
+  /* Fits "your Dreams" on narrow phones (the theme's 4rem overflows below ~375px). */
+  .section_home-header .heading-display-1 > span,
+  .section_home-header .home-header_span-wrapper {
+    font-size: min(4rem, 16.5vw);
+  }
+
+  .section_home-header .home-header_content {
+    z-index: 3;
+  }
+
+  /* Houses fill the bottom 45% of the screen, edge to edge. The PNG's top ~59% is
+     transparent sky (houses start around row 950 of 1601), so the box is
+     45% / (651 / 1601) ≈ 111% of the screen tall, anchored to the bottom, with
+     the clear part behind the text. */
+  .section_home-header .home-header_reactor {
+    position: absolute;
+    top: auto;
+    bottom: 0;
+    left: calc(-1 * var(--_sizes---global-padding--regular));
+    width: 100vw;
+    max-width: none;
+    height: 90svh;
+    margin: 0;
+    object-fit: cover;
+    object-position: 40% 100%;
     transform: none;
+    translate: none;
   }
 }

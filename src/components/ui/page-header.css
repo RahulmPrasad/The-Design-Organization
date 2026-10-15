@@ -1,4 +1,99 @@
-/* Centered variant: title stays left-aligned but sits in the vertical middle of the header. */
+/* Full screen height at every size: the theme drops to a 1440/900 ratio on tablet.
+   `svh` ignores the mobile address bar, so the header doesn't jump as it hides;
+   `min-height` lets it grow if the title ever needs more room (e.g. phones in landscape). */
+header.section_team-header {
+  aspect-ratio: auto;
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+/* Mobile photo fills the header instead of keeping its own height. */
+img.team-header_mobile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.page-header_title {
+  display: block;
+}
+
+/* Eyebrow: small spaced capitals between two hairlines. */
+.page-header_eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+  font-family: var(--_typography---font-family--body);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.page-header_eyebrow::before,
+.page-header_eyebrow::after {
+  content: "";
+  flex: none;
+  width: 3rem;
+  height: 1px;
+  background-color: currentColor;
+  opacity: 0.6;
+}
+
+/* Left-aligned headers only get the trailing hairline. */
+.section_team-header:not(.is-centered) .page-header_eyebrow::before {
+  display: none;
+}
+
+/* Centered variant: title in the middle of the header, both ways. */
 .section_team-header.is-centered {
   justify-content: center;
+}
+
+.section_team-header.is-centered .max-width-large {
+  max-width: 62rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.section_team-header.is-centered .page-header_eyebrow {
+  justify-content: center;
+}
+
+/* Centered titles sit over the middle of the photo, so darken it evenly
+   (the theme's gradient only shades the left half). */
+.section_team-header.is-centered .team-header_background-gradient {
+  width: 100%;
+  opacity: 1;
+  background-image: linear-gradient(180deg, rgb(0 0 0 / 0.2), rgb(0 0 0 / 0.45));
+}
+
+.section_team-header.is-centered .page-header_title {
+  line-height: 1.08;
+  text-wrap: balance;
+  /* Keeps the light-weight title crisp over bright parts of the photo. */
+  text-shadow: 0 2px 32px rgb(0 0 0 / 0.25);
+}
+
+@media screen and (max-width: 767px) {
+  .page-header_eyebrow {
+    margin-bottom: 1rem;
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+    text-wrap: balance;
+  }
+
+  /* Too narrow for the hairlines: the label wraps and they float away from it. */
+  .page-header_eyebrow::before,
+  .page-header_eyebrow::after {
+    display: none;
+  }
+
+  .section_team-header.is-centered .page-header_title {
+    font-size: 2.25rem;
+  }
 }

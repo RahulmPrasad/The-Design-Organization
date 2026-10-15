@@ -20,8 +20,9 @@ export default function AboutUsPage() {
     <>
       <JsonLd data={breadcrumbSchema([{ name: "About Us", path: "/about-us" }])} />
       <PageHeader
-        heading="Interior Designers in Vadodara,"
-        headingEnd="Designing Spaces With Purpose and Character"
+        eyebrow="Vadodara’s Premier Interior Design Studio"
+        heading="Designing Spaces"
+        headingEnd="With Purpose and Character"
         centered
         background={{
           desktop: { src: "/images/projects/interior-wide-8.webp", width: 1600, height: 1000 },

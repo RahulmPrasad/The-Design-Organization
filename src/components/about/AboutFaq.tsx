@@ -8,7 +8,6 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { DESKTOP_QUERY } from "@/lib/media";
 import { faqs } from "@/lib/faq";
-import { siteName } from "@/lib/site";
 import "./faq.css";
 
 const content = {
@@ -153,7 +152,7 @@ export function AboutFaq() {
             <div id="w-node-b91d1224-fb4b-ffa8-795f-bc2d54d6e35f-54d6e352">
               <div data-animate-self="100" className="faq_icon">
                 {/* eslint-disable-next-line @next/next/no-img-element -- tiny decorative brand mark */}
-                <img src="/images/logo-mark.png" alt={siteName} width={64} height={24} className="faq_logo-mark" />
+                <img src="/images/logo-mark.png" alt="" width={64} height={24} loading="lazy" className="faq_logo-mark" />
               </div>
               <Spacer d={8} />
             </div>

@@ -124,8 +124,8 @@ export function HomeHero() {
             <div className="home-header_bottom-content">
               <Spacer d={64} t={104} m={28} />
               <div className="home-header_content">
-                <h1 className="heading-style-h6 text-style-wrap-pretty text-end" style={{ textAlign: "right" }}>
-                  Interior Designers in Vadodara Creating Homes, Offices and Spaces That Adapt to Your World
+                <h1 className="heading-style-h6 text-style-wrap-pretty text-end">
+                  One of Vadodara’s Leading Interior Designers, Creating Homes and Spaces That Adapt to Your World
                 </h1>
                 <div className="home-header_content-line" />
               </div>

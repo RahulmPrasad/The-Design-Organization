@@ -195,7 +195,6 @@ export function HomeAbout() {
                     width={912}
                     height={504}
                     sizes="(max-width: 991px) 100vw, 912px"
-                    loading="eager"
                     className="opacity-0"
                     style={{ height: "auto" }}
                   />

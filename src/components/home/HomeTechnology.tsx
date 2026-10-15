@@ -9,9 +9,9 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import "./technology.css";
 
 const content = {
-  heading: "Complete Interiors,",
-  headingEnd: "Designed in Vadodara",
-  body: "From 2BHK and 3BHK apartments to villas, bungalows, modular kitchens, offices and showrooms, we design and deliver interiors across Vadodara, including Alkapuri, Akota, Gotri, Bhayli, Old Padra Road, Sama and Manjalpur. Every project gets space planning, 3D design and material selection before any work begins.",
+  heading: "Thoughtful Design,",
+  headingEnd: "Carefully Delivered",
+  body: "Every space we design begins with listening. We take time to understand how you live and work, then shape layouts, materials and light around those needs. From the first sketch to the final detail, our team stays with you to make sure the finished space feels considered, comfortable and entirely your own.",
   cta: { label: "Explore Our Services", href: "/about-us#solutions" },
   image: {
     src: "/images/info-img.jpg",
@@ -67,7 +67,6 @@ export function HomeTechnology() {
                 width={1200}
                 height={800}
                 sizes="(max-width: 479px) 260vw, (max-width: 767px) 200vw, 1376px"
-                loading="eager"
                 className="home-tech_image"
                 data-image-parallax="1.12"
                 data-image-scale="false"

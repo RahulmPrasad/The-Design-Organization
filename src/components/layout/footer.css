@@ -9,3 +9,29 @@
     max-width: 12rem;
   }
 }
+
+/* Bottom-right block: contact row, a hairline, then copyright and legal links. */
+.footer-legal_wrapper.is-stacked {
+  flex-direction: column;
+  align-items: stretch;
+  row-gap: 1rem;
+}
+
+.footer-legal_row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 2rem;
+  row-gap: 0.5rem;
+  font-style: normal;
+}
+
+.footer-legal_row.is-legal {
+  column-gap: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.footer-legal_row .footer_link-small.no-hover:hover {
+  color: #fff;
+}

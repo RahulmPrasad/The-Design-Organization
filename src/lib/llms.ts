@@ -15,6 +15,14 @@ const keyFacts = () =>
     `- Vastu-compliant layouts available on request`,
   ].join("\n");
 
+const profileName = (url: string) => {
+  const host = new URL(url).hostname;
+  if (host.includes("instagram")) return "Instagram";
+  if (host.includes("facebook")) return "Facebook";
+  if (host.includes("linkedin")) return "LinkedIn";
+  return "Profile";
+};
+
 const contact = () => {
   const { address } = business;
   const whatsapp = business.whatsapp && `https://wa.me/${business.whatsapp}`;
@@ -26,7 +34,7 @@ const contact = () => {
     business.mapUrl && `- Google Maps: ${business.mapUrl}`,
     business.openingHours && `- Hours: ${business.openingHours}`,
     `- Website: ${absoluteUrl("/")}`,
-    ...business.profiles.map((url) => `- ${url.includes("instagram.com") ? "Instagram" : "Profile"}: ${url}`),
+    ...business.profiles.map((url) => `- ${profileName(url)}: ${url}`),
   ]
     .filter(Boolean)
     .join("\n");

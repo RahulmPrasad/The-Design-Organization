@@ -1,10 +1,7 @@
 export const siteName = "The Design Organization";
 
-/**
- * Public origin used for canonical URLs, the sitemap and structured data.
- * Set NEXT_PUBLIC_SITE_URL to the live domain (e.g. https://www.example.in); Netlify's `URL` is the fallback at build time.
- */
-export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || process.env.URL || "http://localhost:3000").replace(/\/$/, "");
+/** Public origin used for canonical URLs, the sitemap and structured data. NEXT_PUBLIC_SITE_URL can override it (e.g. for a staging site). */
+export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.thedesignorganization.in").replace(/\/$/, "");
 
 export const city = "Vadodara";
 
@@ -36,7 +33,11 @@ export const business = {
   priceRange: "", // e.g. "₹₹"
   foundingYear: "",
   /** Instagram, Facebook, LinkedIn, Houzz, JustDial etc. Used as `sameAs` in structured data. */
-  profiles: ["https://www.instagram.com/thedesignorganization"],
+  profiles: [
+    "https://www.instagram.com/thedesignorganization",
+    "https://www.facebook.com/GodownofDesignStudio/",
+    "https://in.linkedin.com/company/the-design-organization",
+  ],
 };
 
 export type SitePage = {
@@ -153,6 +154,8 @@ export const footerColumns: { id: string; links: SiteLink[] }[] = [
     links: [
       { label: "Start a Project", href: "#cta" },
       { label: "Instagram", href: "https://www.instagram.com/thedesignorganization", external: true },
+      { label: "Facebook", href: "https://www.facebook.com/GodownofDesignStudio/", external: true },
+      { label: "LinkedIn", href: "https://in.linkedin.com/company/the-design-organization", external: true },
       { label: "WhatsApp", href: "https://wa.me/919327335458", external: true },
     ],
   },

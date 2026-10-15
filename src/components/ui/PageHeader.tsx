@@ -11,18 +11,20 @@ import "./page-header.css";
 type HeaderImage = { src: string; width: number; height: number };
 
 type PageHeaderProps = {
+  /** Small label above the title, part of the h1 (e.g. who and where, for search). */
+  eyebrow?: string;
   heading: string;
   /** Second part of the heading, kept together on its own line where it fits. */
   headingEnd?: string;
   /** Paragraph at the bottom left; omit for a title-only header. */
   intro?: string;
   background: { desktop: HeaderImage; mobile: HeaderImage };
-  /** Place the title in the vertical middle of the header (still left-aligned) instead of at the bottom. */
+  /** Center the title in the header, both ways, instead of bottom-left. */
   centered?: boolean;
 };
 
 /** Full-height page header: background image with the title, and an optional intro bottom-left. */
-export function PageHeader({ heading, headingEnd, intro, background, centered = false }: PageHeaderProps) {
+export function PageHeader({ eyebrow, heading, headingEnd, intro, background, centered = false }: PageHeaderProps) {
   const headerRef = useRef<HTMLElement>(null);
 
   // Entrance (desktop): title and intro rise in line by line while the background settles from 1.2x.
@@ -34,11 +36,12 @@ export function PageHeader({ heading, headingEnd, intro, background, centered = 
     const buildIntro = () => {
       let timeline!: gsap.core.Timeline;
       ctx.add(() => {
-        const title = SplitText.create(header.querySelector("h1"), { type: "lines", linesClass: "line-child" });
+        const title = SplitText.create(header.querySelector(".page-header_title"), { type: "lines", linesClass: "line-child" });
         const nextSection = document.querySelector('[data-page-load="next-section"]');
         timeline = gsap
           .timeline()
           .fromTo(".team-header_background-wrapper", { scale: 1.2 }, { scale: 1, duration: 2.5, ease: "expo.out" }, 0.2)
+          .from(".page-header_eyebrow", { duration: 1.4, y: 16, opacity: 0, ease: "power3.out" }, 0.1)
           .from(title.lines, { duration: 1.6, y: 30, opacity: 0, ease: "power4.out", stagger: 0.07 }, 0.2)
           .to(document.querySelector(".navbar"), { yPercent: 0, duration: 0.8, ease: "expo.out" }, 0.4);
         const paragraph = header.querySelector("p");
@@ -66,19 +69,23 @@ export function PageHeader({ heading, headingEnd, intro, background, centered = 
 
   return (
     <header ref={headerRef} className={`section_team-header text-color-white${centered ? " is-centered" : ""}`}>
-      <Spacer d={208} m={220} />
+      {/* Centered titles only need to clear the navbar; a tall spacer would push them below the middle. */}
+      {centered ? <Spacer d={120} m={96} /> : <Spacer d={208} m={220} />}
       <div className="padding-global z-index-2">
         <div className="container-large">
           <div className="team-header_component">
             <div className="max-width-large">
               <h1>
-                {heading}
-                {headingEnd && (
-                  <>
-                    {" "}
-                    <span className="display-inlineblock">{headingEnd}</span>
-                  </>
-                )}
+                {eyebrow && <span className="page-header_eyebrow">{eyebrow}</span>}
+                <span className="page-header_title">
+                  {heading}
+                  {headingEnd && (
+                    <>
+                      {" "}
+                      <span className="display-inlineblock">{headingEnd}</span>
+                    </>
+                  )}
+                </span>
               </h1>
             </div>
             {intro && (
@@ -96,13 +103,13 @@ export function PageHeader({ heading, headingEnd, intro, background, centered = 
         <div className="team-header_background-block">
           <div className="hide-mobile-landscape">
             <div className="video_full-wrapper">
-              {/* `fill`: sized by its container, so Next.js doesn't check it against width/height. */}
+              {/* `fill`: sized by its container, so Next.js doesn't check it against width/height.
+                  Both header images stay lazy (no preload) so only the visible one downloads; fetchPriority still fetches it first. */}
               <Image
                 src={background.desktop.src}
                 alt=""
                 fill
                 sizes="100vw"
-                loading="eager"
                 fetchPriority="high"
                 className="video_full"
                 style={{ objectFit: "cover" }}
@@ -114,9 +121,8 @@ export function PageHeader({ heading, headingEnd, intro, background, centered = 
             alt=""
             width={background.mobile.width}
             height={background.mobile.height}
-            loading="eager"
-            className="show-mobile-landscape"
-            style={{ height: "auto" }}
+            fetchPriority="high"
+            className="show-mobile-landscape team-header_mobile-image"
           />
         </div>
         <div className="team-header_background-gradient" />
