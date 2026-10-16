@@ -5,6 +5,7 @@ import { Fragment, useRef } from "react";
 import { Spacer } from "@/components/ui/Spacer";
 import { useImageParallax } from "@/hooks/useImageParallax";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { brandAlt } from "@/lib/site";
 import "./mission.css";
 
 const content = {
@@ -71,7 +72,7 @@ export function AboutMission() {
                       <div className="features-3_image-wrapper">
                         <Image
                           src={feature.image.src}
-                          alt={feature.image.alt}
+                          alt={brandAlt(feature.image.alt)}
                           width={664}
                           height={928}
                           sizes="(max-width: 479px) 100vw, (max-width: 767px) 50vw, 427px"

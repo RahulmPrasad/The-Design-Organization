@@ -7,6 +7,7 @@ import { Spacer } from "@/components/ui/Spacer";
 import { gsap } from "@/lib/gsap";
 import { DESKTOP_QUERY } from "@/lib/media";
 import { registerPageIntro } from "@/lib/page-intro";
+import { brandAlt } from "@/lib/site";
 import "./hero.css";
 
 // The hero image drifts ±6% vertically as the hero scrolls past (scale 1.12 → (1.12 - 1) * 100 / 2).
@@ -111,7 +112,7 @@ export function HomeHero() {
               <Image
                 className="home-header_reactor"
                 src="/images/hero-img.png"
-                alt="Row of modern homes with grey board-and-batten exteriors"
+                alt={brandAlt("Row of modern homes with grey board-and-batten exteriors")}
                 width={1920}
                 height={1080}
                 sizes="(max-width: 767px) 100vw, (max-width: 991px) 95vw, 1300px"

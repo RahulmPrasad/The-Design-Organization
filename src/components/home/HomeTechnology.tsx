@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Spacer } from "@/components/ui/Spacer";
 import { useImageParallax } from "@/hooks/useImageParallax";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { brandAlt } from "@/lib/site";
 import "./technology.css";
 
 const content = {
@@ -63,7 +64,7 @@ export function HomeTechnology() {
             <div className="home-tech_image-wrapper">
               <Image
                 src={content.image.src}
-                alt={content.image.alt}
+                alt={brandAlt(content.image.alt)}
                 width={1200}
                 height={800}
                 sizes="(max-width: 479px) 260vw, (max-width: 767px) 200vw, 1376px"

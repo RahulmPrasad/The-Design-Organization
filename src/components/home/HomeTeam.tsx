@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Spacer } from "@/components/ui/Spacer";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { prefersReducedMotion } from "@/lib/media";
+import { brandAlt } from "@/lib/site";
 import "./home-team.css";
 
 const portrait = { width: 664, height: 928 };
@@ -90,7 +91,7 @@ export function HomeTeam() {
                     <div key={image.src} className="splide__slide">
                       <Image
                         src={image.src}
-                        alt={image.alt}
+                        alt={brandAlt(image.alt)}
                         width={image.width}
                         height={image.height}
                         sizes="(max-width: 767px) 384px, 742px"

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Spacer } from "@/components/ui/Spacer";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { brandAlt } from "@/lib/site";
 import "./solutions.css";
 
 const content = {
@@ -114,7 +115,7 @@ export function AboutSolutions() {
                 className="tech-solutions_floating-image-wrap"
                 style={{ zIndex: content.items.length - i, height: i < active ? "0%" : "100%" }}
               >
-                <Image src={item.image} alt={item.alt} width={640} height={400} sizes="320px" className="tech-solutions_floating-image" />
+                <Image src={item.image} alt={brandAlt(item.alt)} width={640} height={400} sizes="320px" className="tech-solutions_floating-image" />
               </div>
             ))}
           </div>

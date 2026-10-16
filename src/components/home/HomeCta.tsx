@@ -8,6 +8,7 @@ import { Spacer } from "@/components/ui/Spacer";
 import { useImageParallax } from "@/hooks/useImageParallax";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { gsap } from "@/lib/gsap";
+import { brandAlt } from "@/lib/site";
 import "./cta.css";
 
 const content = {
@@ -79,7 +80,7 @@ function CtaSection() {
             <div id="w-node-ca2f9574-0bdb-39de-1d86-d3c91887c3dd-263b1944" className="cta_image-wrapper">
               <Image
                 src={content.images.large.src}
-                alt={content.images.large.alt}
+                alt={brandAlt(content.images.large.alt)}
                 width={content.images.large.width}
                 height={content.images.large.height}
                 sizes="(max-width: 767px) 50vw, 33vw"
@@ -90,7 +91,7 @@ function CtaSection() {
             <div id="w-node-_52509a74-3c5f-7648-f1c4-90726bc42060-263b1944" className="cta_image-wrapper is-small">
               <Image
                 src={content.images.small.src}
-                alt={content.images.small.alt}
+                alt={brandAlt(content.images.small.alt)}
                 width={content.images.small.width}
                 height={content.images.small.height}
                 sizes="(max-width: 767px) 50vw, 25vw"

@@ -5,6 +5,9 @@ export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.thedesi
 
 export const city = "Vadodara";
 
+/** Image alt text with the studio's name, e.g. "Modern kitchen – The Design Organization". */
+export const brandAlt = (description: string) => `${description} – ${siteName}`;
+
 /** Short pitch reused as the default meta description and in structured data. */
 export const siteDescription =
   "The Design Organization is an interior design studio in Vadodara, Gujarat, designing homes, apartments, villas, kitchens, offices and hospitality spaces, from concept and 3D design to turnkey execution.";

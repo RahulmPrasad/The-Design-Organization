@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import type { Project } from "@/lib/projects";
 import { startScroll, stopScroll } from "@/lib/smooth-scroll";
+import { brandAlt } from "@/lib/site";
 import "./project-drawer.css";
 
 type ProjectDrawerProps = {
@@ -101,7 +102,7 @@ export function ProjectDrawer({ project, open, onClose }: ProjectDrawerProps) {
             <div className="project-drawer_body">
               <Image
                 src={project.heroImage.src}
-                alt={project.heroImage.alt}
+                alt={brandAlt(project.heroImage.alt)}
                 width={project.heroImage.width}
                 height={project.heroImage.height}
                 sizes="(max-width: 767px) 100vw, (max-width: 991px) 75vw, 44vw"
@@ -132,7 +133,7 @@ export function ProjectDrawer({ project, open, onClose }: ProjectDrawerProps) {
                   <Image
                     key={`${image.src}-${i}`}
                     src={image.src}
-                    alt={image.alt}
+                    alt={brandAlt(image.alt)}
                     width={image.width}
                     height={image.height}
                     sizes="(max-width: 767px) 50vw, 22vw"

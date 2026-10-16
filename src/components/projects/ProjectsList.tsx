@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Spacer } from "@/components/ui/Spacer";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { projects, type Project } from "@/lib/projects";
+import { brandAlt } from "@/lib/site";
 import { ProjectDrawer } from "./ProjectDrawer";
 
 /** Four-column grid of project cards (three on tablet, two on mobile); "View Project" opens the side panel. */
@@ -36,7 +37,7 @@ export function ProjectsList() {
                   <div className="team-member_component">
                     <Image
                       src={project.image.src}
-                      alt={project.image.alt}
+                      alt={brandAlt(project.image.alt)}
                       width={project.image.width}
                       height={project.image.height}
                       sizes="(max-width: 767px) 50vw, (max-width: 991px) 33vw, 336px"

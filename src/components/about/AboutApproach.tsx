@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Spacer } from "@/components/ui/Spacer";
 import { useImageParallax } from "@/hooks/useImageParallax";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { brandAlt } from "@/lib/site";
 import "./approach.css";
 
 const content = {
@@ -30,7 +31,7 @@ export function AboutApproach() {
             <div data-animate-self="0" id="w-node-e86044f7-9a8b-36ca-5ef1-8d006a5ee249-f88ddc69" className="solutions-applications_image-wrapper">
               <Image
                 src={content.image.src}
-                alt={content.image.alt}
+                alt={brandAlt(content.image.alt)}
                 width={content.image.width}
                 height={content.image.height}
                 sizes="(max-width: 767px) 100vw, 60vw"
