@@ -1,13 +1,12 @@
 "use client";
 
-import type { AnimationItem } from "lottie-web";
 import { useEffect, useId, useRef, useState } from "react";
-import { Lottie } from "@/components/ui/Lottie";
 import { Spacer } from "@/components/ui/Spacer";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { DESKTOP_QUERY } from "@/lib/media";
 import { faqs } from "@/lib/faq";
+import { siteName } from "@/lib/site";
 import "./faq.css";
 
 const content = {
@@ -30,17 +29,11 @@ function FaqItem({
 }) {
   const id = useId();
   const contentRef = useRef<HTMLDivElement>(null);
-  const icon = useRef<AnimationItem | null>(null);
   const firstRender = useRef(true);
 
   useEffect(() => {
     const panel = contentRef.current;
     if (!panel) return;
-    // Plus ↔ minus icon: play forward when opening, backward when closing.
-    if (icon.current) {
-      icon.current.setDirection(open ? 1 : -1);
-      icon.current.play();
-    }
     if (firstRender.current) {
       firstRender.current = false;
       return;
@@ -71,15 +64,11 @@ function FaqItem({
           >
             <span className="accordion_toggle_text subtitle-3">{question}</span>
             <span className="accordion_toggle_icon-wrap">
-              <Lottie
-                src="/lottie/faq-icon.json"
-                className="accordion_toggle_lottie lottie-current-color"
-                aria-hidden="true"
-                onReady={(animation) => {
-                  icon.current = animation;
-                  animation.goToAndStop(0, true);
-                }}
-              />
+              {/* Plus that turns into a minus: the vertical bar rotates flat when the item opens (CSS in faq.css). */}
+              <svg viewBox="0 0 24 24" fill="none" className="accordion_toggle_lottie accordion_toggle_icon" aria-hidden="true">
+                <path d="M5 12h14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <path className="accordion_toggle_icon-v" d="M12 5v14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
             </span>
           </button>
         </h3>
@@ -152,7 +141,7 @@ export function AboutFaq() {
             <div id="w-node-b91d1224-fb4b-ffa8-795f-bc2d54d6e35f-54d6e352">
               <div data-animate-self="100" className="faq_icon">
                 {/* eslint-disable-next-line @next/next/no-img-element -- tiny decorative brand mark */}
-                <img src="/images/logo-mark.png" alt="" width={64} height={24} loading="lazy" className="faq_logo-mark" />
+                <img src="/images/logo-mark.png" alt={`${siteName} logo`} width={64} height={24} loading="lazy" className="faq_logo-mark" />
               </div>
               <Spacer d={8} />
             </div>

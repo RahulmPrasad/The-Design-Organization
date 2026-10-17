@@ -25,8 +25,8 @@ export default function AboutUsPage() {
         headingEnd="With Purpose and Character"
         centered
         background={{
-          desktop: { src: "/images/projects/interior-wide-8.webp", width: 1600, height: 1000 },
-          mobile: { src: "/images/projects/interior-3.webp", width: 664, height: 928 },
+          desktop: { src: "/images/projects/interior-wide-8.webp", width: 1600, height: 1000, alt: "Modern living room with floor-to-ceiling windows" },
+          mobile: { src: "/images/projects/interior-3.webp", width: 664, height: 928, alt: "Bedroom with an upholstered bed and gold chandelier" },
         }}
       />
       <AboutApproach />

@@ -25,11 +25,25 @@
   max-width: 85rem;
 }
 
-/* Desktop: nudge the image left and up. Uses `translate` (not `transform`),
-   which the scroll/intro animations own. Negative x = left, negative y = up. */
+/* Desktop: the houses rest on the bottom edge of the hero and are sized by its height, so they sit in the
+   same place on every screen shape (positioning from the heading's top let them drift up over the text).
+   The heading stops being the positioning parent so the image anchors to .home-header_component instead.
+   bottom: -6% leaves room for the ±6% scroll parallax; left bleeds the image off the screen's left edge. */
 @media screen and (min-width: 992px) {
-  .home-header_reactor {
-    translate: -8rem -1rem !important;
+  .section_home-header .heading-display-1 {
+    position: static;
+  }
+
+  .section_home-header .home-header_reactor {
+    top: auto;
+    bottom: -6%;
+    left: calc(50% - 50vw);
+    right: auto;
+    margin: 0;
+    width: auto;
+    max-width: none;
+    height: 100%;
+    translate: none !important;
   }
 }
 

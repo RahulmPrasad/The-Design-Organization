@@ -7,7 +7,7 @@ import { Spacer } from "@/components/ui/Spacer";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Flip, gsap, ScrollTrigger, SplitText } from "@/lib/gsap";
 import { DESKTOP_QUERY } from "@/lib/media";
-import { siteName } from "@/lib/site";
+import { brandAlt, siteName } from "@/lib/site";
 import "./about.css";
 
 const content = {
@@ -190,10 +190,10 @@ export function HomeAbout() {
                   className="hide-tablet"
                 >
                   <Image
-                    src="/images/about-city.webp"
-                    alt=""
-                    width={912}
-                    height={504}
+                    src="/images/about-video-poster.webp"
+                    alt={brandAlt("City skyline at dusk")}
+                    width={1920}
+                    height={1080}
                     sizes="(max-width: 991px) 100vw, 912px"
                     className="opacity-0"
                     style={{ height: "auto" }}

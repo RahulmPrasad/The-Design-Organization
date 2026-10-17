@@ -30,3 +30,14 @@
 .lottie-current-color path {
   stroke: currentColor;
 }
+
+/* Plus ↔ minus toggle icon. */
+.accordion_toggle_icon-v {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.accordion_component.is-opened .accordion_toggle_icon-v {
+  transform: rotate(90deg);
+}

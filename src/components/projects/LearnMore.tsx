@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { Button } from "@/components/ui/Button";
 import { Spacer } from "@/components/ui/Spacer";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { brandAlt } from "@/lib/site";
 import "./learn-more.css";
 
 const content = {
@@ -12,10 +13,10 @@ const content = {
   heading: "Discover how we work, the services we offer, and how we can bring your next space to life.",
   // Three cards are shown, skipping `currentPage`.
   cards: [
-    { title: "About Us", cta: "Learn More", href: "/about-us", image: "/images/projects/interior-wide-8.webp" },
-    { title: "Services", cta: "Explore our services", href: "/services", image: "/images/projects/interior-wide-6.webp" },
-    { title: "Projects", cta: "View our work", href: "/projects", image: "/images/projects/interior-wide-1.webp" },
-    { title: "Contact", cta: "Start a project", href: "/contact", image: "/images/projects/interior-wide-3.webp" },
+    { title: "About Us", cta: "Learn More", href: "/about-us", image: "/images/projects/interior-wide-8.webp", alt: "Modern living room with floor-to-ceiling windows" },
+    { title: "Services", cta: "Explore our services", href: "/services", image: "/images/projects/interior-wide-6.webp", alt: "Kitchen with a marble island and white cabinets" },
+    { title: "Projects", cta: "View our work", href: "/projects", image: "/images/projects/interior-wide-1.webp", alt: "Living room with a grey sofa and wooden side tables" },
+    { title: "Contact", cta: "Start a project", href: "/contact", image: "/images/projects/interior-wide-3.webp", alt: "Living room with a fireplace" },
   ],
 };
 
@@ -58,10 +59,9 @@ export function LearnMore({ currentPage }: { currentPage?: string }) {
             {cards.map((card, i) => (
               <div key={card.href} id={CARD_SLOT_IDS[i]}>
                 <div className="about-cta_card has-image">
-                  {/* Decorative: the card's title and link carry the meaning. */}
                   <Image
                     src={card.image}
-                    alt=""
+                    alt={brandAlt(card.alt)}
                     fill
                     sizes="(max-width: 767px) 100vw, 33vw"
                     className="about-cta_card-image"

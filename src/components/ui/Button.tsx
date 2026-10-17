@@ -1,10 +1,7 @@
 "use client";
 
-import type { AnimationItem } from "lottie-web";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import { Lottie } from "@/components/ui/Lottie";
-import { gsap } from "@/lib/gsap";
 
 type VariantConfig = {
   /** Webflow class that styles the variant. */
@@ -56,8 +53,6 @@ type ButtonProps = {
 
 const HOVER_MS = 210;
 const HOVER_TRANSITION = `width ${HOVER_MS / 1000}s cubic-bezier(.23,.75,.57,.94)`;
-/** The arrow animation rests slightly in (4%), plays to the end on hover, and rewinds on leave. */
-const ARROW_REST = 0.04;
 
 function ArrowIcon() {
   return (
@@ -77,8 +72,6 @@ export function Button({ label, variant, href, onClick, ariaLabel, icon, desktop
   const wrapperRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
   const animatedTextRef = useRef<HTMLSpanElement>(null);
-  const arrow = useRef<AnimationItem | null>(null);
-  const arrowFrame = useRef({ frame: 0 });
   const hover = useRef({ animating: false, shouldReverse: false, timers: [] as number[] });
 
   // The hover layer's text must be exactly as wide as the resting text so it doesn't reflow.
@@ -94,27 +87,11 @@ export function Button({ label, variant, href, onClick, ariaLabel, icon, desktop
     document.fonts.ready.then(syncWidth);
     window.addEventListener("resize", syncWidth);
     const timers = hover.current.timers;
-    const frame = arrowFrame.current;
     return () => {
       window.removeEventListener("resize", syncWidth);
       timers.forEach(clearTimeout);
-      gsap.killTweensOf(frame);
     };
   }, []);
-
-  const playArrow = (forward: boolean) => {
-    const animation = arrow.current;
-    if (!animation) return;
-    const last = animation.totalFrames - 1;
-    if (forward) arrowFrame.current.frame = last * ARROW_REST;
-    gsap.to(arrowFrame.current, {
-      frame: forward ? last : 0,
-      duration: 0.75,
-      ease: "power1.inOut",
-      overwrite: true,
-      onUpdate: () => animation.goToAndStop(arrowFrame.current.frame, true),
-    });
-  };
 
   const later = (fn: () => void) => hover.current.timers.push(window.setTimeout(fn, HOVER_MS));
 
@@ -131,7 +108,6 @@ export function Button({ label, variant, href, onClick, ariaLabel, icon, desktop
   // The fill sweeps in from the left, then anchors right so it sweeps out to the right.
   const handleEnter = () => {
     const wrapper = wrapperRef.current;
-    if (squareIcon) playArrow(true);
     if (!wrapper || hover.current.animating) return;
     hover.current.shouldReverse = false;
     hover.current.animating = true;
@@ -146,7 +122,6 @@ export function Button({ label, variant, href, onClick, ariaLabel, icon, desktop
 
   const handleLeave = () => {
     const wrapper = wrapperRef.current;
-    if (squareIcon) playArrow(false);
     hover.current.shouldReverse = true;
     if (!wrapper || hover.current.animating) return;
     if (wrapper.classList.contains("is-hover-state")) collapse(wrapper);
@@ -168,14 +143,11 @@ export function Button({ label, variant, href, onClick, ariaLabel, icon, desktop
       <div ref={wrapperRef} className={withVariant("button-animated-wrapper", everywhere)}>
         {squareIcon && (
           <div className={withVariant("button_icon-wrapper is-animated", iconWrappers)}>
-            <Lottie
-              src="/lottie/button-arrow.json"
-              className="button_lottie"
-              onReady={(animation) => {
-                arrow.current = animation;
-                animation.goToAndStop((animation.totalFrames - 1) * ARROW_REST, true);
-              }}
-            />
+            {/* Two arrows in a clipped box: on hover the first slides out right as the second slides in (CSS in webflow-embeds.css). */}
+            <div className="button_lottie button_arrow-slide" aria-hidden="true">
+              <ArrowIcon />
+              <ArrowIcon />
+            </div>
           </div>
         )}
         <div swiper-btn="" className={withVariant("button_content is-animated", animatedLayer)}>

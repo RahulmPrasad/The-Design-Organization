@@ -98,7 +98,7 @@ export function AboutSolutions() {
                 onMouseEnter={() => setActive(i)}
                 onFocus={() => setActive(i)}
               >
-                <Image src={item.image} alt="" width={624} height={400} sizes="78px" className="tech-solutions_item-img" />
+                <Image src={item.image} alt={brandAlt(item.alt)} width={624} height={400} sizes="78px" className="tech-solutions_item-img" />
                 <h3 className="heading-style-h4">{item.title}</h3>
                 <p className="hide-mobile-landscape">{item.text}</p>
                 <div className="tech-solutions_item-icon">

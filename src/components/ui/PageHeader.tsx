@@ -6,9 +6,10 @@ import { Spacer } from "@/components/ui/Spacer";
 import { gsap, SplitText } from "@/lib/gsap";
 import { isDesktop, prefersReducedMotion } from "@/lib/media";
 import { registerPageIntro } from "@/lib/page-intro";
+import { brandAlt } from "@/lib/site";
 import "./page-header.css";
 
-type HeaderImage = { src: string; width: number; height: number };
+type HeaderImage = { src: string; width: number; height: number; alt: string };
 
 type PageHeaderProps = {
   /** Small label above the title, part of the h1 (e.g. who and where, for search). */
@@ -107,7 +108,7 @@ export function PageHeader({ eyebrow, heading, headingEnd, intro, background, ce
                   Both header images stay lazy (no preload) so only the visible one downloads; fetchPriority still fetches it first. */}
               <Image
                 src={background.desktop.src}
-                alt=""
+                alt={brandAlt(background.desktop.alt)}
                 fill
                 sizes="100vw"
                 fetchPriority="high"
@@ -118,7 +119,7 @@ export function PageHeader({ eyebrow, heading, headingEnd, intro, background, ce
           </div>
           <Image
             src={background.mobile.src}
-            alt=""
+            alt={brandAlt(background.mobile.alt)}
             width={background.mobile.width}
             height={background.mobile.height}
             fetchPriority="high"
