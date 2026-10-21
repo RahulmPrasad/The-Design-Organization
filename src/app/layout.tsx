@@ -30,7 +30,8 @@ const inter = localFont({
   display: "swap",
 });
 
-const defaultTitle = `${siteName} | Interior Designers in ${city}`;
+// Titles lead with the search phrase; the studio name comes last (added by the template below).
+const defaultTitle = `Best Interior Designers in ${city} | ${siteName}`;
 const ogImage = defaultOgImage;
 
 export const metadata: Metadata = {

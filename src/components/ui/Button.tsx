@@ -43,6 +43,8 @@ type ButtonProps = {
   variant: ButtonVariant;
   href?: string;
   onClick?: () => void;
+  /** Without `href`, renders a <button> of this type; "submit" submits the surrounding form. */
+  type?: "button" | "submit";
   /** Accessible name when the visible label isn't specific enough (e.g. "View project: Riverside"). */
   ariaLabel?: string;
   /** Square arrow icon before the label; animates on hover. */
@@ -65,7 +67,7 @@ function ArrowIcon() {
   );
 }
 
-export function Button({ label, variant, href, onClick, ariaLabel, icon, desktopFullWidth, mobileFullWidth }: ButtonProps) {
+export function Button({ label, variant, href, onClick, type = "button", ariaLabel, icon, desktopFullWidth, mobileFullWidth }: ButtonProps) {
   const config: VariantConfig = VARIANTS[variant];
   const { className: variantClass, animatedLayer, everywhere = false, inlineIcon = false, iconWrappers = false } = config;
   const squareIcon = icon && !inlineIcon;
@@ -180,7 +182,7 @@ export function Button({ label, variant, href, onClick, ariaLabel, icon, desktop
             )
           ) : (
             <button
-              type="button"
+              type={type}
               className="clickable_btn"
               style={{ display: "block" }}
               onClick={onClick}

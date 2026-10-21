@@ -10,7 +10,7 @@ import { city, siteName } from "@/lib/site";
 import { breadcrumbSchema } from "@/lib/structured-data";
 
 export const metadata: Metadata = pageMetadata({
-  title: `About Us: Interior Design Studio in ${city}`,
+  title: `About Our Interior Design Studio in ${city}`,
   description: `Meet ${siteName}, an interior design studio in ${city}, Gujarat. Learn how we plan, design and deliver residential, kitchen, office and hospitality interiors, and get answers to common questions.`,
   path: "/about-us",
 });

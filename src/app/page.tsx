@@ -11,7 +11,7 @@ import { city, siteName } from "@/lib/site";
 import { faqSchema } from "@/lib/structured-data";
 
 const homeMetadata = pageMetadata({
-  title: `${siteName} | Interior Designers in ${city} | Home & Office Interiors`,
+  title: `Best Interior Designers in ${city} | ${siteName}`,
   description: `Looking for an interior designer in ${city}? ${siteName} designs apartments, villas, modular kitchens, offices and cafés across Alkapuri, Gotri, Akota, Bhayli and all of Vadodara, with 3D design and turnkey execution.`,
   path: "/",
 });

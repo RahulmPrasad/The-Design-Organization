@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { HoverStaggerText } from "@/components/ui/HoverStaggerText";
@@ -12,6 +13,9 @@ import { startScroll, stopScroll } from "@/lib/smooth-scroll";
 import "./navbar.css";
 
 const SCROLL_THRESHOLD = 16;
+
+/** Sections with a light top: the navbar keeps its white, dark-text "scrolled" look even at the top (subpages included). */
+const LIGHT_SECTIONS = ["/contact", "/blog"];
 
 function cx(...classes: (string | false)[]) {
   return classes.filter(Boolean).join(" ");
@@ -74,7 +78,9 @@ export function Navbar() {
   }, [menuOpen]);
 
   const closeMenu = () => setMenuOpen(false);
-  const scrolledClass = scrolled && "is-navbar-scrolled";
+  const pathname = usePathname();
+  const solid = scrolled || LIGHT_SECTIONS.some((section) => pathname === section || pathname.startsWith(`${section}/`));
+  const scrolledClass = solid && "is-navbar-scrolled";
   const menuClass = menuOpen && "is-menu-opened";
 
   return (

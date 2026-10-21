@@ -1,3 +1,4 @@
+import { posts } from "@/lib/blog";
 import { faqs } from "@/lib/faq";
 import { absoluteUrl, areasServed, business, city, services, siteDescription, siteName, sitePages } from "@/lib/site";
 
@@ -42,6 +43,8 @@ const contact = () => {
 
 const pageLinks = () => sitePages.map((page) => `- [${page.title}](${absoluteUrl(page.path)}): ${page.summary}`).join("\n");
 
+const articleLinks = () => posts.map((post) => `- [${post.title}](${absoluteUrl(`/blog/${post.slug}`)}): ${post.excerpt}`).join("\n");
+
 const intro = () =>
   `${siteName} is an interior design firm in ${city} (Baroda), Gujarat, India. It designs and delivers complete interiors for apartments, 2BHK, 3BHK and 4BHK flats, villas and bungalows, as well as modular kitchens, offices, showrooms, cafés, restaurants and hotels. Clients see layouts and 3D designs before work begins, and the studio can manage the whole project turnkey, from civil and electrical work to carpentry, lighting and styling.`;
 
@@ -62,6 +65,9 @@ export function llmsIndex() {
     "",
     "## Pages",
     pageLinks(),
+    "",
+    "## Articles",
+    articleLinks(),
     "",
     "## Optional",
     `- [Full details for AI assistants](${absoluteUrl("/llms-full.txt")}): services, areas served in ${city} and answers to common questions`,
@@ -94,6 +100,9 @@ export function llmsFull() {
     ...faqs.map((faq) => `### ${faq.q}\n${faq.a.join(" ")}\n`),
     "## Pages",
     pageLinks(),
+    "",
+    "## Articles",
+    articleLinks(),
     "",
   ].join("\n");
 }

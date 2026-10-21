@@ -1,0 +1,332 @@
+/* Contact page: light layout. Heading row, enquiry form beside a photo, then three contact columns.
+   Uses the theme's tokens only: the small radius, greyscale colours, light-blue accent and label styles. */
+
+.section_contact {
+  --contact-muted: var(--_color---greyscale--grey-500);
+  background-color: var(--_color---colors-primary--white);
+}
+
+/* ---- Heading row ---- */
+.contact_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2rem;
+}
+
+/* Typography comes from theme classes on the elements (subtitle-1 here); this only sets layout. */
+.contact_intro {
+  max-width: 26rem;
+  margin: 0;
+  text-align: right;
+}
+
+/* ---- Form card + photo ---- */
+.contact_main {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.contact_card {
+  padding: 2rem;
+  border-radius: var(--_sizes---border-radius--small);
+  background-color: var(--_color---greyscale--grey-50);
+}
+
+.contact_fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 1rem;
+}
+
+.contact_fields .is-full {
+  grid-column: 1 / -1;
+}
+
+.contact_field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  margin: 0;
+  font-weight: inherit;
+}
+
+/* Field labels use the body text style (Inter, regular), in black. */
+.contact_label {
+  color: var(--_color---colors-primary--black);
+}
+
+.contact_input {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  height: 3rem;
+  margin: 0;
+  padding: 0.75rem 1rem;
+  border: 1px solid transparent;
+  border-radius: var(--_sizes---border-radius--small);
+  outline: none;
+  background-color: var(--_color---colors-primary--white);
+  color: var(--_color---colors-primary--black);
+  font-family: var(--_typography---text-regular--font-family);
+  font-size: var(--_typography---text-regular--font-size);
+  line-height: var(--_typography---text-regular--line-height);
+  letter-spacing: var(--letter-spacing--slight);
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color 0.18s ease, background-color 0.18s ease;
+}
+
+.contact_input:hover {
+  border-color: var(--_color---greyscale--grey-250);
+}
+
+.contact_input:focus {
+  border-color: var(--_color---greyscale--grey-650);
+}
+
+.contact_input::placeholder {
+  color: var(--contact-muted);
+}
+
+.contact_input.is-textarea {
+  height: auto;
+  min-height: 8.5rem;
+  resize: vertical;
+}
+
+/* ---- Select ---- */
+.contact_select {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.contact_select .contact_input {
+  padding-right: 2.75rem;
+  cursor: pointer;
+}
+
+/* The placeholder option stays grey until a project type is picked. */
+.contact_select .contact_input:invalid {
+  color: var(--contact-muted);
+}
+
+.contact_select .contact_input option {
+  color: var(--_color---colors-primary--black);
+}
+
+.contact_select-icon {
+  position: absolute;
+  right: 1rem;
+  display: flex;
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--contact-muted);
+  pointer-events: none;
+}
+
+/* ---- Consent checkbox ---- */
+.contact_checkbox {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin: 0;
+  font-weight: inherit;
+  cursor: pointer;
+}
+
+/* The real checkbox covers the whole row (invisible), so the box and text are clickable. */
+.contact_checkbox-input {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.contact_checkbox-box {
+  display: flex;
+  flex: none;
+  justify-content: center;
+  align-items: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.125rem;
+  border: 1px solid var(--_color---greyscale--grey-250);
+  border-radius: var(--_sizes---border-radius--small);
+  background-color: var(--_color---colors-primary--white);
+  color: var(--_color---colors-primary--white);
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.contact_checkbox-icon {
+  width: 60%;
+  opacity: 0;
+  overflow: visible;
+}
+
+.contact_checkbox:has(input:checked) .contact_checkbox-box {
+  border-color: var(--_color---colors-primary--black);
+  background-color: var(--_color---colors-primary--black);
+}
+
+.contact_checkbox:has(input:checked) .contact_checkbox-icon {
+  opacity: 1;
+}
+
+.contact_checkbox-input:focus-visible + .contact_checkbox-box {
+  outline: 0.125rem solid #4d65ff;
+  outline-offset: 0.125rem;
+}
+
+.contact_muted {
+  margin: 0;
+  color: var(--_color---greyscale--grey-650);
+}
+
+.contact_error {
+  margin: 0;
+  color: #c62828;
+}
+
+.contact_success {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  height: 100%;
+  min-height: 20rem;
+}
+
+.contact_honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+/* Photo card: fills the row's height beside the form. */
+.contact_image-card {
+  position: relative;
+  min-height: 24rem;
+  border-radius: var(--_sizes---border-radius--small);
+  overflow: hidden;
+}
+
+.contact_image {
+  object-fit: cover;
+}
+
+/* White info card pinned to the photo's bottom-left, as on the home page. */
+.contact_image-card-label {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 1;
+  max-width: 20rem;
+}
+
+/* ---- Three contact columns ---- */
+.contact_info {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  font-style: normal;
+}
+
+/* Thin rule above each column, like the theme's feature lists. */
+.contact_info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.375rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--_color---greyscale--grey-100);
+}
+
+/* Square icon tile, matching the buttons' light-blue arrow square. */
+.contact_info-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 1rem;
+  border-radius: var(--_sizes---border-radius--small);
+  background-color: var(--_color---colors-primary--light-blue);
+}
+
+.contact_info-icon svg {
+  width: 1.375rem;
+  height: 1.375rem;
+}
+
+/* Title uses subtitle-2 (set on the element); lines use the body text style. */
+.contact_info-title {
+  margin-bottom: 0.5rem;
+  color: var(--_color---colors-primary--black);
+}
+
+.contact_info-line {
+  color: var(--_color---greyscale--grey-750);
+}
+
+a.contact_info-line {
+  transition: color 0.2s;
+}
+
+a.contact_info-line:hover {
+  color: var(--_color---colors-primary--orange);
+}
+
+/* ---- Tablet and mobile ---- */
+@media screen and (max-width: 991px) {
+  /* minmax(0, …) so long dropdown options can't push the column wider than the screen. */
+  .contact_main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .contact_image-card {
+    order: -1;
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .contact_header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .contact_intro {
+    text-align: left;
+  }
+
+  .contact_card {
+    padding: 1.25rem;
+  }
+
+  .contact_fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* 16px+ stops iOS zooming in on focus. */
+  .contact_input {
+    font-size: var(--_typography---text-medium--font-size);
+  }
+
+  .contact_info {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+}
