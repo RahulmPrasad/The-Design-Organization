@@ -62,7 +62,6 @@ export const metadata: Metadata = {
     images: [ogImage],
   },
   twitter: { card: "summary_large_image", title: defaultTitle, description: siteDescription, images: [ogImage.url] },
-  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
   other: { "geo.region": "IN-GJ", "geo.placename": city },
   // TODO: paste the verification code from Google Search Console (HTML tag method) once the domain is live.
   // verification: { google: "…" },

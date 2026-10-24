@@ -14,7 +14,7 @@ const content = {
   // Three cards are shown, skipping `currentPage`.
   cards: [
     { title: "About Us", cta: "Learn More", href: "/about-us", image: "/images/projects/interior-wide-8.webp", alt: "Modern living room with floor-to-ceiling windows" },
-    { title: "Services", cta: "Explore our services", href: "/services", image: "/images/projects/interior-wide-6.webp", alt: "Kitchen with a marble island and white cabinets" },
+    { title: "Services", cta: "Explore our services", href: "/about-us#solutions", image: "/images/projects/interior-wide-6.webp", alt: "Kitchen with a marble island and white cabinets" },
     { title: "Projects", cta: "View our work", href: "/projects", image: "/images/projects/interior-wide-1.webp", alt: "Living room with a grey sofa and wooden side tables" },
     { title: "Contact", cta: "Start a project", href: "/contact", image: "/images/projects/interior-wide-3.webp", alt: "Living room with a fireplace" },
   ],

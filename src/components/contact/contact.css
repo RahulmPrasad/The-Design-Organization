@@ -303,6 +303,23 @@ a.contact_info-line:hover {
 }
 
 @media screen and (max-width: 767px) {
+  /* The theme turns .info-card into a full-width banner on phones (4rem padding, negative margins);
+     keep this one a small tag on the photo, with just its label. */
+  .info-card.contact_image-card-label {
+    left: 0.75rem;
+    right: auto;
+    bottom: 0.75rem;
+    max-width: calc(100% - 1.5rem);
+    margin: 0;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--_sizes---border-radius--small);
+  }
+
+  .contact_image-card-label .spacer,
+  .contact_image-card-label p {
+    display: none;
+  }
+
   .contact_header {
     flex-direction: column;
     align-items: flex-start;

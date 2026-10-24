@@ -1,5 +1,6 @@
 import { posts } from "@/lib/blog";
 import { faqs } from "@/lib/faq";
+import { projectLocation, projects } from "@/lib/projects";
 import { absoluteUrl, areasServed, business, city, services, siteDescription, siteName, sitePages } from "@/lib/site";
 
 // Plain-text briefs for AI assistants and answer engines (https://llmstxt.org).
@@ -96,6 +97,19 @@ export function llmsFull() {
     `## Areas served in ${city}`,
     `${siteName} works across ${city} (Baroda), including ${areasServed.join(", ")}, and takes on projects elsewhere in Gujarat on request.`,
     "",
+    `## Projects in ${city}`,
+    ...projects.map(
+      (p) =>
+        `### ${p.name}
+- Location: ${projectLocation(p)}
+- Property: ${p.property}
+- Scope: ${p.scope}
+- Style: ${p.style}
+- Status: ${p.status}
+${p.intro.join(" ")}
+What we designed: ${p.highlights.join("; ")}.
+`,
+    ),
     "## Frequently asked questions",
     ...faqs.map((faq) => `### ${faq.q}\n${faq.a.join(" ")}\n`),
     "## Pages",

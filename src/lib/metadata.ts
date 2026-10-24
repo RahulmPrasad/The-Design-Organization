@@ -18,6 +18,8 @@ export function pageMetadata({ title, description, path }: { title: string; desc
     title,
     description,
     alternates: { canonical: path },
+    // Set per page rather than in the layout, so the 404 page carries only Next.js's own "noindex".
+    robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
     openGraph: { type: "website", locale: "en_IN", siteName, url: path, title: socialTitle, description, images: [defaultOgImage] },
     twitter: { card: "summary_large_image", title: socialTitle, description, images: [defaultOgImage.url] },
   };

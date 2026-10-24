@@ -22,7 +22,8 @@ const content = {
     { title: "Renovations", text: "Thoughtful updates that transform existing spaces", image: "/images/projects/interior-wide-7.webp", alt: "Modern white kitchen with a marble island" },
     { title: "Styling", text: "Furniture, art and finishing touches that complete a room", image: "/images/projects/interior-8.webp", alt: "Leather sofa in front of a gallery wall" },
   ],
-  href: "/services",
+  // Each solution leads to examples of that kind of work.
+  href: "/projects",
 };
 
 function ArrowIcon() {

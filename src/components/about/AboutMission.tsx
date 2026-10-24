@@ -16,17 +16,17 @@ const content = {
     {
       title: "Personal by Design",
       text: "Every project starts with listening. We shape layouts, colours and finishes around how you actually live and work.",
-      image: { src: "/images/projects/mission1.jpeg", alt: "White and timber living room" },
+      image: { src: "/images/projects/mission1.jpeg", alt: "Lounge with a cream sofa, floor lamp and tall timber blinds" },
     },
     {
       title: "Seamless Delivery",
       text: "From concept to installation, we coordinate designers, suppliers and craftspeople so the process stays simple for you.",
-      image: { src: "/images/projects/mission2.jpeg", alt: "White kitchen cabinets with a black pendant lamp" },
+      image: { src: "/images/projects/mission2.jpeg", alt: "Living room with a timber-panelled wall, lounge chair and clerestory windows" },
     },
     {
       title: "Lasting Quality",
       text: "We choose durable materials and timeless details, creating interiors that age gracefully and feel right for years.",
-      image: { src: "/images/projects/mission3.jpeg", alt: "Kitchen with grey cabinets and marble countertops" },
+      image: { src: "/images/projects/mission3.jpeg", alt: "Timber-panelled lounge with low shelving and a round coffee table" },
     },
   ],
 };

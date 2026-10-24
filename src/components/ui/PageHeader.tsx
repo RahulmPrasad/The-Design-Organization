@@ -39,12 +39,14 @@ export function PageHeader({ eyebrow, heading, headingEnd, intro, background, ce
       ctx.add(() => {
         const title = SplitText.create(header.querySelector(".page-header_title"), { type: "lines", linesClass: "line-child" });
         const nextSection = document.querySelector('[data-page-load="next-section"]');
+        const eyebrowEl = header.querySelector(".page-header_eyebrow");
         timeline = gsap
           .timeline()
           .fromTo(".team-header_background-wrapper", { scale: 1.2 }, { scale: 1, duration: 2.5, ease: "expo.out" }, 0.2)
-          .from(".page-header_eyebrow", { duration: 1.4, y: 16, opacity: 0, ease: "power3.out" }, 0.1)
           .from(title.lines, { duration: 1.6, y: 30, opacity: 0, ease: "power4.out", stagger: 0.07 }, 0.2)
           .to(document.querySelector(".navbar"), { yPercent: 0, duration: 0.8, ease: "expo.out" }, 0.4);
+        // The eyebrow is optional; animating a missing element makes GSAP warn.
+        if (eyebrowEl) timeline.from(eyebrowEl, { duration: 1.4, y: 16, opacity: 0, ease: "power3.out" }, 0.1);
         const paragraph = header.querySelector("p");
         if (paragraph) {
           const text = SplitText.create(paragraph, { type: "lines", linesClass: "line-child" });

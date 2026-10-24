@@ -120,16 +120,37 @@
   transition-delay: 0.2s;
 }
 
-.project-drawer_image {
-  display: block;
-  width: 100%;
-  height: auto;
+/* Photos are cropped to fixed frames (16:10 hero, 4:5 gallery) so every project looks consistent. */
+.project-drawer_hero,
+.project-drawer_gallery-item {
+  position: relative;
   border-radius: var(--_sizes---border-radius--small, 0.25rem);
+  overflow: hidden;
+  background-color: var(--_color---greyscale--grey-50, #f2f2f2);
 }
 
+.project-drawer_hero {
+  aspect-ratio: 16 / 10;
+}
+
+.project-drawer_gallery-item {
+  aspect-ratio: 4 / 5;
+}
+
+.project-drawer_gallery.is-single .project-drawer_gallery-item {
+  grid-column: 1 / -1;
+  aspect-ratio: 16 / 10;
+}
+
+.project-drawer_cover {
+  object-fit: cover;
+}
+
+/* Location, property, scope and style in a 2 × 2 grid. */
 .project-drawer_meta {
-  display: flex;
-  gap: 3rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem 2rem;
   margin: 0;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid var(--_color---greyscale--grey-100, #e8e8e8);
@@ -155,6 +176,54 @@
   gap: 1rem;
 }
 
+.project-drawer_highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.project-drawer_list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Each item on its own line with a hairline between, like the theme's lists. */
+.project-drawer_list li {
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--_color---greyscale--grey-100, #e8e8e8);
+}
+
+.project-drawer_list li:last-child {
+  border-bottom: 1px solid var(--_color---greyscale--grey-100, #e8e8e8);
+}
+
+/* Stacked (text, then button): the panel is too narrow for both on one row. */
+.project-drawer_cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  border-radius: var(--_sizes---border-radius--small, 0.25rem);
+  background-color: var(--_color---greyscale--grey-50, #f2f2f2);
+}
+
+.project-drawer_cta p {
+  margin: 0;
+}
+
+/* Keep the button at its natural width, on one line. */
+.project-drawer_cta .button_main_icon {
+  flex: none;
+  white-space: nowrap;
+}
+
+.project-drawer_cta-text {
+  margin-top: 0.5rem !important;
+  color: var(--_color---greyscale--grey-650);
+}
+
 @media screen and (max-width: 991px) {
   .project-drawer_panel {
     width: 75vw;
@@ -171,6 +240,7 @@
     padding-left: 1rem;
     padding-right: 1rem;
   }
+
 }
 
 @media (prefers-reduced-motion: reduce) {

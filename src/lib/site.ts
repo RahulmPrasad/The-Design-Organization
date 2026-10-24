@@ -178,7 +178,5 @@ export const footerColumns: { id: string; links: SiteLink[] }[] = [
   },
 ];
 
-export const legalLinks: SiteLink[] = [
-  { label: "Privacy Policy", href: "/privacy-policy" },
-  { label: "Terms of Use", href: "/terms-of-use" },
-];
+// No legal pages yet; add e.g. { label: "Privacy Policy", href: "/privacy-policy" } once the page exists.
+export const legalLinks: SiteLink[] = [];

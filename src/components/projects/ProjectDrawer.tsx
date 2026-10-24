@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import type { Project } from "@/lib/projects";
+import { Button } from "@/components/ui/Button";
+import { projectLocation, type Project } from "@/lib/projects";
 import { startScroll, stopScroll } from "@/lib/smooth-scroll";
 import { brandAlt } from "@/lib/site";
 import "./project-drawer.css";
@@ -89,7 +90,9 @@ export function ProjectDrawer({ project, open, onClose }: ProjectDrawerProps) {
           <>
             <div className="project-drawer_header">
               <div>
-                <div className="label-style-2 text-color-grey-650">{project.summary}</div>
+                <div className="label-style-2 text-color-grey-650">
+                  {project.status} · {project.category}
+                </div>
                 <h2 id="project-drawer-title" className="heading-style-h4 project-drawer_title">
                   {project.name}
                 </h2>
@@ -100,24 +103,28 @@ export function ProjectDrawer({ project, open, onClose }: ProjectDrawerProps) {
             </div>
 
             <div className="project-drawer_body">
-              <Image
-                src={project.heroImage.src}
-                alt={brandAlt(project.heroImage.alt)}
-                width={project.heroImage.width}
-                height={project.heroImage.height}
-                sizes="(max-width: 767px) 100vw, (max-width: 991px) 75vw, 44vw"
-                className="project-drawer_image"
-              />
+              <div className="project-drawer_hero">
+                <Image
+                  src={project.heroImage.src}
+                  alt={brandAlt(project.heroImage.alt)}
+                  fill
+                  sizes="(max-width: 767px) 100vw, (max-width: 991px) 75vw, 44vw"
+                  className="project-drawer_cover"
+                />
+              </div>
 
               <dl className="project-drawer_meta">
-                <div>
-                  <dt className="label-style-2 text-color-grey-650">Location</dt>
-                  <dd className="label-style-2">{project.location}</dd>
-                </div>
-                <div>
-                  <dt className="label-style-2 text-color-grey-650">Year</dt>
-                  <dd className="label-style-2">{project.year}</dd>
-                </div>
+                {[
+                  ["Location", projectLocation(project)],
+                  ["Property", project.property],
+                  ["Scope", project.scope],
+                  ["Style", project.style],
+                ].map(([term, value]) => (
+                  <div key={term}>
+                    <dt className="label-style-2 text-color-grey-650">{term}</dt>
+                    <dd className="label-style-2">{value}</dd>
+                  </div>
+                ))}
               </dl>
 
               <div className="project-drawer_text">
@@ -128,17 +135,26 @@ export function ProjectDrawer({ project, open, onClose }: ProjectDrawerProps) {
                 ))}
               </div>
 
-              <div className="project-drawer_gallery">
+              <div className="project-drawer_highlights">
+                <h3 className="subtitle-2">What we designed</h3>
+                <ul className="project-drawer_list">
+                  {project.highlights.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className={`project-drawer_gallery${project.gallery.length === 1 ? " is-single" : ""}`}>
                 {project.gallery.map((image, i) => (
-                  <Image
-                    key={`${image.src}-${i}`}
-                    src={image.src}
-                    alt={brandAlt(image.alt)}
-                    width={image.width}
-                    height={image.height}
-                    sizes="(max-width: 767px) 50vw, 22vw"
-                    className="project-drawer_image"
-                  />
+                  <div key={`${image.src}-${i}`} className="project-drawer_gallery-item">
+                    <Image
+                      src={image.src}
+                      alt={brandAlt(image.alt)}
+                      fill
+                      sizes="(max-width: 767px) 50vw, 22vw"
+                      className="project-drawer_cover"
+                    />
+                  </div>
                 ))}
               </div>
 
@@ -148,6 +164,19 @@ export function ProjectDrawer({ project, open, onClose }: ProjectDrawerProps) {
                     {paragraph}
                   </p>
                 ))}
+              </div>
+
+              <div className="project-drawer_cta">
+                <div>
+                  <p className="subtitle-2">
+                    {/* "on Old Padra Road", but "in Gotri" */}
+                    Planning a similar project {/Road$/.test(project.area) ? "on" : "in"} {project.area}?
+                  </p>
+                  <p className="project-drawer_cta-text">
+                    We design homes and workplaces across Vadodara. Tell us about your space.
+                  </p>
+                </div>
+                <Button variant="light" icon label="Contact Us" href="/contact" />
               </div>
             </div>
           </>

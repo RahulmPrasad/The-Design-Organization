@@ -289,6 +289,9 @@ export function ContactSection() {
                 src={content.image.src}
                 alt={brandAlt(content.image.alt)}
                 fill
+                // Above the fold on every screen size (first on phones), and the page's largest image.
+                loading="eager"
+                fetchPriority="high"
                 sizes="(max-width: 991px) 100vw, 33vw"
                 className="contact_image"
               />
