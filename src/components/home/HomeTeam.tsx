@@ -78,7 +78,7 @@ export function HomeTeam() {
               </p>
               <Spacer d={40} m={48} />
               <div data-animate-self="600" className="button-mobile-full">
-                <Button variant="light" icon label={content.cta.label} href={content.cta.href} mobileFullWidth />
+                <Button variant="light" label={content.cta.label} href={content.cta.href} mobileFullWidth />
               </div>
             </div>
           </div>

@@ -50,7 +50,7 @@ export function HomeTechnology() {
               </div>
               <Spacer d={40} />
               <div data-animate-self="600" className="button-mobile-full">
-                <Button variant="light" icon label={content.cta.label} href={content.cta.href} mobileFullWidth />
+                <Button variant="light" label={content.cta.label} href={content.cta.href} mobileFullWidth />
               </div>
             </div>
           </div>
@@ -92,6 +92,7 @@ export function HomeTechnology() {
           </div>
         </div>
       </div>
+      <Spacer d={96} m={64} />
     </section>
   );
 }

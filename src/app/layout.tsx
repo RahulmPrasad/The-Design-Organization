@@ -63,8 +63,8 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image", title: defaultTitle, description: siteDescription, images: [ogImage.url] },
   other: { "geo.region": "IN-GJ", "geo.placename": city },
-  // TODO: paste the verification code from Google Search Console (HTML tag method) once the domain is live.
-  // verification: { google: "…" },
+  // Google Search Console ownership check (HTML tag method). Keep it after verifying, or Google can drop the property.
+  verification: { google: "Z1S3qgzhR88q3Hv_uJJZeuq8YIVV9Epz0LhcX0Nh58A" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

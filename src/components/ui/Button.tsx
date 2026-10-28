@@ -10,10 +10,8 @@ type VariantConfig = {
   animatedLayer: boolean;
   /** The variant class also goes on the hover wrapper, resting content and top line. */
   everywhere?: boolean;
-  /** Arrow sits inline before the label instead of in a separate square. */
-  inlineIcon?: boolean;
-  /** The variant class also goes on the square icon wrappers. */
-  iconWrappers?: boolean;
+  /** Label aligned left instead of centered. */
+  alignLeft?: boolean;
   /** Value of the data-wf--button--variant attribute, when it differs from the key. */
   dataName?: string;
 };
@@ -24,14 +22,14 @@ const VARIANTS = {
   light: { className: "", animatedLayer: false },
   /** Small outlined button on project cards. */
   "team-card": { className: "w-variant-a34e5f5e-b186-5de3-c9f1-93a11190005c", animatedLayer: false },
-  /** Outlined light button with a light-blue arrow square (for dark sections). */
-  cta: { className: "w-variant-d9e79d8e-4125-5274-6302-d8ac911798b8", animatedLayer: false, iconWrappers: true },
-  /** Full-width text link with an inline arrow and a top rule that sweeps in on hover (for dark cards). */
+  /** Outlined light button (for dark sections). */
+  cta: { className: "w-variant-d9e79d8e-4125-5274-6302-d8ac911798b8", animatedLayer: false },
+  /** Full-width text link with a top rule that sweeps in on hover (for dark cards). */
   "tertiary-dark": {
     className: "w-variant-ff30d952-2892-9a95-9aeb-d29186579211",
     animatedLayer: true,
     everywhere: true,
-    inlineIcon: true,
+    alignLeft: true,
     dataName: "tertiary---dark",
   },
 } satisfies Record<string, VariantConfig>;
@@ -47,8 +45,6 @@ type ButtonProps = {
   type?: "button" | "submit";
   /** Accessible name when the visible label isn't specific enough (e.g. "View project: Riverside"). */
   ariaLabel?: string;
-  /** Square arrow icon before the label; animates on hover. */
-  icon?: boolean;
   desktopFullWidth?: boolean;
   mobileFullWidth?: boolean;
 };
@@ -56,21 +52,9 @@ type ButtonProps = {
 const HOVER_MS = 210;
 const HOVER_TRANSITION = `width ${HOVER_MS / 1000}s cubic-bezier(.23,.75,.57,.94)`;
 
-function ArrowIcon() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 20 20" fill="none" className="button_icon-svg">
-      <path
-        d="M3.67242 12.9971V2.5H4.67242V11.9971H15.7824L15.6133 11.9455L12.4346 8.69261L13.1494 7.99339L17.209 12.1477L17.5508 12.4973L17.209 12.8469L13.1494 17.0012L12.4346 16.302L15.6162 13.0452L15.7753 12.9971H3.67242Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
-
-export function Button({ label, variant, href, onClick, type = "button", ariaLabel, icon, desktopFullWidth, mobileFullWidth }: ButtonProps) {
+export function Button({ label, variant, href, onClick, type = "button", ariaLabel, desktopFullWidth, mobileFullWidth }: ButtonProps) {
   const config: VariantConfig = VARIANTS[variant];
-  const { className: variantClass, animatedLayer, everywhere = false, inlineIcon = false, iconWrappers = false } = config;
-  const squareIcon = icon && !inlineIcon;
+  const { className: variantClass, animatedLayer, everywhere = false, alignLeft = false } = config;
   const wrapperRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
   const animatedTextRef = useRef<HTMLSpanElement>(null);
@@ -138,37 +122,18 @@ export function Button({ label, variant, href, onClick, type = "button", ariaLab
       desktop-full-width={desktopFullWidth ? "true" : ""}
       mobile-full-width={mobileFullWidth ? "true" : ""}
       className={withVariant("button_main_icon")}
-      style={inlineIcon ? { textAlign: "left" } : undefined}
+      style={alignLeft ? { textAlign: "left" } : undefined}
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
     >
       <div ref={wrapperRef} className={withVariant("button-animated-wrapper", everywhere)}>
-        {squareIcon && (
-          <div className={withVariant("button_icon-wrapper is-animated", iconWrappers)}>
-            {/* Two arrows in a clipped box: on hover the first slides out right as the second slides in (CSS in webflow-embeds.css). */}
-            <div className="button_lottie button_arrow-slide" aria-hidden="true">
-              <ArrowIcon />
-              <ArrowIcon />
-            </div>
-          </div>
-        )}
         <div swiper-btn="" className={withVariant("button_content is-animated", animatedLayer)}>
           <span ref={animatedTextRef} aria-hidden="true" data-button-animated-text="" className="button_text text-color-white">
             {label}
           </span>
         </div>
       </div>
-      {squareIcon && (
-        <div className={withVariant("button_icon-wrapper", iconWrappers)}>
-          <ArrowIcon />
-        </div>
-      )}
       <div className={withVariant("button_content", everywhere)}>
-        {icon && inlineIcon && (
-          <div style={{ order: 0 }} className="button_icon-inner">
-            <ArrowIcon />
-          </div>
-        )}
         <div className="clickable_wrap">
           {href ? (
             isInternal ? (

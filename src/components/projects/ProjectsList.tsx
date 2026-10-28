@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Spacer } from "@/components/ui/Spacer";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { projectLocation, projects, type Project } from "@/lib/projects";
-import { areasServed, brandAlt, city } from "@/lib/site";
+import { areasServed, brandAlt, citiesServed, city, listWithAnd } from "@/lib/site";
 import { ProjectDrawer } from "./ProjectDrawer";
 import "./projects.css";
 
@@ -18,7 +18,7 @@ const content = {
   areas: {
     label: "Where We Work",
     heading: `Interior Designers Across ${city}`,
-    text: `We design apartments, villas, kitchens, offices and hospitality spaces in every part of ${city} (Baroda), and take on projects across Gujarat.`,
+    text: `We design apartments, villas, kitchens, offices and hospitality spaces in every part of ${city} (Baroda), and take on projects across India, including ${listWithAnd(citiesServed.filter((name) => name !== city))}.`,
   },
 };
 

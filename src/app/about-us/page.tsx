@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { AboutApproach } from "@/components/about/AboutApproach";
 import { AboutFaq } from "@/components/about/AboutFaq";
 import { AboutMission } from "@/components/about/AboutMission";
-import { AboutSolutions } from "@/components/about/AboutSolutions";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { pageMetadata } from "@/lib/metadata";
@@ -32,7 +31,6 @@ export default function AboutUsPage() {
       <AboutApproach />
       <AboutMission />
       <AboutFaq />
-      <AboutSolutions />
     </>
   );
 }

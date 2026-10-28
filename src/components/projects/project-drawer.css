@@ -82,7 +82,7 @@
   height: 3rem;
   padding: 0;
   border: 0;
-  border-radius: 0.25rem;
+  border-radius: 8px;
   background-color: var(--_color---colors-primary--light-blue, #d3e7ff);
   color: var(--_color---colors-primary--black, #000);
   cursor: pointer;
@@ -124,7 +124,7 @@
 .project-drawer_hero,
 .project-drawer_gallery-item {
   position: relative;
-  border-radius: var(--_sizes---border-radius--small, 0.25rem);
+  border-radius: var(--_sizes---border-radius--small);
   overflow: hidden;
   background-color: var(--_color---greyscale--grey-50, #f2f2f2);
 }
@@ -205,7 +205,7 @@
   align-items: flex-start;
   gap: 1.25rem;
   padding: 1.5rem;
-  border-radius: var(--_sizes---border-radius--small, 0.25rem);
+  border-radius: var(--_sizes---border-radius--small);
   background-color: var(--_color---greyscale--grey-50, #f2f2f2);
 }
 

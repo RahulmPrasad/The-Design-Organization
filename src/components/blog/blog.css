@@ -180,7 +180,7 @@
   height: 3rem;
   padding: 0.875rem;
   border: 1px solid var(--_color---greyscale--grey-100);
-  border-radius: var(--_sizes---border-radius--small);
+  border-radius: 8px;
   background-color: var(--_color---colors-primary--white);
   color: var(--_color---colors-primary--black);
   cursor: pointer;

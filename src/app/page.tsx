@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AboutFaq } from "@/components/about/AboutFaq";
+import { Testimonials } from "@/components/home/Testimonials";
 import { HomeAbout } from "@/components/home/HomeAbout";
 import { HomeHero } from "@/components/home/HomeHero";
 import { HomeTeam } from "@/components/home/HomeTeam";
@@ -31,6 +32,7 @@ export default function Home() {
       <HomeTechnology />
       <HomeTeam />
       <AboutFaq />
+      <Testimonials />
     </>
   );
 }

@@ -70,7 +70,7 @@ function CtaSection() {
               </div>
               <Spacer d={40} t={40} m={32} />
               <div data-animate-self="0" className="cta_button-wrapper">
-                <Button variant="cta" icon label={content.cta.label} href={content.cta.href} mobileFullWidth />
+                <Button variant="cta" label={content.cta.label} href={content.cta.href} mobileFullWidth />
               </div>
               <div className="show-mobile-landscape">
                 <Spacer d={0} m={32} />

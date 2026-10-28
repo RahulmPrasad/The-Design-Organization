@@ -277,7 +277,7 @@ export function ContactSection() {
                     )}
 
                     <div className="is-full">
-                      <Button variant="light" icon type="submit" label={status === "sending" ? "Sending…" : "Send Enquiry"} />
+                      <Button variant="light" type="submit" label={status === "sending" ? "Sending…" : "Send Enquiry"} />
                     </div>
                   </div>
                 </form>

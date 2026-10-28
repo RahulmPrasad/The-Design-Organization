@@ -64,7 +64,7 @@ export function BlogArticle({ post }: { post: BlogPost }) {
               <Spacer d={8} />
               <p>Tell us about your space and we&apos;ll arrange a consultation.</p>
             </div>
-            <Button variant="light" icon label="Contact Us" href="/contact" />
+            <Button variant="light" label="Contact Us" href="/contact" />
           </div>
 
           <div className="blog_divider" />

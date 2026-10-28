@@ -1,0 +1,114 @@
+/* ---- Hero: heading row like the blog page, then the photo strip ---- */
+.services-hero {
+  background-color: var(--_color---colors-primary--white);
+}
+
+.services-hero_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2rem;
+}
+
+.services-hero_header h1 {
+  max-width: 40rem;
+}
+
+.services-hero_intro {
+  max-width: 26rem;
+  margin: 0;
+  text-align: right;
+}
+
+/* Photo cards, a little wider than square. */
+.services-hero_card {
+  position: relative;
+  width: 32rem;
+  aspect-ratio: 5 / 4;
+  overflow: hidden;
+  border-radius: var(--_sizes---border-radius--small);
+  background-color: var(--_color---colors-secondary--duck-egg);
+}
+
+.services-hero_card-image {
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.services-hero_card:hover .services-hero_card-image {
+  transform: scale(1.04);
+}
+
+/* Service name bottom-left, over a soft shade so it reads on bright photos. */
+.services-hero_card::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 1;
+  height: 55%;
+  background-image: linear-gradient(0deg, rgb(0 0 0 / 0.7), rgb(0 0 0 / 0.25) 55%, transparent);
+  pointer-events: none;
+}
+
+.services-hero_card-title {
+  position: absolute;
+  left: 1.5rem;
+  right: 1.5rem;
+  bottom: 1.25rem;
+  z-index: 2;
+  margin: 0;
+  color: var(--_color---colors-primary--white);
+  text-shadow: 0 1px 12px rgb(0 0 0 / 0.3);
+  font-family: var(--_typography---font-family--heading);
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+/* Cities row, in place of the reference's client logos. */
+.services-hero_cities-label {
+  text-align: center;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgb(0 0 0 / 0.55);
+}
+
+.services-hero_cities {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 2.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 1.375rem;
+  line-height: 1.2;
+  color: rgb(0 0 0 / 0.45);
+}
+
+@media screen and (max-width: 767px) {
+  .services-hero_header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .services-hero_intro {
+    text-align: left;
+  }
+
+  .services-hero_card {
+    width: 18rem;
+  }
+
+  .services-hero_card-title {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    font-size: 1.25rem;
+  }
+
+  .services-hero_cities {
+    gap: 0.5rem 1.5rem;
+    font-size: 1.0625rem;
+  }
+}

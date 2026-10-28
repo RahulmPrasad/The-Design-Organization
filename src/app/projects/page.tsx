@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { LearnMore } from "@/components/projects/LearnMore";
 import { ProjectsHeader } from "@/components/projects/ProjectsHeader";
 import { ProjectsList } from "@/components/projects/ProjectsList";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -42,7 +41,6 @@ export default function ProjectsPage() {
       <JsonLd data={[projectsSchema, breadcrumbSchema([{ name: "Projects", path: "/projects" }])]} />
       <ProjectsHeader />
       <ProjectsList />
-      <LearnMore currentPage="/projects" />
     </>
   );
 }

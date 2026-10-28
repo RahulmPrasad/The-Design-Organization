@@ -56,7 +56,7 @@
     --_typography---quote-1--letter-spacing: var(--letter-spacing--extra-tight);
     --container--large: 86rem;
     --_sizes---global-padding--regular: 2.5rem;
-    --_sizes---border-radius--small: .25rem;
+    --_sizes---border-radius--small: 12px;
     --_color---colors-primary--dark-grey: #1b1b1b;
     --_color---colors-primary--orange: #e6912d; /* brand accent */
     --container--medium: 64rem;
@@ -152,7 +152,7 @@
     --_typography---label-2--line-height: var(--line-height--1-2);
     --_typography---label-2--font-weight: var(--font-weight--normal);
     --_typography---label-2--letter-spacing: var(--letter-spacing--slight);
-    --_button-style---border-radius: .25rem;
+    --_button-style---border-radius: 8px;
     --_color---colors-secondary--dark-blue: #3d5e86;
     --_button-style---square-background: var(--_color---colors-primary--light-blue);
     --_button-style---square-background-hover: var(--_color---colors-secondary--blue);
@@ -739,7 +739,7 @@ figcaption {
     --_button-style---border-hover: var(--_color---colors-secondary--blue);
     --_button-style---background-hover: var(--_color---colors-secondary--blue);
     --_button-style---text-hover: var(--_color---colors-primary--white);
-    --_button-style---border-radius: .25rem;
+    --_button-style---border-radius: 8px;
     --_button-style---square-background: var(--_color---colors-primary--light-blue);
     --_button-style---square-background-hover: var(--_color---colors-secondary--blue)
 }
@@ -763,7 +763,7 @@ figcaption {
     --_button-style---border-hover: var(--_color---colors-secondary--blue);
     --_button-style---background-hover: var(--_color---colors-secondary--blue);
     --_button-style---text-hover: var(--_color---colors-primary--white);
-    --_button-style---border-radius: .25rem;
+    --_button-style---border-radius: 8px;
     --_button-style---square-background: var(--_color---colors-primary--light-blue);
     --_button-style---square-background-hover: var(--_color---colors-secondary--blue)
 }
@@ -775,7 +775,7 @@ figcaption {
     --_button-style---border-hover: var(--_color---colors-secondary--blue);
     --_button-style---background-hover: var(--_color---colors-secondary--blue);
     --_button-style---text-hover: var(--_color---colors-primary--white);
-    --_button-style---border-radius: .25rem;
+    --_button-style---border-radius: 8px;
     --_button-style---square-background: var(--_color---colors-primary--light-blue);
     --_button-style---square-background-hover: var(--_color---colors-secondary--blue)
 }
@@ -787,7 +787,7 @@ figcaption {
     --_button-style---border-hover: var(--_color---colors-secondary--blue);
     --_button-style---background-hover: var(--_color---colors-secondary--blue);
     --_button-style---text-hover: var(--_color---colors-primary--white);
-    --_button-style---border-radius: .25rem;
+    --_button-style---border-radius: 8px;
     --_button-style---square-background: var(--_color---colors-primary--light-blue);
     --_button-style---square-background-hover: var(--_color---colors-secondary--blue)
 }
@@ -803,7 +803,7 @@ figcaption {
     --_button-style---border-hover: var(--_color---colors-secondary--blue);
     --_button-style---background-hover: var(--_color---colors-secondary--blue);
     --_button-style---text-hover: var(--_color---colors-primary--white);
-    --_button-style---border-radius: .25rem;
+    --_button-style---border-radius: 8px;
     --_button-style---square-background: var(--_color---colors-primary--light-blue);
     --_button-style---square-background-hover: var(--_color---colors-secondary--blue)
 }
@@ -841,7 +841,7 @@ figcaption {
 .home-about_video-wrapper {
     isolation: isolate;
     will-change: transform, width, height;
-    border-radius: .4rem;
+    border-radius: var(--_sizes---border-radius--small);
     height: 100dvh;
     min-height: 100dvh;
     position: relative
@@ -928,7 +928,7 @@ figcaption {
 
 .home-tech_wrapper {
     max-width: var(--container--large);
-    border-radius: var(--_button-style---border-radius);
+    border-radius: var(--_sizes---border-radius--small);
     justify-content: flex-start;
     align-items: flex-end;
     display: flex;
@@ -1217,7 +1217,7 @@ figcaption {
 
 .section_cta {
     z-index: 2;
-    border-radius: var(--_sizes---border-radius--small);
+    border-radius: 0 0 12px 12px;
     background-color: var(--_color---colors-primary--dark-grey);
     color: var(--_color---greyscale--grey-350);
     position: relative
@@ -1601,7 +1601,7 @@ figcaption {
 @media screen and (max-width:991px) {
     body {
         --_sizes---global-padding--regular: 2.5rem;
-        --_sizes---border-radius--small: .25rem;
+        --_sizes---border-radius--small: 12px;
         --_sizes---padding-section--small: 5rem;
         --_sizes---padding-section--is-mobile-smaller: 0px;
         --_sizes---padding-section--is-mobile-smaller2: 0px;
@@ -1790,9 +1790,6 @@ figcaption {
     .home-about_video-block {
         height: auto
     }
-    .tech-solutions_item {
-        grid-template-columns: 1.75fr 2.75fr 1fr
-    }
     .team-member_list {
         grid-template-columns: 1fr 1fr 1fr
     }
@@ -1869,9 +1866,6 @@ figcaption {
     .home-about_video-wrap {
         min-height: auto
     }
-    .tech-solutions_floating-images {
-        display: none
-    }
     .new-footer_logo {
         order: 9999
     }
@@ -1898,7 +1892,7 @@ figcaption {
 @media screen and (max-width:767px) {
     body {
         --_sizes---global-padding--regular: 1rem;
-        --_sizes---border-radius--small: .25rem;
+        --_sizes---border-radius--small: 12px;
         --_sizes---padding-section--small: 3rem;
         --_sizes---padding-section--is-mobile-smaller: 2rem;
         --_sizes---padding-section--is-mobile-smaller2: 1.5rem;
@@ -2153,22 +2147,6 @@ figcaption {
     }
     .features-3_h-divider {
         display: none
-    }
-    .tech-solutions_item {
-        grid-template-columns: 4.875rem 15.4fr 1.5rem;
-        height: auto;
-        padding-left: 0;
-        padding-right: 0
-    }
-    .tech-solutions_item-img {
-        aspect-ratio: 7.8/4.8;
-        width: 100%;
-        height: auto;
-        position: static;
-        opacity: 1 !important
-    }
-    .tech-solutions_item-icon {
-        width: 1.5rem
     }
     .footer_links-col {
         margin-top: 2.5rem

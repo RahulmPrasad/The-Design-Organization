@@ -10,7 +10,7 @@ export const brandAlt = (description: string) => `${description} – ${siteName}
 
 /** Short pitch reused as the default meta description and in structured data. */
 export const siteDescription =
-  "The Design Organization is an interior design studio in Vadodara, Gujarat, designing homes, apartments, villas, kitchens, offices and hospitality spaces, from concept and 3D design to turnkey execution.";
+  "The Design Organization is an architecture and interior design studio in Vadodara, Gujarat, working on residential and commercial architecture and interiors, institutional projects, product design, urban design and landscape design, from concept to completion.";
 
 /**
  * Name, address and phone (NAP) for local SEO. These must match the Google Business Profile exactly.
@@ -62,6 +62,13 @@ export const sitePages: SitePage[] = [
     changeFrequency: "weekly",
   },
   {
+    path: "/services",
+    title: "Architecture & Interior Design Services in Vadodara",
+    summary: "The studio's services: residential and commercial architecture and interiors, institutional projects, product design, urban design and landscape design.",
+    priority: 0.9,
+    changeFrequency: "monthly",
+  },
+  {
     path: "/projects",
     title: "Interior Design Projects & Portfolio in Vadodara",
     summary: "Portfolio of home, apartment, villa, kitchen, workplace and hospitality interiors.",
@@ -94,6 +101,14 @@ export const sitePages: SitePage[] = [
 /** Absolute URL for a site path ("/" maps to the bare origin). */
 export const absoluteUrl = (path: string) => `${siteUrl}${path === "/" ? "" : path}`;
 
+/** Cities the studio takes projects in (pan India): used in the FAQ, structured data and llms.txt. */
+export const citiesServed = ["Vadodara", "Ahmedabad", "Surat", "Pune", "Guwahati", "Jodhpur", "Udaipur", "Jaipur"];
+
+/** Joins items as "A, B and C". */
+export function listWithAnd(items: string[]) {
+  return items.length < 2 ? items.join("") : `${items.slice(0, -1).join(", ")} and ${items.at(-1)}`;
+}
+
 /** Vadodara neighbourhoods the studio works in: shown on the site and listed as `areaServed`. */
 export const areasServed = [
   "Alkapuri",
@@ -114,15 +129,17 @@ export const areasServed = [
   "Atladara",
 ];
 
+/** The studio's services: shown on the Services page and published in structured data and llms.txt. */
 export const services = [
-  { name: "Residential Interior Design", description: "Complete interiors for apartments, 2BHK, 3BHK and 4BHK flats, villas, bungalows and independent houses in Vadodara." },
-  { name: "Modular Kitchen Design", description: "Functional modular kitchens planned around how you cook, with durable finishes and smart storage." },
-  { name: "Living Room and Bedroom Interiors", description: "Living rooms, bedrooms and wardrobes designed for comfort, storage and everyday use." },
-  { name: "Office and Commercial Interior Design", description: "Workplaces, showrooms and retail spaces that support focus, collaboration and brand." },
-  { name: "Hospitality Interior Design", description: "Cafés, restaurants and hotel interiors that welcome guests and are built to last." },
-  { name: "Renovation and Turnkey Interiors", description: "End-to-end execution: 3D design, material selection, civil work, carpentry, lighting and site supervision." },
-  { name: "Furniture and Styling", description: "Custom furniture, décor, art and finishing touches that complete a space." },
-];
+  { name: "Residential Architecture", description: "Homes, villas, bungalows and residential buildings, from site planning and concept design to working drawings and support during construction." },
+  { name: "Residential Interiors", description: "Complete interiors for apartments, 2BHK to 4BHK flats, villas and bungalows: space planning, 3D design, kitchens, wardrobes and turnkey execution." },
+  { name: "Commercial Architecture", description: "Offices, showrooms, retail and mixed-use buildings designed around how the business works and how people move through them." },
+  { name: "Commercial Interiors", description: "Workplaces, showrooms, shops, cafés, restaurants and hotels that express the brand and are built for everyday use." },
+  { name: "Institutional Projects", description: "Schools, colleges, healthcare and community buildings planned for heavy daily use, clear circulation and a long life." },
+  { name: "Product Design", description: "Custom furniture, lighting and fixtures designed in-house and made to fit the spaces we create." },
+  { name: "Urban Design", description: "Streetscapes, public spaces and neighbourhood layouts that make places easier and more pleasant to live and work in." },
+  { name: "Landscape Design", description: "Gardens, courtyards, terraces and campus landscapes that connect buildings with the outdoors." },
+] as const;
 
 export type SiteLink = {
   label: string;
@@ -132,8 +149,8 @@ export type SiteLink = {
 
 export const mainNav: SiteLink[] = [
   { label: "Home", href: "/" },
-  { label: "About Us", href: "/about-us" },
-  // { label: "Services", href: "/services" },
+  { label: "About", href: "/about-us" },
+  { label: "Services", href: "/services" },
   { label: "Projects", href: "/projects" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
@@ -148,21 +165,21 @@ export const footerColumns: { id: string; links: SiteLink[] }[] = [
     id: "w-node-_78e76d15-8bbc-8e48-95ae-2dee7a4d395e-7a4d3953",
     links: [
       { label: "Home", href: "/" },
-      { label: "About Us", href: "/about-us" },
+      { label: "About", href: "/about-us" },
       { label: "Projects", href: "/projects" },
       { label: "Our Approach", href: "/about-us#approach" },
       { label: "FAQ", href: "/about-us#faq" },
     ],
   },
   {
-    // Services (the solutions on the About page)
+    // Services
     id: "w-node-_78e76d15-8bbc-8e48-95ae-2dee7a4d3967-7a4d3953",
     links: [
-      { label: "Residential", href: "/about-us#solutions" },
-      { label: "Kitchens", href: "/about-us#solutions" },
-      { label: "Workplaces", href: "/about-us#solutions" },
-      { label: "Hospitality", href: "/about-us#solutions" },
-      { label: "Renovations", href: "/about-us#solutions" },
+      { label: "Residential", href: "/services" },
+      { label: "Commercial", href: "/services" },
+      { label: "Institutional", href: "/services" },
+      { label: "Product Design", href: "/services" },
+      { label: "Urban & Landscape", href: "/services" },
     ],
   },
   {

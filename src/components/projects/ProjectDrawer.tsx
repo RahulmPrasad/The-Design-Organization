@@ -176,7 +176,7 @@ export function ProjectDrawer({ project, open, onClose }: ProjectDrawerProps) {
                     We design homes and workplaces across Vadodara. Tell us about your space.
                   </p>
                 </div>
-                <Button variant="light" icon label="Contact Us" href="/contact" />
+                <Button variant="light" label="Contact Us" href="/contact" />
               </div>
             </div>
           </>

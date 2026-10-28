@@ -1,5 +1,5 @@
 import type { Faq } from "@/lib/faq";
-import { areasServed, business, city, services, siteDescription, siteName, siteUrl } from "@/lib/site";
+import { areasServed, business, citiesServed, city, services, siteDescription, siteName, siteUrl } from "@/lib/site";
 
 // schema.org JSON-LD for search engines and AI answer engines.
 // Validate changes with https://search.google.com/test/rich-results and https://validator.schema.org/.
@@ -46,11 +46,21 @@ export function businessSchema(): Json {
     }),
     geo: geo && { "@type": "GeoCoordinates", latitude: geo.lat, longitude: geo.lng },
     areaServed: [
+      { "@type": "Country", name: "India" },
       { "@type": "City", name: city, alternateName: "Baroda", containedInPlace: { "@type": "State", name: "Gujarat" } },
+      ...citiesServed.filter((name) => name !== city).map((name) => ({ "@type": "City", name, containedInPlace: { "@type": "Country", name: "India" } })),
       ...areasServed.map((name) => ({ "@type": "Place", name: `${name}, ${city}` })),
     ],
     knowsAbout: [
+      "Architecture",
       "Interior design",
+      "Residential architecture",
+      "Commercial architecture",
+      "Institutional architecture",
+      "Product design",
+      "Furniture design",
+      "Urban design",
+      "Landscape design",
       "Residential interior design",
       "Modular kitchen design",
       "Office interior design",
@@ -63,7 +73,7 @@ export function businessSchema(): Json {
     ],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: `Interior design services in ${city}`,
+      name: `Architecture and interior design services in ${city}`,
       itemListElement: services.map((service) => ({
         "@type": "Offer",
         itemOffered: { "@type": "Service", name: service.name, description: service.description, areaServed: city },

@@ -1,7 +1,7 @@
 import { posts } from "@/lib/blog";
 import { faqs } from "@/lib/faq";
 import { projectLocation, projects } from "@/lib/projects";
-import { absoluteUrl, areasServed, business, city, services, siteDescription, siteName, sitePages } from "@/lib/site";
+import { absoluteUrl, areasServed, business, citiesServed, city, listWithAnd, services, siteDescription, siteName, sitePages } from "@/lib/site";
 
 // Plain-text briefs for AI assistants and answer engines (https://llmstxt.org).
 // Built from the same data as the pages and structured data, so every source states the same facts.
@@ -9,7 +9,7 @@ import { absoluteUrl, areasServed, business, city, services, siteDescription, si
 const keyFacts = () =>
   [
     `- Name: ${siteName}`,
-    `- Type: Interior design firm / interior design studio`,
+    `- Type: Architecture and interior design studio`,
     `- Location: ${city} (Baroda), Gujarat, India`,
     `- Serves: homeowners, developers and businesses across ${city} and Gujarat`,
     `- Specialities: residential interiors (2BHK, 3BHK, 4BHK flats, villas, bungalows), modular kitchens, office and commercial interiors, hospitality interiors, renovations and turnkey execution`,
@@ -71,7 +71,7 @@ export function llmsIndex() {
     articleLinks(),
     "",
     "## Optional",
-    `- [Full details for AI assistants](${absoluteUrl("/llms-full.txt")}): services, areas served in ${city} and answers to common questions`,
+    `- [Full details for AI assistants](${absoluteUrl("/llms-full.txt")}): services, cities served across India and answers to common questions`,
     `- [Sitemap](${absoluteUrl("/sitemap.xml")})`,
     "",
   ].join("\n");
@@ -92,10 +92,10 @@ export function llmsFull() {
     "## Contact",
     contact(),
     "",
-    `## Interior design services in ${city}`,
+    `## Services`,
     ...services.map((service) => `### ${service.name}\n${service.description}\n`),
-    `## Areas served in ${city}`,
-    `${siteName} works across ${city} (Baroda), including ${areasServed.join(", ")}, and takes on projects elsewhere in Gujarat on request.`,
+    `## Areas served`,
+    `${siteName} serves clients across India, including ${listWithAnd(citiesServed)}. The studio is based in ${city} (Baroda) and works in every part of the city, including ${areasServed.join(", ")}.`,
     "",
     `## Projects in ${city}`,
     ...projects.map(

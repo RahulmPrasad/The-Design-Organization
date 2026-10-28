@@ -15,7 +15,7 @@ import "./navbar.css";
 const SCROLL_THRESHOLD = 16;
 
 /** Sections with a light top: the navbar keeps its white, dark-text "scrolled" look even at the top (subpages included). */
-const LIGHT_SECTIONS = ["/contact", "/blog"];
+const LIGHT_SECTIONS = ["/contact", "/blog", "/services"];
 
 function cx(...classes: (string | false)[]) {
   return classes.filter(Boolean).join(" ");

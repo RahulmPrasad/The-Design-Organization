@@ -1,4 +1,4 @@
-import { areasServed, siteName } from "@/lib/site";
+import { areasServed, citiesServed, listWithAnd, services, siteName } from "@/lib/site";
 
 export type Faq = { q: string; a: string[] };
 
@@ -6,15 +6,17 @@ export type Faq = { q: string; a: string[] };
 // Answers lead with a direct one-sentence reply: that's the part search and AI answers quote.
 export const faqs: Faq[] = [
   {
-    q: "What interior design services do you offer in Vadodara?",
+    q: "What design services do you offer in Vadodara?",
     a: [
-      `${siteName} designs complete home interiors (apartments, 2BHK, 3BHK and 4BHK flats, villas and bungalows), modular kitchens, living rooms, bedrooms and wardrobes, as well as offices, showrooms, cafés, restaurants and hotels across Vadodara. We also handle renovations and turnkey execution.`,
+      `${siteName} offers ${listWithAnd(services.map((service) => service.name.toLowerCase()))}. On residential work that covers homes, apartments, 2BHK to 4BHK flats, villas and bungalows; on commercial work, offices, showrooms, shops, cafés, restaurants and hotels.`,
+      "We take projects from the first concept and 3D design through to execution, and can handle turnkey delivery.",
     ],
   },
   {
-    q: "Which areas of Vadodara do you serve?",
+    q: "Which cities do you serve?",
     a: [
-      `We work across Vadodara (Baroda), including ${areasServed.slice(0, -1).join(", ")} and ${areasServed.at(-1)}, and take on projects elsewhere in Gujarat on request.`,
+      `We serve clients across India, including ${listWithAnd(citiesServed)}, and take on projects in other cities too.`,
+      `Our studio is based in Vadodara (Baroda), where we work in every part of the city, including ${listWithAnd(areasServed)}.`,
     ],
   },
   {
